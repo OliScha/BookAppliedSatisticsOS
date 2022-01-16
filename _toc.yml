@@ -4,5 +4,7 @@
 - file: intro
 - file: content
   sections:
-    - file: markdown
-    - file: notebooks
+    - file: Variablen
+    - file: dataprep
+    - file: regression
+    - file: classification
