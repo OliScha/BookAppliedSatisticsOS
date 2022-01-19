@@ -1,4 +1,6 @@
-# Variablen
+# Beschreibung der verwendeten Variablen
+
+Die folgenen Variablen stehen für die Modellierung zur verfügung:
 
 - **housing_median_age**: Median age of a house within a district; a lower number is a newer building
 - **total_rooms**: Total number of rooms within a district

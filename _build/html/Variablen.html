@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Variablen &#8212; California Housing Guide</title>
+    <title>Beschreibung der verwendeten Variablen &#8212; California Housing Guide</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -52,8 +52,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Regression Project" href="regression.html" />
-    <link rel="prev" title="Content in Jupyter Book" href="content.html" />
+    <link rel="next" title="California Housing Guide - Regression Modelle" href="regression.html" />
+    <link rel="prev" title="Inhalt" href="Modelle.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -92,8 +92,8 @@
 </ul>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="content.html">
-   Content in Jupyter Book
+  <a class="reference internal" href="Modelle.html">
+   Inhalt
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -103,15 +103,25 @@
   <ul class="current">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     Variablen
+     Beschreibung der verwendeten Variablen
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="regression.html">
-     Regression Project
+     California Housing Guide - Regression Modelle
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html">
+     California Housing Guide - Logistic Regression Modelle
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Fazit.html">
+   Fazit
+  </a>
  </li>
 </ul>
 
@@ -203,18 +213,19 @@
         
               <div>
                 
-  <section id="variablen">
-<h1>Variablen<a class="headerlink" href="#variablen" title="Permalink to this headline">¶</a></h1>
+  <section id="beschreibung-der-verwendeten-variablen">
+<h1>Beschreibung der verwendeten Variablen<a class="headerlink" href="#beschreibung-der-verwendeten-variablen" title="Permalink to this headline">¶</a></h1>
+<p>Die folgenen Variablen stehen für die Modellierung zur verfügung:</p>
 <ul class="simple">
-<li><p>housing_median_age: Median age of a house within a district; a lower number is a newer building
--total_rooms: Total number of rooms within a district
--total_bedrooms: Total number of bedrooms within a district</p></li>
-<li><p>population: Total number of people residing within a district</p></li>
-<li><p>households: Total number of households, a group of people residing within a home unit, for a district
+<li><p><strong>housing_median_age</strong>: Median age of a house within a district; a lower number is a newer building</p></li>
+<li><p><strong>total_rooms</strong>: Total number of rooms within a district</p></li>
+<li><p><strong>total_bedrooms</strong>: Total number of bedrooms within a district</p></li>
+<li><p><strong>population</strong>: Total number of people residing within a district</p></li>
+<li><p><strong>households</strong>: Total number of households, a group of people residing within a home unit, for a district
 median_income: Median income for households within a district of houses (measured in tens of thousands of US Dollars)</p></li>
-<li><p>median_house_value: Median house value within a district (measured in US Dollars)</p></li>
-<li><p>ocean_proximity: Location of the district</p></li>
-<li><p>price_category: Indicator variable made from median_house_value (if median house value is below or above 150000)</p></li>
+<li><p><strong>median_house_value</strong>: Median house value within a district (measured in US Dollars)</p></li>
+<li><p><strong>ocean_proximity</strong>: Location of the district</p></li>
+<li><p><strong>price_category</strong>: Indicator variable made from median_house_value (if median house value is below or above 150000)</p></li>
 </ul>
 </section>
 
@@ -248,11 +259,11 @@ median_income: Median income for households within a district of houses (measure
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="content.html" title="previous page">
+        <a class="left-prev" href="Modelle.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Content in Jupyter Book</p>
+                <p class="prevnext-title">Inhalt</p>
             </div>
         </a>
     </div>
@@ -260,7 +271,7 @@ median_income: Median income for households within a district of houses (measure
         <a class="right-next" href="regression.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Regression Project</p>
+                <p class="prevnext-title">California Housing Guide - Regression Modelle</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
