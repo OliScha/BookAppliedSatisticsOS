@@ -1,18 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # California Housing Guide - Regression Modelle
-
-# Aufgabenstellung & Ziel:  
-# 
-# In diesem Projekt sollen mit Hilfe von Regressionsmodellen auf Basis der zur Verfügung gestellten Daten der median Hauspreis von Distrikten vorhergesagt werden.  
-# 
-# Da es sich bei Haus-/Wohnungspreisen in der Regel um niedrige bis hohe 6-stellige Summen handelt (ca. 100.000 - 500.000$ in diesem Fall), wäre eine Modell mit einem 4-stelligen bis niedrig 5-stelligem RMSE wünschenswert.
+# # Regression Modelle
 
 # # Setup
 # ---
 
-# ### Import von benötigten Libraries
+# ### Import Module & Libraries
 
 # Zu Beginn werden die benötigten Komponenten aus den entsprechenden Libraries importiert.
 
@@ -56,7 +50,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import Ridge
 
 
-# ### Erstellen der Pipeline für scikit learn Modelle
+# ### Erstellen einer Pipeline
 
 # Um die numerische und kategoriale Variablen automatisch in ein korrektes Format für die scikit learn Modelle zu transformieren, wird an dieser Stelle eine Pipeline definiert. Diese besteht aus verschiedenen Elementen, welche bspw. fehlende Werte ausfüllt (SimpleImputer) oder kategoriale Variablen in ein binäres Format umwandelt (OneHotEncoder).
 
@@ -311,8 +305,9 @@ plt.show()
 # # Exploratory Data Analysis
 # ---
 
+# ## Überblick
+
 # Nachdem die statistischen Besonderheiten berachtet wurden, soll nun die Verteilung der Variablen sowie deren Abhängigkeiten untereinander sowie auf die vorherzusagende Variable untersucht werden.
-# Dabei betrachten wir zuerst wieder die numerischen Variablen.
 
 # In[25]:
 
@@ -327,14 +322,14 @@ sns.pairplot(data=train_dataset, hue="ocean_proximity");
 
 # Auch an Hand der Korrelationswerte lässt sich erkennen, dass lediglich *median_income* einen starken Einfluss auf *median_house_value* hat.
 
-# In[158]:
+# In[331]:
 
 
 corr = train_dataset.corr()
 corr['median_house_value'].sort_values(ascending=False)
 
 
-# In[159]:
+# In[332]:
 
 
 # Create correlation matrix for numerical variables
@@ -342,7 +337,7 @@ corr_matrix = train_dataset.corr()
 corr_matrix
 
 
-# In[160]:
+# In[333]:
 
 
 # Erstellen einer Heatmap um Abhängigkeiten zwischen den verschiedenen Variablen zu visualisieren
@@ -370,17 +365,17 @@ heatmap = sns.heatmap(corr_matrix,
 
 # ---
 
-# #### EDA - Analyse kategorialer Varaiblen
+# #### Analyse kategorialer Variablen
 
 # Als nächstes wird die kategoriale Variable *ocean_proximity* näher untersucht.
 
-# In[161]:
+# In[334]:
 
 
 train_dataset['ocean_proximity'].value_counts()
 
 
-# In[162]:
+# In[335]:
 
 
 # Verteilung von ocean_proximity auf Geokoordinaten visualisieren
@@ -390,7 +385,7 @@ sns.jointplot(data=train_dataset, x='longitude', y='latitude', hue="ocean_proxim
 # Auf Basis der Geokoordinaten und der Form lässt sich feststellen, dass es sich bei unserem Datensatz um Distrikte aus Kalifornien handelt.  
 # Auf dem Plot lässt sich erkennen, dass sich die Ausprägungen *ISLAND* und *NEAR BAY* sehr stark auf bestimmte Gebiete beschränken. Die anderen Ausprägungen sind einigermaßen gleichmäßig und nach einer Logik mit Abstand zum Meer verteilt.
 
-# In[163]:
+# In[336]:
 
 
 # Visualisierung Dichte
@@ -399,7 +394,7 @@ sns.jointplot(data=train_dataset, x='longitude', y='latitude', hue="ocean_proxim
 
 # Durch eine kleine Änderung in den Parametern des Plots lassen sich besonders gut die Gebiete erkennen, aus welchen viele Observations vorliegen. Wie bereits vermutet handelt es sich vor allem um Ballungszentren bei San Francisco und Los Angeles.
 
-# In[164]:
+# In[337]:
 
 
 train_dataset.plot(kind="scatter", x="longitude", y="latitude", alpha=0.4, figsize=(10,7),c="median_house_value", cmap=plt.get_cmap("jet"), colorbar=True,)
@@ -408,7 +403,7 @@ plt.legend()
 
 # Mit Hilfe eines erweiterten Scatterplots können wir sogar visualisieren, wo die Distrikts mit den hohen *median_house_value* liegen. Wie zu erwarten war handelt es sich ebenfalls um die Gebiete rund um San Francisco und Los Angeles.
 
-# In[165]:
+# In[338]:
 
 
 # Untersuchung der kategroialen Variable "ocean_proximity" mit einem erweiterten Boxplot
@@ -417,7 +412,7 @@ sns.boxenplot(data=train_dataset, x="ocean_proximity", y="median_house_value");
 
 # Durch ein erweitertes Boxplot Diagramm können wir erkennen, dass die Verteilung von *median_house_value* in den Ausprägungen *<1H OCEAN, NEAR BAY* und *NEAR OCEAN* sehr ähnlich ist. *INLAND* und *ISLAND* unterscheiden sich davon stark. Ggfs. könnte es Sinn machen, die ähnlichen Ausprägungen zusammenzufassen, das soll jedoch zuerst in den Modellen getestet werden.
 
-# In[166]:
+# In[339]:
 
 
 # Ergänzung zum Boxplot um Menge und Dichte der Observations zu visualisieren
@@ -426,7 +421,7 @@ sns.stripplot(data=train_dataset, x="ocean_proximity", y="median_house_value" , 
 
 # Durch eine andere Form der Darstellung lässt sich nochmal gut die Menge und Dicht der Observations erkennen - und dass für *ISLAND* nur sehr wenige Observations vorliegen.
 
-# In[167]:
+# In[340]:
 
 
 # Analyse von "ocean_proximity" mit displot
@@ -436,11 +431,11 @@ sns.displot(data=train_dataset, x="median_house_value", hue = "ocean_proximity",
 # >**Fazit:** Die kategoriale Variable *ocean_proximity* hat definitiv Einfluss auf unsere vorherzusagende Variable. *INLAND* ist bspw. tenedneziell günstiger als die Distrikte, die näher am Meer liegen.   
 # Auffällig ist, das es für die Ausprägung *ISLAND* nur sehr wenige Observations gibt und *ISLAND* und *NEAR BAY* stark auf bestimmte Gebiete beschränkt sind.
 
-# #### EDA - Analyse numerischer Varaiblen
+# #### Analyse numerischer Variablen
 
 # Vor allem die numerische Variable *median_income* sieht auf Basis des zu Beginn erstellen pairplots vielversprechend aus und wird daher nun näher untersucht. Aber auch andere numerische Varaiblen sollen noch genauer betrachtet werden.
 
-# In[168]:
+# In[341]:
 
 
 # Analyse der Variablen "median_income"
@@ -449,7 +444,7 @@ sns.jointplot(data=train_dataset, x='median_income', y='median_house_value', hue
 
 # Wie bereits im Parplot lässt sich hier nochmal gut erkennen, dass tendenziell mit steigendem *median_income* auch der *median_house_value* steigt.
 
-# In[169]:
+# In[342]:
 
 
 sns.lmplot(x='median_income', y='median_house_value', data=train_dataset, line_kws={'color': 'darkred'}, ci=False);
@@ -457,7 +452,7 @@ sns.lmplot(x='median_income', y='median_house_value', data=train_dataset, line_k
 
 # Analyse "total_rooms"
 
-# In[170]:
+# In[343]:
 
 
 sns.scatterplot(data=train_dataset, x='total_rooms', y='median_house_value', hue="ocean_proximity" )
@@ -465,7 +460,7 @@ sns.scatterplot(data=train_dataset, x='total_rooms', y='median_house_value', hue
 
 # Auch bei *total_rooms* lääst sich ein leichter Trend erkennen. Da es sich allerdings hier um die Gesamtzahl der Räume in einem Distrikt handelt, welche natürlich direkt abhängig von dessen Größe ist, ist diese Variable möglicherweise nicht besonders gut geeignet. Viel besser wäre eine Variable, die die Anzahl der Räume in Relation setzt zur Anzahl an Haushalten oder Menschen. So eine Variable kann später im Feature Engineering erstellt werden.
 
-# In[171]:
+# In[344]:
 
 
 sns.lmplot(x='total_rooms', y='median_house_value', data=train_dataset, line_kws={'color': 'darkred'}, ci=False);
@@ -473,7 +468,7 @@ sns.lmplot(x='total_rooms', y='median_house_value', data=train_dataset, line_kws
 
 # Analyse "housing_median_age"
 
-# In[172]:
+# In[345]:
 
 
 sns.scatterplot(data=train_dataset, x='housing_median_age', y='median_house_value', hue="ocean_proximity" )
@@ -481,7 +476,7 @@ sns.scatterplot(data=train_dataset, x='housing_median_age', y='median_house_valu
 
 # Bei der Variable *housing_median_age* könnte man eine Auswirkung auf median_house_value erwarten, da neuere Häuser teurer sein könnten als alte Häuser. Anhand der Analyse lässt sich jedoch erkennen, dass diese Auswirkung nur sehr gering ist. Das könnte man bspw. durch teure Altbauwohungen oder durchgeführte Instandhaltungsmaßnahmen erklären.
 
-# In[173]:
+# In[346]:
 
 
 sns.lmplot(x='housing_median_age', y='median_house_value', data=train_dataset, line_kws={'color': 'darkred'}, ci=False);
@@ -494,7 +489,7 @@ sns.lmplot(x='housing_median_age', y='median_house_value', data=train_dataset, l
 
 # ## Erstellen eigener Variablen
 
-# In[174]:
+# In[347]:
 
 
 # Erstellen neuer Variablen
@@ -504,9 +499,9 @@ train_dataset=train_dataset.assign(rooms_per_household=lambda train_dataset: tra
 train_dataset=train_dataset.assign(bedrooms_per_room=lambda train_dataset: train_dataset.total_bedrooms/train_dataset.total_rooms)
 
 
-# ## Analyse & Optimierung der neuen erstellten Variablen
+# ## Analyse & Optimierung
 
-# In[175]:
+# In[348]:
 
 
 corr = train_dataset.corr()
@@ -515,7 +510,7 @@ corr['median_house_value'].sort_values(ascending=False)
 
 # Anhand der Matrix lässt sich erkennen, dass von den neu erstellten Varaiblen vor allem *bedrooms_per_room* und *rooms_per_household* einen Einfluss auf die vorherzusagende Variable *median_house_value* haben.
 
-# In[176]:
+# In[349]:
 
 
 #Analyse neu erstellter Variablen
@@ -524,37 +519,37 @@ sns.pairplot(data=train_dataset, y_vars=["median_house_value"], x_vars=["people_
 
 # Hier lassen sich Outlier bei *people_per_household*, *bedrooms_per_household* und *rooms_per_household* erkennen. Diese können später entfernt werden.
 
-# In[177]:
+# In[350]:
 
 
 sns.scatterplot(data=train_dataset, x='bedrooms_per_room', y='median_house_value')
 
 
-# In[178]:
+# In[351]:
 
 
 sns.lmplot(data=train_dataset, x='bedrooms_per_room', y='median_house_value');
 
 
-# In[179]:
+# In[352]:
 
 
 sns.scatterplot(data=train_dataset, x='rooms_per_household', y='median_house_value')
 
 
-# In[180]:
+# In[353]:
 
 
 sns.lmplot(data=train_dataset, x='rooms_per_household', y='median_house_value');
 
 
-# In[181]:
+# In[354]:
 
 
 sns.scatterplot(data=train_dataset, x='people_per_household', y='median_house_value')
 
 
-# In[182]:
+# In[355]:
 
 
 sns.lmplot(data=train_dataset, x='people_per_household', y='median_house_value');
@@ -562,25 +557,25 @@ sns.lmplot(data=train_dataset, x='people_per_household', y='median_house_value')
 
 # Die zuvor auf dem Scatterplot aufgefallenen Outliers von *people_per_household* sollen nun identifiziert und entfernt werden. Distrikte, in denen im Schnitt mehrere hundert Menschen in einem Haushalt leben klingen nach fehlerhaften Daten (Unterschiedliche Methode in der Erfassung der Daten, Tippfehler etc.)
 
-# In[183]:
+# In[356]:
 
 
 train_dataset.nlargest (10,'people_per_household')
 
 
-# In[184]:
+# In[357]:
 
 
 train_dataset.nlargest (10,'rooms_per_household')
 
 
-# In[185]:
+# In[358]:
 
 
 train_dataset.nlargest (10,'bedrooms_per_household')
 
 
-# In[186]:
+# In[359]:
 
 
 # people_per_household outlier droppen
@@ -592,25 +587,25 @@ train_dataset = train_dataset.drop(index=[1914,1979])
 
 # Nach dem Entfernen der Outlier lässt sich eine stärke Auswirkung der Features auf die Y Variable erkennen
 
-# In[187]:
+# In[360]:
 
 
 sns.lmplot(data=train_dataset, x='bedrooms_per_room', y='median_house_value');
 
 
-# In[188]:
+# In[361]:
 
 
 sns.lmplot(data=train_dataset, x='rooms_per_household', y='median_house_value');
 
 
-# In[189]:
+# In[362]:
 
 
 sns.lmplot(data=train_dataset, x='people_per_household', y='median_house_value');
 
 
-# In[190]:
+# In[363]:
 
 
 corr = train_dataset.corr()
@@ -628,7 +623,7 @@ corr['median_house_value'].sort_values(ascending=False)
 # 
 # Obwohl *latitude* auch eine vielversprechende Correlation zeigt, wird diese Varaible nicht als feature für die Modelle ausgewählt, da geografische Informationen bereits in *ocean_proximity* enthalten sind.
 
-# In[191]:
+# In[364]:
 
 
 
@@ -646,12 +641,13 @@ vif.round(2)
 
 # Um unsere ausgewählten Variablen auf Multikollinearität zu untersuchen, berechnen wir den Variance Inflation Factor (VIF). Da sich dieser bei allen Variablen unter 5 befindet, stellt die Kollinearität bei diesen Variablen kein Problem dar.
 
-# ## Ergänzung nach Durchlauf mehrerer Modelle
+# ## Ergänzung
 
+# Nach Durchlauf mehrerer Modelle wird folgendes ergänzt:  
 # Die Ausprägungen *ISLAND*, *NEAR* *BAY* und *NEAR* *OCEAN* der Variablen *ocean_proximity* wurden in verschiedenen Modellen (Classification & Regression) durch P-Values oder Koeffizienten als unwichtig eingestuft.
 # Daher werden diese nun zu einer Ausprägung zusammengefasst.
 
-# In[192]:
+# In[365]:
 
 
 train_dataset.ocean_proximity = train_dataset.ocean_proximity.str.replace("ISLAND", "NEAR WATER", regex =True)
@@ -660,27 +656,27 @@ train_dataset.ocean_proximity = train_dataset.ocean_proximity.str.replace("NEAR 
 train_dataset.ocean_proximity = train_dataset.ocean_proximity.str.replace("<1H OCEAN", "NEAR WATER", regex =True)
 
 
-# In[193]:
+# In[366]:
 
 
 # durch die gerade stattgefundene Transformation muss der datatype wieder korrigiert werden
 train_dataset['ocean_proximity'] = train_dataset['ocean_proximity'].astype("category")
 
 
-# In[194]:
+# In[367]:
 
 
 train_dataset['ocean_proximity'].value_counts()
 
 
-# In[195]:
+# In[368]:
 
 
 # Verteilung von ocean_proximity auf Geokoordinaten visualisieren
 sns.jointplot(data=train_dataset, x='longitude', y='latitude', hue="ocean_proximity",height=10);
 
 
-# In[196]:
+# In[369]:
 
 
 # Untersuchung der kategroialen Variable "ocean_proximity" mit einem erweiterten Boxplot
@@ -700,7 +696,7 @@ sns.boxenplot(data=train_dataset, x="ocean_proximity", y="median_house_value");
 # Mit den zuvor ausgewählten Variablen testen wir nun das Lineare Regressionsmodell von scikit learn.  
 # Um die Daten in das für scikit learn benötigte Format zu bringen, führen wir erneut einen datasplit durch. Da wir bereits vom Anfang noch ein Testdatenset haben, wird bei diesem Split ein Validierungsdatenset erzeugt, mit welchem das Modell erst validiert wird, bevor es dann am Ende mit den Testdaten evaluiert wird.
 
-# In[197]:
+# In[370]:
 
 
 # Auswahl der Features und Split der Trainingsdaten in X und Y Varaiblen
@@ -709,14 +705,14 @@ X1 = train_dataset[features]
 y1 = train_dataset["median_house_value"]
 
 
-# In[198]:
+# In[371]:
 
 
 # Data Split für Modell Scikitlearn
 X_train1, X_val1, y_train1, y_val1 = train_test_split(X1, y1, test_size=0.2, random_state=0)
 
 
-# In[199]:
+# In[372]:
 
 
 # Create pipeline with model
@@ -726,7 +722,7 @@ lin_pipe = Pipeline(steps=[
                         ])
 
 
-# In[200]:
+# In[373]:
 
 
 # show pipeline
@@ -735,20 +731,20 @@ set_config(display="diagram")
 lin_pipe.fit(X_train1, y_train1)
 
 
-# In[201]:
+# In[374]:
 
 
 # Obtain model coefficients
 lin_pipe.named_steps['lin'].coef_
 
 
-# In[202]:
+# In[375]:
 
 
 list_numerical = X1.drop(['ocean_proximity'], axis=1).columns
 
 
-# In[203]:
+# In[376]:
 
 
 features_names = np.concatenate((list_numerical.to_numpy(), lin_pipe.named_steps['preprocessor'].transformers_[1][1]['onehot'].get_feature_names_out()))
@@ -757,7 +753,7 @@ features_names
 
 # Mit Hilfe der Koeffizienten der ausgewählten Variablen können wir uns die Relevanz grafisch darstellen lassen. So können beim Optimieren des Models gezielt weniger wichtige Features weggelassen werden. So wie aktuell dargestellt haben alle Features zumindest eine gewisse Relevanz. Ein Durchlauf des Models ohne die schwächste Variable *housing_median_age* erzielt kein besseres Ergebnis (Siehe "Evaluation mit Trainingsdaten" unten). Zuvor wurde hier ebenfalls Ausprägungen von *ocean_proximity* als irrelevant dargestellt, was unter anderem Anlass war, im Feature Engineering die Ausprägungen zu *NEAR* *WATER* zusammengefasst wurden.
 
-# In[204]:
+# In[377]:
 
 
 # get absolute values of coefficients
@@ -770,19 +766,19 @@ sns.barplot(x=importance,
 
 # #### Evaluation mit Trainingsdaten
 
-# In[205]:
+# In[378]:
 
 
 y_pred1train = lin_pipe.predict(X_train1)
 
 
-# In[206]:
+# In[379]:
 
 
 y_pred1train
 
 
-# In[207]:
+# In[380]:
 
 
 print('r2 in %:', r2_score(y_train1, y_pred1train)*100)
@@ -802,13 +798,13 @@ print('RMSE:', mean_squared_error(y_train1, y_pred1train, squared=False))
 
 # Nun wird das Modell mit dem Validation dataset validiert.
 
-# In[208]:
+# In[381]:
 
 
 y_pred1val = lin_pipe.predict(X_val1)
 
 
-# In[209]:
+# In[382]:
 
 
 print('r2 in %:', r2_score(y_val1, y_pred1val)*100)
@@ -825,28 +821,28 @@ print('RMSE:', mean_squared_error(y_val1, y_pred1val, squared=False))
 
 # Für das Linear Regression Modell von statsmodels ist kein erneuter datasplit notwendig, das Modell kann mit dem train_dataset arbeiten, welches X und Y Variablen enthält. Auf die seperate Erstellung eines Validation Datasets wird hier verzichtet, das Modell wird lediglich mit den Traingsdaten und schließlich mit den Testdaten evaluiert.
 
-# In[210]:
+# In[383]:
 
 
 
 lm1 = smf.ols(formula='median_house_value ~ median_income + ocean_proximity + bedrooms_per_room + people_per_household + housing_median_age', data=train_dataset).fit()
 
 
-# In[211]:
+# In[384]:
 
 
 # Short summary
 lm1.summary().tables[1]
 
 
-# In[212]:
+# In[385]:
 
 
 # Full summary
 lm1.summary()
 
 
-# In[213]:
+# In[386]:
 
 
 print("RMSE", np.sqrt(lm1.mse_resid))
@@ -858,7 +854,7 @@ print("RMSE", np.sqrt(lm1.mse_resid))
 # 
 # Bevor die Ergebnisse weiter interpretiert werden, soll zunächste ein Optimierung durch die Entfernung von Outliern stattfinden. Die Outlier werden durch die Methode "Cook's Distance" identifiziert.
 
-# In[214]:
+# In[387]:
 
 
 # Visualisierung der Outlier nach Cook's Distance
@@ -866,7 +862,7 @@ fig = sm.graphics.influence_plot(lm1, criterion="cooks")
 fig.tight_layout(pad=1.0)
 
 
-# In[215]:
+# In[388]:
 
 
 # Berechnen der Outlier nach Cook's Distance
@@ -890,7 +886,7 @@ print(train_dataset.index[out_d], "\n",
 
 # Um das Trainingsdatenset noch für weitere Modelle verwenden zu können ohne es neu erzeugen zu müssen, wird an dieser Stelle ein neues Datenset erstellt.
 
-# In[216]:
+# In[389]:
 
 
 # droppen der Outlier Observations
@@ -899,19 +895,19 @@ train_dataset2=train_dataset.drop(train_dataset.index[out_d])
 
 # Nun wird der Algorithmus erneut durchgeführt, auf Basis des bereinigten datasets.
 
-# In[217]:
+# In[390]:
 
 
 lm2 = smf.ols(formula='median_house_value ~ median_income + ocean_proximity + bedrooms_per_room + people_per_household + housing_median_age', data=train_dataset2).fit()
 
 
-# In[218]:
+# In[391]:
 
 
 lm2.summary()
 
 
-# In[219]:
+# In[392]:
 
 
 print("RMSE", np.sqrt(lm2.mse_resid))
@@ -929,7 +925,7 @@ print("RMSE", np.sqrt(lm2.mse_resid))
 
 # In diesem Abschnitt soll nun noch einmal verstärkt die Auswirkung der einzelnen Features auf unser Modell sowie mögliche Outlier untersucht werden.
 
-# In[220]:
+# In[393]:
 
 
 fig = sm.graphics.plot_partregress_grid(lm2)
@@ -938,13 +934,13 @@ fig.tight_layout(pad=1.0)
 
 # Auf dem Partial Regression Plot können wir jeweils einen mehr oder weniger linearen Zusammenhang der Features auf die Y Variable erkennen.
 
-# In[221]:
+# In[394]:
 
 
 sns.lmplot(x='median_income', y='median_house_value', data=train_dataset2, line_kws={'color': 'darkred'}, ci=False);
 
 
-# In[222]:
+# In[395]:
 
 
 sns.lmplot(x='bedrooms_per_room', y='median_house_value', data=train_dataset2, line_kws={'color': 'darkred'}, ci=False);
@@ -952,22 +948,22 @@ sns.lmplot(x='bedrooms_per_room', y='median_house_value', data=train_dataset2, l
 
 # Da bereits im Feature Engineering sowie durch Cook's Distance starke Outlier entfernt wurden, sind hier keine Outlier mehr mit bspw. besonders starkem Hebel zu erkennen.
 
-# In[223]:
+# In[396]:
+
+
+train_dataset2
+
+
+# In[397]:
 
 
 y_pred2 = lm2.predict(train_dataset2)
 
 
-# In[224]:
+# In[398]:
 
 
-y_pred2
-
-
-# In[225]:
-
-
-sns.residplot(x="y_pred2", y="median_house_value", data=train_dataset2, scatter_kws={"s": 80});
+sns.residplot(x=y_pred2, y="median_house_value", data=train_dataset2, scatter_kws={"s": 80});
 
 
 # Im residplot sollten im Optimalfall die residuals einigermaßen gleichmäßig zufällig um die horizontale Nulllinie verteilt sein.
@@ -975,7 +971,7 @@ sns.residplot(x="y_pred2", y="median_house_value", data=train_dataset2, scatter_
 # 
 # Um das zu überprüfen, wird der Breusch-Pagan Lagrange Multiplier Test angewendet. Die Null Hypothese hierbei ist homoscedasticity.
 
-# In[226]:
+# In[399]:
 
 
 name = ['Lagrange multiplier statistic', 'p-value', 'f-value', 'f p-value']
@@ -989,7 +985,7 @@ lzip(name, test)
 # - Y and Fitted vs. X: Die auf Basis von *median_income* gefitteten Werte bewegen sich in einem ähnlichen Bereich wie unsere Y Variable
 # - Partial Regression & CCPR Plot deuten auf ein lineares Verhältnis von *median_income* auf Y hin
 
-# In[227]:
+# In[400]:
 
 
 # Regression diagnostics für Variable "median_income"
@@ -1004,7 +1000,7 @@ fig.tight_layout(pad=0.2)
 
 # #### Lasso - Split Data
 
-# In[228]:
+# In[401]:
 
 
 # Erstellen der X und Y Variablen
@@ -1013,7 +1009,7 @@ features = ['median_income', 'people_per_household', 'ocean_proximity', 'bedroom
 X2 = train_dataset2[features]
 
 
-# In[229]:
+# In[402]:
 
 
 # Data split
@@ -1024,7 +1020,7 @@ X_train2, X_val2, y_train2, y_val2 = train_test_split(X2, y2, test_size=0.3, ran
 
 # Bei der ersten Durchführung des Modells setzen wir den Alpha Wert standardmäßig auf 1. Dieser wird später noch optimiert.
 
-# In[230]:
+# In[403]:
 
 
 
@@ -1035,7 +1031,7 @@ lasso_pipe = Pipeline(steps=[
                         ])
 
 
-# In[231]:
+# In[404]:
 
 
 # Fitten von Pipeline/Modell
@@ -1044,7 +1040,7 @@ lasso_pipe.fit(X_train2, y_train2)
 
 # Um die Importance der einzelnen Features im Lasso Algorithmus zu visualisieren, wird an dieser Stelle eine Liste mit allen Feature Namen erstellt.
 
-# In[232]:
+# In[405]:
 
 
 # Erstellen einer Liste der numerical features
@@ -1052,7 +1048,7 @@ list_numerical = X2.drop(['ocean_proximity'], axis=1).columns
 list_numerical
 
 
-# In[233]:
+# In[406]:
 
 
 # Erstellen einer Liste aller Feature Namen
@@ -1060,7 +1056,7 @@ feature_names = np.concatenate((list_numerical.to_numpy(), lasso_pipe.named_step
 feature_names
 
 
-# In[234]:
+# In[407]:
 
 
 # get absolute values of coefficients
@@ -1074,14 +1070,14 @@ sns.barplot(x=importance,
 
 # Bevor es an die Optimierung geht, soll zuerst das Modell noch mit dem Wert alpha = 1 evaluiert werden.
 
-# In[235]:
+# In[408]:
 
 
 pred_train = lasso_pipe.predict(X_train2)
 pred_val = lasso_pipe.predict(X_val2)
 
 
-# In[236]:
+# In[409]:
 
 
 print('R squared training set', round(lasso_pipe.score(X_train2, y_train2)*100, 2))
@@ -1090,7 +1086,7 @@ print('RMSE train set', round(mean_squared_error(y_train2, pred_train, squared=F
 print('RMSE validation set', round(mean_squared_error(y_val2, pred_val, squared=False),2))
 
 
-# In[237]:
+# In[410]:
 
 
 # Training data
@@ -1108,7 +1104,7 @@ print('MSE validation set', round(mse_test, 2))
 
 # Nun soll mit Hilfe der k-fold Cross Validation Methode der optimale Wert für alpha ermittelt werden, um unser Modell weiter zu optimieren.
 
-# In[238]:
+# In[411]:
 
 
 # Erstellen von Modell mit Pipeline
@@ -1118,14 +1114,14 @@ lassoCV_pipe = Pipeline(steps=[
                         ])
 
 
-# In[239]:
+# In[412]:
 
 
 # Fit model
 lassoCV_pipe.fit(X_train2, y_train2)
 
 
-# In[240]:
+# In[413]:
 
 
 lassoCV_pipe.named_steps['lassoCV'].alpha_
@@ -1137,7 +1133,7 @@ lassoCV_pipe.named_steps['lassoCV'].alpha_
 
 # Der ermittelte Optimalwert für alpha wird nun in das Modell eingesetzt.
 
-# In[241]:
+# In[414]:
 
 
 # Create pipeline with model
@@ -1147,7 +1143,7 @@ lassobest_pipe = Pipeline(steps=[
                             ])
 
 
-# In[242]:
+# In[415]:
 
 
 # Set best alpha
@@ -1158,14 +1154,14 @@ lassobest_pipe.fit(X_train2, y_train2)
 # Zur Berechnung des RMSE werden auch mit dem Modell lassobest_pipe Predictions berechnet.
 # 
 
-# In[243]:
+# In[416]:
 
 
 pred_trainbest = lassobest_pipe.predict(X_train2)
 pred_valbest = lassobest_pipe.predict(X_val2)
 
 
-# In[244]:
+# In[417]:
 
 
 #Werte mit optimalem alpha:
@@ -1176,7 +1172,7 @@ print('RMSE train set', round(mean_squared_error(y_train2, pred_trainbest, squar
 print('RMSE validation set', round(mean_squared_error(y_val2, pred_valbest, squared=False),2))
 
 
-# In[245]:
+# In[418]:
 
 
 # Werte ohne optimales alpha:
@@ -1196,14 +1192,14 @@ print('RMSE validation set', round(mean_squared_error(y_val2, pred_val, squared=
 
 # Für das scikit leran Modell wird wieder der übliche datasplit durchgeführt.
 
-# In[246]:
+# In[419]:
 
 
 y3 = train_dataset[['median_house_value']]
 X3 = train_dataset[['median_income', 'ocean_proximity', 'bedrooms_per_room', 'people_per_household', 'housing_median_age']]
 
 
-# In[247]:
+# In[420]:
 
 
 # data split
@@ -1212,7 +1208,7 @@ X_train3, X_val3, y_train3, y_val3 = train_test_split(X3, y3, test_size=0.3, ran
 
 # Für das Modell definieren wir die Anzahl der zu platzierenden Knots auf 4. Die Komponente SplineTransformer wird diese Knots dann autoamtisch platzieren.
 
-# In[248]:
+# In[421]:
 
 
 # Erstellen des Models mit Pipeline. Der Spline Transformer soll 4 Knots platzieren.
@@ -1223,7 +1219,7 @@ splines_pipe = Pipeline(steps=[
                         ])
 
 
-# In[249]:
+# In[422]:
 
 
 splines_pipe.fit(X_train3, y_train3)
@@ -1233,7 +1229,7 @@ y_pred = splines_pipe.predict(X_train3)
 
 # Nach dem Erstellen und fitten des Modells wird eine Funktion definiert, um den RMSE auszugeben.
 
-# In[250]:
+# In[423]:
 
 
 # Erstellen der Funktion model_results um KPIs auszugeben
@@ -1257,13 +1253,13 @@ def model_results(model_name):
     return result;
 
 
-# In[251]:
+# In[424]:
 
 
 model_results(model_name = "spline sklearn")
 
 
-# In[252]:
+# In[425]:
 
 
 print('R squared training set', round(splines_pipe.score(X_train3, y_train3)*100, 2))
@@ -1272,7 +1268,7 @@ print('R squared validation set', round(splines_pipe.score(X_val3, y_val3)*100, 
 
 # Sowohl der r2 Wert als auch der RMSE des Modells liegen hinter dem der vorherigen Modelle mit statsmodels.
 
-# In[253]:
+# In[426]:
 
 
 # Create observations
@@ -1281,7 +1277,7 @@ x_new = pd.DataFrame(x_new, columns=X3.drop(["ocean_proximity"], axis=1).columns
 x_new = x_new.assign(ocean_proximity=lambda x_new: "dummy")
 
 
-# In[254]:
+# In[427]:
 
 
 pred = splines_pipe.predict((x_new))
@@ -1296,21 +1292,21 @@ plt.legend();
 
 # Da dieses Splines Modell das vielversprechendste ist, wird das Modell als Test noch einmal mit den per Cook's Distance bereinigten Trainingsdaten gefittet und evaluiert.
 
-# In[255]:
+# In[428]:
 
 
 y5 = train_dataset2[['median_house_value']]
 X5 = train_dataset2[['median_income', 'ocean_proximity', 'bedrooms_per_room', 'people_per_household', 'housing_median_age']]
 
 
-# In[256]:
+# In[429]:
 
 
 # data split
 X_train5, X_val5, y_train5, y_val5 = train_test_split(X5, y5, test_size=0.3, random_state=0)
 
 
-# In[257]:
+# In[430]:
 
 
 # Erstellen des Models mit Pipeline. Der Spline Transformer soll 4 Knots platzieren.
@@ -1321,7 +1317,7 @@ splinesCD_pipe = Pipeline(steps=[
                         ])
 
 
-# In[258]:
+# In[431]:
 
 
 splinesCD_pipe.fit(X_train5, y_train5)
@@ -1329,7 +1325,7 @@ splinesCD_pipe.fit(X_train5, y_train5)
 y_pred = splinesCD_pipe.predict(X_train5)
 
 
-# In[259]:
+# In[432]:
 
 
 # Erstellen der Funktion model_results um KPIs auszugeben
@@ -1353,13 +1349,13 @@ def model_results(model_name):
     return result;
 
 
-# In[260]:
+# In[433]:
 
 
 model_results(model_name = "spline sklearn")
 
 
-# In[261]:
+# In[434]:
 
 
 print('R squared training set', round(splinesCD_pipe.score(X_train5, y_train5)*100, 2))
@@ -1370,21 +1366,21 @@ print('R squared validation set', round(splinesCD_pipe.score(X_val5, y_val5)*100
 
 # ### 3.2 Cubic Spline with Patsy & Statsmodels
 
-# In[262]:
+# In[435]:
 
 
 y4 = train_dataset[['median_house_value']]
 X4 = train_dataset[['median_income']]
 
 
-# In[263]:
+# In[436]:
 
 
 # data split
 X_train4, X_val4, y_train4, y_val4 = train_test_split(X4, y4, test_size=0.3, random_state=0)
 
 
-# In[264]:
+# In[437]:
 
 
 # Erstellen eines cubic spline mit 3 manuell platzierten knots bei 1, 4 und 7
@@ -1393,14 +1389,14 @@ transformed_x = dmatrix(
                 {"train": X_train4},return_type='dataframe')
 
 
-# In[265]:
+# In[438]:
 
 
 # Fitten des linearen models an das transformierte dataset
 spline2 = sm.GLM(y_train4, transformed_x).fit()
 
 
-# In[266]:
+# In[439]:
 
 
 # Training data
@@ -1422,7 +1418,7 @@ model_results = pd.DataFrame(
 model_results
 
 
-# In[267]:
+# In[440]:
 
 
 print('R squared training set', round(r2_score(y_train4, pred_train)*100, 2))
@@ -1431,7 +1427,7 @@ print('R squared validation set', round(r2_score(y_val4, pred_val)*100, 2))
 
 # In diesem Modell ist sowohl der r2 Wert als auch der RMSE sehr viel schlechter als in den übrigen Modellen. Dies überrascht nicht, da in diesem Modell nur eine X Variable zur Vorhersage verwendet wurde.
 
-# In[268]:
+# In[441]:
 
 
 # Create observations
@@ -1448,7 +1444,7 @@ plt.legend();
 
 # ### 3.3 Natural Spline with Patsy & Statsmodels
 
-# In[271]:
+# In[442]:
 
 
 transformed_x3 = dmatrix("cr(train,df = 3)", {"train": X_train4}, return_type='dataframe')
@@ -1456,7 +1452,7 @@ transformed_x3 = dmatrix("cr(train,df = 3)", {"train": X_train4}, return_type='d
 spline3 = sm.GLM(y_train3, transformed_x3).fit()
 
 
-# In[272]:
+# In[443]:
 
 
 # Training data
@@ -1478,14 +1474,14 @@ model_results_ns = pd.DataFrame(
 model_results_ns
 
 
-# In[273]:
+# In[444]:
 
 
 print('R squared training set', round(r2_score(y_train4, pred_train)*100, 2))
 print('R squared test set', round(r2_score(y_val4, pred_val)*100, 2))
 
 
-# In[274]:
+# In[445]:
 
 
 # Make predictions
@@ -1503,27 +1499,27 @@ plt.legend();
 
 # Um die Testdaten verwenden zu können, müssen die gleichen Schritte zur Transformation durchgeführt werden wie mit den Traindaten (ANpassung Datentypen, droppen NULL values, Erzeugen von selbst erstellten Features)
 
-# In[275]:
+# In[446]:
 
 
 test_dataset
 
 
-# In[276]:
+# In[447]:
 
 
 # droppen von NULL Values
 test_dataset = test_dataset.dropna()
 
 
-# In[277]:
+# In[448]:
 
 
 # nicht benötigte Variable droppen
 test_dataset = test_dataset.drop(columns=['price_category'])
 
 
-# In[278]:
+# In[449]:
 
 
 # Anpassung der datatypes
@@ -1533,7 +1529,7 @@ test_dataset['total_bedrooms'] = test_dataset['total_bedrooms'].astype("int64")
 test_dataset['ocean_proximity'] = test_dataset['ocean_proximity'].astype("category")
 
 
-# In[279]:
+# In[450]:
 
 
 # erzeugen der selbst erstellten Features
@@ -1543,7 +1539,7 @@ test_dataset=test_dataset.assign(rooms_per_household=lambda test_dataset: test_d
 test_dataset=test_dataset.assign(bedrooms_per_room=lambda test_dataset: test_dataset.total_bedrooms/test_dataset.total_rooms)
 
 
-# In[280]:
+# In[451]:
 
 
 # Zusammenfassung des Features ocean_proximity
@@ -1553,7 +1549,7 @@ test_dataset.ocean_proximity = test_dataset.ocean_proximity.str.replace("NEAR OC
 test_dataset.ocean_proximity = test_dataset.ocean_proximity.str.replace("<1H OCEAN", "NEAR WATER", regex =True)
 
 
-# In[281]:
+# In[452]:
 
 
 # Korrektur des datatype von ocean_proximity
@@ -1564,7 +1560,7 @@ test_dataset['ocean_proximity'] = test_dataset['ocean_proximity'].astype("catego
 
 # Um die Testdaten in der Evaluation für bestimmte Modelle verwenden zu können, müssen diese nach Features und vorherzusagender Varaible aufgeteilt werden.
 
-# In[282]:
+# In[467]:
 
 
 #X = test_dataset.drop(["median_house_value"], axis=1)
@@ -1583,36 +1579,30 @@ X = test_dataset[features]
 
 # ### Evaluation Lineares Regressionsmodell mit statsmodels
 
-# In[283]:
+# In[468]:
 
 
 pred_test = lm2.predict(X)
 
 
-# In[284]:
+# In[469]:
 
 
-print('RMSE test set', round(mean_squared_error(y, pred_test, squared=False),2))
 print('R squared test set', round(r2_score(y, pred_test)*100, 2))
+print('RMSE test set', round(mean_squared_error(y, pred_test, squared=False),2))
 
+
+# Die Ergebnisse mit den Testdaten sind schlechter als die Resultate mit den bearbeiteten Trainingsdaten. Dies liegt vermutlich am Entfernen vieler Outlier durch Cook's Distance.
 
 # ### Evaluation Lasso Regression mit scikit learn
 
-# In[285]:
-
-
-y2 = test_dataset['median_house_value']
-features = ['median_income', 'people_per_household', 'ocean_proximity', 'bedrooms_per_room', 'housing_median_age']
-X2 = test_dataset[features]
-
-
-# In[286]:
+# In[470]:
 
 
 pred_testfinal = lassobest_pipe.predict(X)
 
 
-# In[287]:
+# In[471]:
 
 
 print('Testergebnis mit lasso best:')
@@ -1622,13 +1612,13 @@ print('RMSE test set', round(mean_squared_error(y, pred_testfinal, squared=False
 
 # ### Evaluation Splines mit scikit learn
 
-# In[288]:
+# In[476]:
 
 
-y_pred = splinesCD_pipe.predict(X)
+y_pred = splines_pipe.predict(X)
 
 
-# In[289]:
+# In[489]:
 
 
 # Erstellen der Funktion model_results um KPIs auszugeben
@@ -1652,14 +1642,20 @@ def model_results(model_name):
     return result;
 
 
-# In[290]:
+# In[490]:
 
 
 model_results(model_name = "spline sklearn")
 
 
-# In[291]:
+# In[488]:
 
 
 print('R squared test set', round(splinesCD_pipe.score(X, y)*100, 2))
 
+
+# Das Modell, welches mit dem Cook's Distance optimierten Traindataset gefitted wurde, erzielt in der Evaluation mit den Testdaten leicht bessere Ergebnisse.
+# 
+# Zum Vergleich die KPIs ohne Cook's Distance Optimierung:  
+# - RMSE: 66017.6385  
+# - r2: 66.57  

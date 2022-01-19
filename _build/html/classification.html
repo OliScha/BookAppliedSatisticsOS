@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>California Housing Guide - Logistic Regression Modelle &#8212; California Housing Guide</title>
+    <title>Classification Modelle &#8212; California Housing Guide</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -53,7 +53,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Fazit" href="Fazit.html" />
-    <link rel="prev" title="California Housing Guide - Regression Modelle" href="regression.html" />
+    <link rel="prev" title="Regression Modelle" href="regression.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -103,17 +103,17 @@
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="Variablen.html">
-     Beschreibung der verwendeten Variablen
+     Variablen
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="regression.html">
-     California Housing Guide - Regression Modelle
+     Regression Modelle
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     California Housing Guide - Logistic Regression Modelle
+     Classification Modelle
     </a>
    </li>
   </ul>
@@ -229,7 +229,7 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   California Housing Guide - Logistic Regression Modelle
+   Classification Modelle
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -362,9 +362,8 @@
         
               <div>
                 
-  <section id="california-housing-guide-logistic-regression-modelle">
-<h1>California Housing Guide - Logistic Regression Modelle<a class="headerlink" href="#california-housing-guide-logistic-regression-modelle" title="Permalink to this headline">¶</a></h1>
-<p>Es soll ein Classification Modell für ein Immobilienunternehmen erstellt werden, welches einschätzen kann ob der median housing prices in Destrikten über oder unter dem Wert 150.000$ liegen.</p>
+  <section id="classification-modelle">
+<h1>Classification Modelle<a class="headerlink" href="#classification-modelle" title="Permalink to this headline">¶</a></h1>
 </section>
 <section id="setup">
 <h1>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h1>
@@ -886,13 +885,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\olive\AppData\Local\Temp/ipykernel_25744/1257863661.py:2: SettingWithCopyWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\olive\AppData\Local\Temp/ipykernel_15100/1257863661.py:2: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
   train_dataset[&#39;median_house_value&#39;] = train_dataset[&#39;median_house_value&#39;].astype(&quot;string&quot;)
-C:\Users\olive\AppData\Local\Temp/ipykernel_25744/1257863661.py:3: SettingWithCopyWarning: 
+C:\Users\olive\AppData\Local\Temp/ipykernel_15100/1257863661.py:3: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
@@ -919,25 +918,25 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\olive\AppData\Local\Temp/ipykernel_25744/2696206269.py:2: SettingWithCopyWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\olive\AppData\Local\Temp/ipykernel_15100/2696206269.py:2: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
   train_dataset[&#39;median_house_value&#39;] = train_dataset[&#39;median_house_value&#39;].astype(&quot;float64&quot;)
-C:\Users\olive\AppData\Local\Temp/ipykernel_25744/2696206269.py:3: SettingWithCopyWarning: 
+C:\Users\olive\AppData\Local\Temp/ipykernel_15100/2696206269.py:3: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
   train_dataset[&#39;housing_median_age&#39;] = train_dataset[&#39;housing_median_age&#39;].astype(&quot;float64&quot;)
-C:\Users\olive\AppData\Local\Temp/ipykernel_25744/2696206269.py:4: SettingWithCopyWarning: 
+C:\Users\olive\AppData\Local\Temp/ipykernel_15100/2696206269.py:4: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
   train_dataset[&#39;total_bedrooms&#39;] = train_dataset[&#39;total_bedrooms&#39;].astype(&quot;int64&quot;)
-C:\Users\olive\AppData\Local\Temp/ipykernel_25744/2696206269.py:5: SettingWithCopyWarning: 
+C:\Users\olive\AppData\Local\Temp/ipykernel_15100/2696206269.py:5: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
@@ -955,7 +954,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\olive\AppData\Local\Temp/ipykernel_25744/1780705196.py:2: SettingWithCopyWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\olive\AppData\Local\Temp/ipykernel_15100/1780705196.py:2: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
@@ -972,7 +971,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\olive\AppData\Local\Temp/ipykernel_25744/1027169169.py:1: SettingWithCopyWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\olive\AppData\Local\Temp/ipykernel_15100/1027169169.py:1: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
@@ -1248,7 +1247,7 @@ Model Family:                                                      Binomial   Df
 Link Function:                                                        logit   Scale:                          1.0000
 Method:                                                                IRLS   Log-Likelihood:                -5655.1
 Date:                                                      Wed, 19 Jan 2022   Deviance:                       11310.
-Time:                                                              11:22:11   Pearson chi2:                 1.45e+10
+Time:                                                              13:55:37   Pearson chi2:                 1.45e+10
 No. Iterations:                                                           8                                         
 Covariance Type:                                                  nonrobust                                         
 =================================================================================================
@@ -2135,7 +2134,7 @@ Demnach wäre das <strong>Modell</strong> <strong>mit</strong> <strong>Threshold
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_56_0.png" src="_images/classification_56_0.png" />
+<img alt="_images/classification_55_0.png" src="_images/classification_55_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2176,7 +2175,7 @@ weighted avg       0.86      0.86      0.86      3270
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_59_0.png" src="_images/classification_59_0.png" />
+<img alt="_images/classification_58_0.png" src="_images/classification_58_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2216,7 +2215,7 @@ weighted avg       0.85      0.85      0.84      3270
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_61_0.png" src="_images/classification_61_0.png" />
+<img alt="_images/classification_60_0.png" src="_images/classification_60_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2356,7 +2355,7 @@ weighted avg       0.86      0.85      0.85      3270
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_82_0.png" src="_images/classification_82_0.png" />
+<img alt="_images/classification_81_0.png" src="_images/classification_81_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2403,7 +2402,7 @@ F1 Score:  0.8858</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/classification_86_0.png" src="_images/classification_86_0.png" />
+<img alt="_images/classification_85_0.png" src="_images/classification_85_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2484,7 +2483,7 @@ weighted avg       0.86      0.86      0.86      3270
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">California Housing Guide - Regression Modelle</p>
+                <p class="prevnext-title">Regression Modelle</p>
             </div>
         </a>
     </div>

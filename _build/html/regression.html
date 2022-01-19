@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>California Housing Guide - Regression Modelle &#8212; California Housing Guide</title>
+    <title>Regression Modelle &#8212; California Housing Guide</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -54,8 +54,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="California Housing Guide - Logistic Regression Modelle" href="classification.html" />
-    <link rel="prev" title="Beschreibung der verwendeten Variablen" href="Variablen.html" />
+    <link rel="next" title="Classification Modelle" href="classification.html" />
+    <link rel="prev" title="Variablen" href="Variablen.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -105,17 +105,17 @@
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="Variablen.html">
-     Beschreibung der verwendeten Variablen
+     Variablen
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     California Housing Guide - Regression Modelle
+     Regression Modelle
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="classification.html">
-     California Housing Guide - Logistic Regression Modelle
+     Classification Modelle
     </a>
    </li>
   </ul>
@@ -231,7 +231,7 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   California Housing Guide - Regression Modelle
+   Regression Modelle
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -240,13 +240,13 @@
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#import-von-benotigten-libraries">
-     Import von benötigten Libraries
+    <a class="reference internal nav-link" href="#import-module-libraries">
+     Import Module &amp; Libraries
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#erstellen-der-pipeline-fur-scikit-learn-modelle">
-     Erstellen der Pipeline für scikit learn Modelle
+    <a class="reference internal nav-link" href="#erstellen-einer-pipeline">
+     Erstellen einer Pipeline
     </a>
    </li>
   </ul>
@@ -289,14 +289,21 @@
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#eda-analyse-kategorialer-varaiblen">
-     EDA - Analyse kategorialer Varaiblen
+    <a class="reference internal nav-link" href="#uberblick">
+     Überblick
     </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#eda-analyse-numerischer-varaiblen">
-     EDA - Analyse numerischer Varaiblen
-    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#analyse-kategorialer-variablen">
+       Analyse kategorialer Variablen
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#analyse-numerischer-variablen">
+       Analyse numerischer Variablen
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -311,8 +318,8 @@
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#analyse-optimierung-der-neuen-erstellten-variablen">
-     Analyse &amp; Optimierung der neuen erstellten Variablen
+    <a class="reference internal nav-link" href="#analyse-optimierung">
+     Analyse &amp; Optimierung
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
@@ -321,8 +328,8 @@
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#erganzung-nach-durchlauf-mehrerer-modelle">
-     Ergänzung nach Durchlauf mehrerer Modelle
+    <a class="reference internal nav-link" href="#erganzung">
+     Ergänzung
     </a>
    </li>
   </ul>
@@ -491,17 +498,14 @@
         
               <div>
                 
-  <section id="california-housing-guide-regression-modelle">
-<h1>California Housing Guide - Regression Modelle<a class="headerlink" href="#california-housing-guide-regression-modelle" title="Permalink to this headline">¶</a></h1>
-<p>Aufgabenstellung &amp; Ziel:</p>
-<p>In diesem Projekt sollen mit Hilfe von Regressionsmodellen auf Basis der zur Verfügung gestellten Daten der median Hauspreis von Distrikten vorhergesagt werden.</p>
-<p>Da es sich bei Haus-/Wohnungspreisen in der Regel um niedrige bis hohe 6-stellige Summen handelt (ca. 100.000 - 500.000$ in diesem Fall), wäre eine Modell mit einem 4-stelligen bis niedrig 5-stelligem RMSE wünschenswert.</p>
+  <section id="regression-modelle">
+<h1>Regression Modelle<a class="headerlink" href="#regression-modelle" title="Permalink to this headline">¶</a></h1>
 </section>
 <section id="setup">
 <h1>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h1>
 <hr class="docutils" />
-<section id="import-von-benotigten-libraries">
-<h2>Import von benötigten Libraries<a class="headerlink" href="#import-von-benotigten-libraries" title="Permalink to this headline">¶</a></h2>
+<section id="import-module-libraries">
+<h2>Import Module &amp; Libraries<a class="headerlink" href="#import-module-libraries" title="Permalink to this headline">¶</a></h2>
 <p>Zu Beginn werden die benötigten Komponenten aus den entsprechenden Libraries importiert.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -545,8 +549,8 @@
 </div>
 </div>
 </section>
-<section id="erstellen-der-pipeline-fur-scikit-learn-modelle">
-<h2>Erstellen der Pipeline für scikit learn Modelle<a class="headerlink" href="#erstellen-der-pipeline-fur-scikit-learn-modelle" title="Permalink to this headline">¶</a></h2>
+<section id="erstellen-einer-pipeline">
+<h2>Erstellen einer Pipeline<a class="headerlink" href="#erstellen-einer-pipeline" title="Permalink to this headline">¶</a></h2>
 <p>Um die numerische und kategoriale Variablen automatisch in ein korrektes Format für die scikit learn Modelle zu transformieren, wird an dieser Stelle eine Pipeline definiert. Diese besteht aus verschiedenen Elementen, welche bspw. fehlende Werte ausfüllt (SimpleImputer) oder kategoriale Variablen in ein binäres Format umwandelt (OneHotEncoder).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1192,7 +1196,7 @@ memory usage: 2.0+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/regression_27_0.png" src="_images/regression_27_0.png" />
+<img alt="_images/regression_26_0.png" src="_images/regression_26_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1738,7 +1742,7 @@ Name: ocean_proximity, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/regression_51_0.png" src="_images/regression_51_0.png" />
+<img alt="_images/regression_50_0.png" src="_images/regression_50_0.png" />
 </div>
 </div>
 <p>Bei einem Blick auf die Histogramme fällt auf, dass es bei unserer vorherzusagenden Variablen <em>median_house_value</em> eine große Anzahl an Observations gibt, die einen extrem hohen Wert besitzen (ca. 500.000$).<br />
@@ -1749,8 +1753,9 @@ Auch bei <em>housing_median_age</em> gibt es eine auffällig große Menge an Obs
 <section id="exploratory-data-analysis">
 <h1>Exploratory Data Analysis<a class="headerlink" href="#exploratory-data-analysis" title="Permalink to this headline">¶</a></h1>
 <hr class="docutils" />
-<p>Nachdem die statistischen Besonderheiten berachtet wurden, soll nun die Verteilung der Variablen sowie deren Abhängigkeiten untereinander sowie auf die vorherzusagende Variable untersucht werden.
-Dabei betrachten wir zuerst wieder die numerischen Variablen.</p>
+<section id="uberblick">
+<h2>Überblick<a class="headerlink" href="#uberblick" title="Permalink to this headline">¶</a></h2>
+<p>Nachdem die statistischen Besonderheiten berachtet wurden, soll nun die Verteilung der Variablen sowie deren Abhängigkeiten untereinander sowie auf die vorherzusagende Variable untersucht werden.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pairplot für numerische Variablen mit Farbmarkierung für ocean_proximity</span>
@@ -1761,7 +1766,7 @@ Dabei betrachten wir zuerst wieder die numerischen Variablen.</p>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_25636</span><span class="o">/</span><span class="mf">1502785857.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_15996</span><span class="o">/</span><span class="mf">1502785857.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Pairplot für numerische Variablen mit Farbmarkierung für ocean_proximity</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;ocean_proximity&quot;</span><span class="p">);</span>
 
@@ -2098,8 +2103,8 @@ Name: median_house_value, dtype: float64
 </div>
 <p>Die oben bereits erkannten Zusammenhänge lassen sich hier nochmal einen Blick bestätigen.</p>
 <hr class="docutils" />
-<section id="eda-analyse-kategorialer-varaiblen">
-<h2>EDA - Analyse kategorialer Varaiblen<a class="headerlink" href="#eda-analyse-kategorialer-varaiblen" title="Permalink to this headline">¶</a></h2>
+<section id="analyse-kategorialer-variablen">
+<h3>Analyse kategorialer Variablen<a class="headerlink" href="#analyse-kategorialer-variablen" title="Permalink to this headline">¶</a></h3>
 <p>Als nächstes wird die kategoriale Variable <em>ocean_proximity</em> näher untersucht.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2154,7 +2159,7 @@ Auf dem Plot lässt sich erkennen, dass sich die Ausprägungen <em>ISLAND</em> u
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1f7c1bdb880&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1f7da63f1f0&gt;
 </pre></div>
 </div>
 <img alt="_images/regression_70_2.png" src="_images/regression_70_2.png" />
@@ -2193,7 +2198,7 @@ Auf dem Plot lässt sich erkennen, dass sich die Ausprägungen <em>ISLAND</em> u
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1f7cea287f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1f7d8d36760&gt;
 </pre></div>
 </div>
 <img alt="_images/regression_76_1.png" src="_images/regression_76_1.png" />
@@ -2204,8 +2209,8 @@ Auf dem Plot lässt sich erkennen, dass sich die Ausprägungen <em>ISLAND</em> u
 Auffällig ist, das es für die Ausprägung <em>ISLAND</em> nur sehr wenige Observations gibt und <em>ISLAND</em> und <em>NEAR BAY</em> stark auf bestimmte Gebiete beschränkt sind.</p>
 </div></blockquote>
 </section>
-<section id="eda-analyse-numerischer-varaiblen">
-<h2>EDA - Analyse numerischer Varaiblen<a class="headerlink" href="#eda-analyse-numerischer-varaiblen" title="Permalink to this headline">¶</a></h2>
+<section id="analyse-numerischer-variablen">
+<h3>Analyse numerischer Variablen<a class="headerlink" href="#analyse-numerischer-variablen" title="Permalink to this headline">¶</a></h3>
 <p>Vor allem die numerische Variable <em>median_income</em> sieht auf Basis des zu Beginn erstellen pairplots vielversprechend aus und wird daher nun näher untersucht. Aber auch andere numerische Varaiblen sollen noch genauer betrachtet werden.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2284,6 +2289,7 @@ Auffällig ist, das es für die Ausprägung <em>ISLAND</em> nur sehr wenige Obse
 </div></blockquote>
 </section>
 </section>
+</section>
 <section id="initial-feature-engineering">
 <h1>Initial Feature Engineering<a class="headerlink" href="#initial-feature-engineering" title="Permalink to this headline">¶</a></h1>
 <hr class="docutils" />
@@ -2301,8 +2307,8 @@ Auffällig ist, das es für die Ausprägung <em>ISLAND</em> nur sehr wenige Obse
 </div>
 </div>
 </section>
-<section id="analyse-optimierung-der-neuen-erstellten-variablen">
-<h2>Analyse &amp; Optimierung der neuen erstellten Variablen<a class="headerlink" href="#analyse-optimierung-der-neuen-erstellten-variablen" title="Permalink to this headline">¶</a></h2>
+<section id="analyse-optimierung">
+<h2>Analyse &amp; Optimierung<a class="headerlink" href="#analyse-optimierung" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
@@ -3219,9 +3225,10 @@ Name: median_house_value, dtype: float64
 </div>
 <p>Um unsere ausgewählten Variablen auf Multikollinearität zu untersuchen, berechnen wir den Variance Inflation Factor (VIF). Da sich dieser bei allen Variablen unter 5 befindet, stellt die Kollinearität bei diesen Variablen kein Problem dar.</p>
 </section>
-<section id="erganzung-nach-durchlauf-mehrerer-modelle">
-<h2>Ergänzung nach Durchlauf mehrerer Modelle<a class="headerlink" href="#erganzung-nach-durchlauf-mehrerer-modelle" title="Permalink to this headline">¶</a></h2>
-<p>Die Ausprägungen <em>ISLAND</em>, <em>NEAR</em> <em>BAY</em> und <em>NEAR</em> <em>OCEAN</em> der Variablen <em>ocean_proximity</em> wurden in verschiedenen Modellen (Classification &amp; Regression) durch P-Values oder Koeffizienten als unwichtig eingestuft.
+<section id="erganzung">
+<h2>Ergänzung<a class="headerlink" href="#erganzung" title="Permalink to this headline">¶</a></h2>
+<p>Nach Durchlauf mehrerer Modelle wird folgendes ergänzt:<br />
+Die Ausprägungen <em>ISLAND</em>, <em>NEAR</em> <em>BAY</em> und <em>NEAR</em> <em>OCEAN</em> der Variablen <em>ocean_proximity</em> wurden in verschiedenen Modellen (Classification &amp; Regression) durch P-Values oder Koeffizienten als unwichtig eingestuft.
 Daher werden diese nun zu einer Ausprägung zusammengefasst.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3330,32 +3337,32 @@ Um die Daten in das für scikit learn benötigte Format zu bringen, führen wir 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 {color: black;background-color: white;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 pre{padding: 0;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-toggleable {background-color: white;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-estimator:hover {background-color: #d4ebff;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-item {z-index: 1;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-parallel::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-parallel-item {display: flex;flex-direction: column;position: relative;background-color: white;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-parallel-item:only-child::after {width: 0;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;position: relative;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-label label {font-family: monospace;font-weight: bold;background-color: white;display: inline-block;line-height: 1.2em;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-label-container {position: relative;z-index: 2;text-align: center;}#sk-abba8a43-8637-4621-9bf4-9035f5fc44a6 div.sk-container {display: inline-block;position: relative;}</style><div id="sk-abba8a43-8637-4621-9bf4-9035f5fc44a6" class"sk-top-container"><div class="sk-container"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="2c800ef1-f352-421c-9b30-dce857021d8c" type="checkbox" ><label class="sk-toggleable__label" for="2c800ef1-f352-421c-9b30-dce857021d8c">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessor',
+<div class="output text_html"><style>#sk-f216df2b-8441-4009-bfac-45fc149c022b {color: black;background-color: white;}#sk-f216df2b-8441-4009-bfac-45fc149c022b pre{padding: 0;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-toggleable {background-color: white;}#sk-f216df2b-8441-4009-bfac-45fc149c022b label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-f216df2b-8441-4009-bfac-45fc149c022b input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-f216df2b-8441-4009-bfac-45fc149c022b input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-estimator:hover {background-color: #d4ebff;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-item {z-index: 1;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-parallel::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-parallel-item {display: flex;flex-direction: column;position: relative;background-color: white;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-parallel-item:only-child::after {width: 0;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;position: relative;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-label label {font-family: monospace;font-weight: bold;background-color: white;display: inline-block;line-height: 1.2em;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-label-container {position: relative;z-index: 2;text-align: center;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-container {display: inline-block;position: relative;}</style><div id="sk-f216df2b-8441-4009-bfac-45fc149c022b" class"sk-top-container"><div class="sk-container"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="69b1f1e4-a749-4325-a73e-8d446420ef06" type="checkbox" ><label class="sk-toggleable__label" for="69b1f1e4-a749-4325-a73e-8d446420ef06">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessor',
                  ColumnTransformer(transformers=[('num',
                                                   Pipeline(steps=[('imputer',
                                                                    SimpleImputer(strategy='median')),
                                                                   ('scaler',
                                                                    StandardScaler())]),
-                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730220>),
+                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0>),
                                                  ('cat',
                                                   Pipeline(steps=[('imputer',
                                                                    SimpleImputer(fill_value='missing',
                                                                                  strategy='constant')),
                                                                   ('onehot',
                                                                    OneHotEncoder(handle_unknown='ignore'))]),
-                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730160>)])),
-                ('lin', LinearRegression())])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="b8c6a8ab-49ae-428c-b678-13b338a2f98b" type="checkbox" ><label class="sk-toggleable__label" for="b8c6a8ab-49ae-428c-b678-13b338a2f98b">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('num',
+                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10>)])),
+                ('lin', LinearRegression())])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="ec76a1b9-d803-4c07-9d07-6de838bfec81" type="checkbox" ><label class="sk-toggleable__label" for="ec76a1b9-d803-4c07-9d07-6de838bfec81">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('num',
                                  Pipeline(steps=[('imputer',
                                                   SimpleImputer(strategy='median')),
                                                  ('scaler', StandardScaler())]),
-                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730220>),
+                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0>),
                                 ('cat',
                                  Pipeline(steps=[('imputer',
                                                   SimpleImputer(fill_value='missing',
                                                                 strategy='constant')),
                                                  ('onehot',
                                                   OneHotEncoder(handle_unknown='ignore'))]),
-                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730160>)])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="805ddb52-d9c4-4133-b9ed-27e4d4588055" type="checkbox" ><label class="sk-toggleable__label" for="805ddb52-d9c4-4133-b9ed-27e4d4588055">num</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730220></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="54866e5c-486e-4791-b66a-0dd8d13af0b7" type="checkbox" ><label class="sk-toggleable__label" for="54866e5c-486e-4791-b66a-0dd8d13af0b7">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy='median')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="cd88f2d0-1379-4f8f-9b2e-2b2cd2eff669" type="checkbox" ><label class="sk-toggleable__label" for="cd88f2d0-1379-4f8f-9b2e-2b2cd2eff669">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="04d7e21f-40be-4bd5-b250-1647b62c02f5" type="checkbox" ><label class="sk-toggleable__label" for="04d7e21f-40be-4bd5-b250-1647b62c02f5">cat</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730160></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="d2918e31-7853-4800-9d05-0258bcadd44f" type="checkbox" ><label class="sk-toggleable__label" for="d2918e31-7853-4800-9d05-0258bcadd44f">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(fill_value='missing', strategy='constant')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="d686da22-80ed-46a5-a87d-70278412cd8f" type="checkbox" ><label class="sk-toggleable__label" for="d686da22-80ed-46a5-a87d-70278412cd8f">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown='ignore')</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="f1e4f5c6-c31e-43ab-96eb-1e9de4437847" type="checkbox" ><label class="sk-toggleable__label" for="f1e4f5c6-c31e-43ab-96eb-1e9de4437847">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div></div></div></div></div>
+                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10>)])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="e47d7881-f013-491a-8d2d-6744a4f0aaa5" type="checkbox" ><label class="sk-toggleable__label" for="e47d7881-f013-491a-8d2d-6744a4f0aaa5">num</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="ba54500e-ec2c-4318-854a-4028f2a0167b" type="checkbox" ><label class="sk-toggleable__label" for="ba54500e-ec2c-4318-854a-4028f2a0167b">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy='median')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="5054ec28-03a8-4cbc-90b8-607946014fa2" type="checkbox" ><label class="sk-toggleable__label" for="5054ec28-03a8-4cbc-90b8-607946014fa2">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="5187cd71-9dcf-4ad2-b583-61a29749ec5c" type="checkbox" ><label class="sk-toggleable__label" for="5187cd71-9dcf-4ad2-b583-61a29749ec5c">cat</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="6103333c-160a-487b-a8fd-28e5c2ef7887" type="checkbox" ><label class="sk-toggleable__label" for="6103333c-160a-487b-a8fd-28e5c2ef7887">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(fill_value='missing', strategy='constant')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="0937c15c-7ad7-4467-adce-3d032930b657" type="checkbox" ><label class="sk-toggleable__label" for="0937c15c-7ad7-4467-adce-3d032930b657">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown='ignore')</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="6dd46deb-685c-4ab2-8d00-6310b15913fd" type="checkbox" ><label class="sk-toggleable__label" for="6dd46deb-685c-4ab2-8d00-6310b15913fd">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3552,7 +3559,7 @@ Das Modell ist also nicht gut genug gefittet, also underfitted. Nun kann entwede
   <th>Date:</th>              <td>Wed, 19 Jan 2022</td>  <th>  Prob (F-statistic):</th>   <td>  0.00</td>   
 </tr>
 <tr>
-  <th>Time:</th>                  <td>10:48:22</td>      <th>  Log-Likelihood:    </th> <td>-2.0583e+05</td>
+  <th>Time:</th>                  <td>12:59:26</td>      <th>  Log-Likelihood:    </th> <td>-2.0583e+05</td>
 </tr>
 <tr>
   <th>No. Observations:</th>       <td> 16346</td>       <th>  AIC:               </th>  <td>4.117e+05</td> 
@@ -3910,7 +3917,7 @@ Int64Index([10574, 17237,  4643,  4592,  5288, 15700, 17108,  8857,  5464,
   <th>Date:</th>              <td>Wed, 19 Jan 2022</td>  <th>  Prob (F-statistic):</th>   <td>  0.00</td>   
 </tr>
 <tr>
-  <th>Time:</th>                  <td>10:49:18</td>      <th>  Log-Likelihood:    </th> <td>-1.9102e+05</td>
+  <th>Time:</th>                  <td>13:00:22</td>      <th>  Log-Likelihood:    </th> <td>-1.9102e+05</td>
 </tr>
 <tr>
   <th>No. Observations:</th>       <td> 15527</td>       <th>  AIC:               </th>  <td>3.821e+05</td> 
@@ -4024,6 +4031,240 @@ Int64Index([10574, 17237,  4643,  4592,  5288, 15700, 17108,  8857,  5464,
 <p>Da bereits im Feature Engineering sowie durch Cook’s Distance starke Outlier entfernt wurden, sind hier keine Outlier mehr mit bspw. besonders starkem Hebel zu erkennen.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_dataset2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>longitude</th>
+      <th>latitude</th>
+      <th>housing_median_age</th>
+      <th>total_rooms</th>
+      <th>total_bedrooms</th>
+      <th>population</th>
+      <th>households</th>
+      <th>median_income</th>
+      <th>median_house_value</th>
+      <th>ocean_proximity</th>
+      <th>people_per_household</th>
+      <th>bedrooms_per_household</th>
+      <th>rooms_per_household</th>
+      <th>bedrooms_per_room</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>14740</th>
+      <td>-117.05</td>
+      <td>32.58</td>
+      <td>22.0</td>
+      <td>2101</td>
+      <td>399</td>
+      <td>1551</td>
+      <td>371</td>
+      <td>4.1518</td>
+      <td>136900.0</td>
+      <td>NEAR WATER</td>
+      <td>4.180593</td>
+      <td>1.075472</td>
+      <td>5.663073</td>
+      <td>0.189910</td>
+    </tr>
+    <tr>
+      <th>10101</th>
+      <td>-117.97</td>
+      <td>33.92</td>
+      <td>32.0</td>
+      <td>2620</td>
+      <td>398</td>
+      <td>1296</td>
+      <td>429</td>
+      <td>5.7796</td>
+      <td>241300.0</td>
+      <td>NEAR WATER</td>
+      <td>3.020979</td>
+      <td>0.927739</td>
+      <td>6.107226</td>
+      <td>0.151908</td>
+    </tr>
+    <tr>
+      <th>20566</th>
+      <td>-121.84</td>
+      <td>38.65</td>
+      <td>29.0</td>
+      <td>3167</td>
+      <td>548</td>
+      <td>1554</td>
+      <td>534</td>
+      <td>4.3487</td>
+      <td>200700.0</td>
+      <td>INLAND</td>
+      <td>2.910112</td>
+      <td>1.026217</td>
+      <td>5.930712</td>
+      <td>0.173034</td>
+    </tr>
+    <tr>
+      <th>2670</th>
+      <td>-115.60</td>
+      <td>33.20</td>
+      <td>37.0</td>
+      <td>709</td>
+      <td>187</td>
+      <td>390</td>
+      <td>142</td>
+      <td>2.4511</td>
+      <td>72500.0</td>
+      <td>INLAND</td>
+      <td>2.746479</td>
+      <td>1.316901</td>
+      <td>4.992958</td>
+      <td>0.263752</td>
+    </tr>
+    <tr>
+      <th>15709</th>
+      <td>-122.43</td>
+      <td>37.79</td>
+      <td>25.0</td>
+      <td>1637</td>
+      <td>394</td>
+      <td>649</td>
+      <td>379</td>
+      <td>5.0049</td>
+      <td>460000.0</td>
+      <td>NEAR WATER</td>
+      <td>1.712401</td>
+      <td>1.039578</td>
+      <td>4.319261</td>
+      <td>0.240684</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>4083</th>
+      <td>-118.38</td>
+      <td>34.15</td>
+      <td>36.0</td>
+      <td>2933</td>
+      <td>619</td>
+      <td>1115</td>
+      <td>579</td>
+      <td>4.3036</td>
+      <td>365900.0</td>
+      <td>NEAR WATER</td>
+      <td>1.925734</td>
+      <td>1.069085</td>
+      <td>5.065630</td>
+      <td>0.211047</td>
+    </tr>
+    <tr>
+      <th>7616</th>
+      <td>-118.22</td>
+      <td>33.86</td>
+      <td>16.0</td>
+      <td>8732</td>
+      <td>1489</td>
+      <td>3944</td>
+      <td>1493</td>
+      <td>5.1948</td>
+      <td>203500.0</td>
+      <td>NEAR WATER</td>
+      <td>2.641661</td>
+      <td>0.997321</td>
+      <td>5.848627</td>
+      <td>0.170522</td>
+    </tr>
+    <tr>
+      <th>16388</th>
+      <td>-121.30</td>
+      <td>38.05</td>
+      <td>52.0</td>
+      <td>122</td>
+      <td>26</td>
+      <td>62</td>
+      <td>25</td>
+      <td>1.1500</td>
+      <td>112500.0</td>
+      <td>INLAND</td>
+      <td>2.480000</td>
+      <td>1.040000</td>
+      <td>4.880000</td>
+      <td>0.213115</td>
+    </tr>
+    <tr>
+      <th>19949</th>
+      <td>-119.37</td>
+      <td>36.21</td>
+      <td>35.0</td>
+      <td>2228</td>
+      <td>476</td>
+      <td>1567</td>
+      <td>449</td>
+      <td>1.4455</td>
+      <td>54100.0</td>
+      <td>INLAND</td>
+      <td>3.489978</td>
+      <td>1.060134</td>
+      <td>4.962138</td>
+      <td>0.213645</td>
+    </tr>
+    <tr>
+      <th>10078</th>
+      <td>-120.27</td>
+      <td>39.35</td>
+      <td>11.0</td>
+      <td>2520</td>
+      <td>401</td>
+      <td>397</td>
+      <td>165</td>
+      <td>4.6650</td>
+      <td>145600.0</td>
+      <td>INLAND</td>
+      <td>2.406061</td>
+      <td>2.430303</td>
+      <td>15.272727</td>
+      <td>0.159127</td>
+    </tr>
+  </tbody>
+</table>
+<p>15527 rows × 14 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred2</span> <span class="o">=</span> <span class="n">lm2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">train_dataset2</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -4031,102 +4272,12 @@ Int64Index([10574, 17237,  4643,  4592,  5288, 15700, 17108,  8857,  5464,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">y_pred2</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train_dataset2</span><span class="p">,</span> <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="mi">80</span><span class="p">});</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14740    186329.909836
-10101    290766.150714
-20566    170797.499314
-2670     123274.422012
-15709    313143.168545
-             ...      
-4083     273125.907490
-7616     264661.850217
-16388     63070.367177
-19949     35551.544583
-10078    177980.659718
-Length: 15527, dtype: float64
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;y_pred2&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train_dataset2</span><span class="p">,</span> <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="mi">80</span><span class="p">});</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="nn">~\Anaconda\lib\site-packages\pandas\core\indexes\base.py</span> in <span class="ni">get_loc</span><span class="nt">(self, key, method, tolerance)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3360</span>             <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">3361</span>                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3362</span>             <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\pandas\_libs\index.pyx</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\pandas\_libs\index.pyx</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
-
-<span class="nn">pandas\_libs\hashtable_class_helper.pxi</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="nn">pandas\_libs\hashtable_class_helper.pxi</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="ne">KeyError</span>: &#39;y_pred2&#39;
-
-<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
-
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_27644</span><span class="o">/</span><span class="mf">1279372456.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;y_pred2&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train_dataset2</span><span class="p">,</span> <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="mi">80</span><span class="p">});</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\seaborn\_decorators.py</span> in <span class="ni">inner_f</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">44</span>             <span class="p">)</span>
-<span class="nn">     45         kwargs.update({k: arg for k, arg</span> in <span class="ni">zip</span><span class="nt">(sig.parameters, args)})</span>
-<span class="ne">---&gt; </span><span class="mi">46</span>         <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span>     <span class="k">return</span> <span class="n">inner_f</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span> 
-
-<span class="nn">~\Anaconda\lib\site-packages\seaborn\regression.py</span> in <span class="ni">residplot</span><span class="nt">(x, y, data, lowess, x_partial, y_partial, order, robust, dropna, label, color, scatter_kws, line_kws, ax)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1094</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1095</span>     <span class="s2">&quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1096</span><span class="s2">     plotter = _RegressionPlotter(x, y, data, ci=None,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1097</span><span class="s2">                                  order=order, robust=robust,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1098</span><span class="s2">                                  x_partial=x_partial, y_partial=y_partial,</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\seaborn\regression.py</span> in <span class="ni">__init__</span><span class="nt">(self, x, y, data, x_estimator, x_bins, x_ci, scatter, fit_reg, ci, n_boot, units, seed, order, logistic, lowess, robust, logx, x_partial, y_partial, truncate, dropna, x_jitter, y_jitter, color, label)</span>
-<span class="g g-Whitespace">    </span><span class="mi">107</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">108</span><span class="s2">         # Extract the data vals from the arguments or passed dataframe</span>
-<span class="ne">--&gt; </span><span class="mi">109</span><span class="s2">         self.establish_variables(data, x=x, y=y, units=units,</span>
-<span class="g g-Whitespace">    </span><span class="mi">110</span><span class="s2">                                  x_partial=x_partial, y_partial=y_partial)</span>
-<span class="g g-Whitespace">    </span><span class="mi">111</span><span class="s2"> </span>
-
-<span class="nn">~\Anaconda\lib\site-packages\seaborn\regression.py</span> in <span class="ni">establish_variables</span><span class="nt">(self, data, **kws)</span>
-<span class="g g-Whitespace">     </span><span class="mi">44</span><span class="s2">         for var, val in kws.items():</span>
-<span class="g g-Whitespace">     </span><span class="mi">45</span><span class="s2">             if isinstance(val, str):</span>
-<span class="ne">---&gt; </span><span class="mi">46</span><span class="s2">                 vector = data[val]</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span><span class="s2">             elif isinstance(val, list):</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span><span class="s2">                 vector = np.asarray(val)</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\pandas\core\frame.py</span> in <span class="ni">__getitem__</span><span class="nt">(self, key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3456</span><span class="s2">             if self.columns.nlevels &gt; 1:</span>
-<span class="g g-Whitespace">   </span><span class="mi">3457</span><span class="s2">                 return self._getitem_multilevel(key)</span>
-<span class="ne">-&gt; </span><span class="mi">3458</span><span class="s2">             indexer = self.columns.get_loc(key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3459</span><span class="s2">             if is_integer(indexer):</span>
-<span class="g g-Whitespace">   </span><span class="mi">3460</span><span class="s2">                 indexer = [indexer]</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\pandas\core\indexes\base.py</span> in <span class="ni">get_loc</span><span class="nt">(self, key, method, tolerance)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3361</span><span class="s2">                 return self._engine.get_loc(casted_key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3362</span><span class="s2">             except KeyError as err:</span>
-<span class="ne">-&gt; </span><span class="mi">3363</span><span class="s2">                 raise KeyError(key) from err</span>
-<span class="g g-Whitespace">   </span><span class="mi">3364</span><span class="s2"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">3365</span><span class="s2">         if is_scalar(key) and isna(key) and not self.hasnans:</span>
-
-<span class="ne">KeyError</span>: &#39;y_pred2&#39;
-</pre></div>
-</div>
+<img alt="_images/regression_177_0.png" src="_images/regression_177_0.png" />
 </div>
 </div>
 <p>Im residplot sollten im Optimalfall die residuals einigermaßen gleichmäßig zufällig um die horizontale Nulllinie verteilt sein.
@@ -4216,32 +4367,32 @@ Da dies nicht ganz der Fall ist, könnte es auf heteroscedasticity hindeuten. Da
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>#sk-befd5397-6c21-47e4-9006-7edaa53547f4 {color: black;background-color: white;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 pre{padding: 0;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-toggleable {background-color: white;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-estimator:hover {background-color: #d4ebff;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-item {z-index: 1;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-parallel::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-parallel-item {display: flex;flex-direction: column;position: relative;background-color: white;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-parallel-item:only-child::after {width: 0;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;position: relative;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-label label {font-family: monospace;font-weight: bold;background-color: white;display: inline-block;line-height: 1.2em;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-label-container {position: relative;z-index: 2;text-align: center;}#sk-befd5397-6c21-47e4-9006-7edaa53547f4 div.sk-container {display: inline-block;position: relative;}</style><div id="sk-befd5397-6c21-47e4-9006-7edaa53547f4" class"sk-top-container"><div class="sk-container"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="7b37997d-4fe6-477f-924b-aa9140ab5344" type="checkbox" ><label class="sk-toggleable__label" for="7b37997d-4fe6-477f-924b-aa9140ab5344">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessor',
+<div class="output text_html"><style>#sk-2f13929c-eecc-4084-8e51-09929a837be3 {color: black;background-color: white;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 pre{padding: 0;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-toggleable {background-color: white;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-estimator:hover {background-color: #d4ebff;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-item {z-index: 1;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-parallel::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-parallel-item {display: flex;flex-direction: column;position: relative;background-color: white;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-parallel-item:only-child::after {width: 0;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;position: relative;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-label label {font-family: monospace;font-weight: bold;background-color: white;display: inline-block;line-height: 1.2em;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-label-container {position: relative;z-index: 2;text-align: center;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-container {display: inline-block;position: relative;}</style><div id="sk-2f13929c-eecc-4084-8e51-09929a837be3" class"sk-top-container"><div class="sk-container"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="ba9d4eaa-6f49-48ea-8b27-15629defb299" type="checkbox" ><label class="sk-toggleable__label" for="ba9d4eaa-6f49-48ea-8b27-15629defb299">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessor',
                  ColumnTransformer(transformers=[('num',
                                                   Pipeline(steps=[('imputer',
                                                                    SimpleImputer(strategy='median')),
                                                                   ('scaler',
                                                                    StandardScaler())]),
-                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730220>),
+                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0>),
                                                  ('cat',
                                                   Pipeline(steps=[('imputer',
                                                                    SimpleImputer(fill_value='missing',
                                                                                  strategy='constant')),
                                                                   ('onehot',
                                                                    OneHotEncoder(handle_unknown='ignore'))]),
-                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730160>)])),
-                ('lasso', Lasso(alpha=1))])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="6ac45b7c-f480-4cad-83ab-961f56c5abb5" type="checkbox" ><label class="sk-toggleable__label" for="6ac45b7c-f480-4cad-83ab-961f56c5abb5">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('num',
+                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10>)])),
+                ('lasso', Lasso(alpha=1))])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="a997f487-c0ae-41e4-8814-b8802cfbaca8" type="checkbox" ><label class="sk-toggleable__label" for="a997f487-c0ae-41e4-8814-b8802cfbaca8">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('num',
                                  Pipeline(steps=[('imputer',
                                                   SimpleImputer(strategy='median')),
                                                  ('scaler', StandardScaler())]),
-                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730220>),
+                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0>),
                                 ('cat',
                                  Pipeline(steps=[('imputer',
                                                   SimpleImputer(fill_value='missing',
                                                                 strategy='constant')),
                                                  ('onehot',
                                                   OneHotEncoder(handle_unknown='ignore'))]),
-                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730160>)])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="2b1612cf-2255-4610-b6e6-14e006001366" type="checkbox" ><label class="sk-toggleable__label" for="2b1612cf-2255-4610-b6e6-14e006001366">num</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730220></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="aab24ed3-610e-408f-aaf1-f075ecbf3d41" type="checkbox" ><label class="sk-toggleable__label" for="aab24ed3-610e-408f-aaf1-f075ecbf3d41">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy='median')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="33c7cc13-c37c-4f8d-b642-37e612412430" type="checkbox" ><label class="sk-toggleable__label" for="33c7cc13-c37c-4f8d-b642-37e612412430">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="83fa53ea-a091-462d-a1b2-20cee00fb6a9" type="checkbox" ><label class="sk-toggleable__label" for="83fa53ea-a091-462d-a1b2-20cee00fb6a9">cat</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730160></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="8f06bb9e-1229-4d91-9492-9072b13dfb21" type="checkbox" ><label class="sk-toggleable__label" for="8f06bb9e-1229-4d91-9492-9072b13dfb21">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(fill_value='missing', strategy='constant')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="baf0d6fc-e49a-4345-af98-868edfa78047" type="checkbox" ><label class="sk-toggleable__label" for="baf0d6fc-e49a-4345-af98-868edfa78047">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown='ignore')</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="29ce9d85-f511-4474-900e-e4e66d3deb9c" type="checkbox" ><label class="sk-toggleable__label" for="29ce9d85-f511-4474-900e-e4e66d3deb9c">Lasso</label><div class="sk-toggleable__content"><pre>Lasso(alpha=1)</pre></div></div></div></div></div></div></div></div></div>
+                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10>)])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="ff7be644-5542-453a-aba8-e55ce7bdd078" type="checkbox" ><label class="sk-toggleable__label" for="ff7be644-5542-453a-aba8-e55ce7bdd078">num</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="fdf0e51d-1000-4db6-8b70-8197101343ae" type="checkbox" ><label class="sk-toggleable__label" for="fdf0e51d-1000-4db6-8b70-8197101343ae">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy='median')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="ef241b6e-d8b8-4694-bc5b-3b992d928ff9" type="checkbox" ><label class="sk-toggleable__label" for="ef241b6e-d8b8-4694-bc5b-3b992d928ff9">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="8d00ddd0-73ac-4d22-a02d-e9b0f1ed162f" type="checkbox" ><label class="sk-toggleable__label" for="8d00ddd0-73ac-4d22-a02d-e9b0f1ed162f">cat</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="8cc60b3e-0643-4144-9706-3a738d5dcbc8" type="checkbox" ><label class="sk-toggleable__label" for="8cc60b3e-0643-4144-9706-3a738d5dcbc8">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(fill_value='missing', strategy='constant')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="14467aa3-0be3-48bd-a742-46c99ad360e6" type="checkbox" ><label class="sk-toggleable__label" for="14467aa3-0be3-48bd-a742-46c99ad360e6">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown='ignore')</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="25588e76-6f06-4670-8edf-0ed472a4ee45" type="checkbox" ><label class="sk-toggleable__label" for="25588e76-6f06-4670-8edf-0ed472a4ee45">Lasso</label><div class="sk-toggleable__content"><pre>Lasso(alpha=1)</pre></div></div></div></div></div></div></div></div></div>
 </div>
 <p>Um die Importance der einzelnen Features im Lasso Algorithmus zu visualisieren, wird an dieser Stelle eine Liste mit allen Feature Namen erstellt.</p>
 <div class="cell docutils container">
@@ -4363,32 +4514,32 @@ MSE validation set 2889438999.32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 {color: black;background-color: white;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 pre{padding: 0;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-toggleable {background-color: white;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-estimator:hover {background-color: #d4ebff;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-item {z-index: 1;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-parallel::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-parallel-item {display: flex;flex-direction: column;position: relative;background-color: white;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-parallel-item:only-child::after {width: 0;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;position: relative;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-label label {font-family: monospace;font-weight: bold;background-color: white;display: inline-block;line-height: 1.2em;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-label-container {position: relative;z-index: 2;text-align: center;}#sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95 div.sk-container {display: inline-block;position: relative;}</style><div id="sk-4cb7cc3e-05a9-46c9-b10b-c95643596b95" class"sk-top-container"><div class="sk-container"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="c75bf528-0240-4a83-a285-3a179012e1e3" type="checkbox" ><label class="sk-toggleable__label" for="c75bf528-0240-4a83-a285-3a179012e1e3">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessor',
+<div class="output text_html"><style>#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 {color: black;background-color: white;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 pre{padding: 0;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-toggleable {background-color: white;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-estimator:hover {background-color: #d4ebff;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-item {z-index: 1;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-parallel::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-parallel-item {display: flex;flex-direction: column;position: relative;background-color: white;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-parallel-item:only-child::after {width: 0;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;position: relative;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-label label {font-family: monospace;font-weight: bold;background-color: white;display: inline-block;line-height: 1.2em;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-label-container {position: relative;z-index: 2;text-align: center;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-container {display: inline-block;position: relative;}</style><div id="sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004" class"sk-top-container"><div class="sk-container"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="3a44113d-0417-47db-9b85-59c6c1362945" type="checkbox" ><label class="sk-toggleable__label" for="3a44113d-0417-47db-9b85-59c6c1362945">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessor',
                  ColumnTransformer(transformers=[('num',
                                                   Pipeline(steps=[('imputer',
                                                                    SimpleImputer(strategy='median')),
                                                                   ('scaler',
                                                                    StandardScaler())]),
-                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730220>),
+                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0>),
                                                  ('cat',
                                                   Pipeline(steps=[('imputer',
                                                                    SimpleImputer(fill_value='missing',
                                                                                  strategy='constant')),
                                                                   ('onehot',
                                                                    OneHotEncoder(handle_unknown='ignore'))]),
-                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730160>)])),
-                ('lassoCV', LassoCV(cv=5, max_iter=10000, random_state=0))])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="df753d90-fe82-432f-8703-b7fa597b29c5" type="checkbox" ><label class="sk-toggleable__label" for="df753d90-fe82-432f-8703-b7fa597b29c5">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('num',
+                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10>)])),
+                ('lassoCV', LassoCV(cv=5, max_iter=10000, random_state=0))])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="92250a54-48a7-4441-b62d-ed1ca1cabb7a" type="checkbox" ><label class="sk-toggleable__label" for="92250a54-48a7-4441-b62d-ed1ca1cabb7a">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('num',
                                  Pipeline(steps=[('imputer',
                                                   SimpleImputer(strategy='median')),
                                                  ('scaler', StandardScaler())]),
-                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730220>),
+                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0>),
                                 ('cat',
                                  Pipeline(steps=[('imputer',
                                                   SimpleImputer(fill_value='missing',
                                                                 strategy='constant')),
                                                  ('onehot',
                                                   OneHotEncoder(handle_unknown='ignore'))]),
-                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730160>)])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="ac08a666-3d61-4e25-bd43-8926edf56db5" type="checkbox" ><label class="sk-toggleable__label" for="ac08a666-3d61-4e25-bd43-8926edf56db5">num</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730220></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="1f22cc00-3832-489c-a8ad-e3239a3d0278" type="checkbox" ><label class="sk-toggleable__label" for="1f22cc00-3832-489c-a8ad-e3239a3d0278">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy='median')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="5dfde464-2107-41e8-bca6-86dd91f92be8" type="checkbox" ><label class="sk-toggleable__label" for="5dfde464-2107-41e8-bca6-86dd91f92be8">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="c7560468-a306-4d8c-934b-8b9f499edc43" type="checkbox" ><label class="sk-toggleable__label" for="c7560468-a306-4d8c-934b-8b9f499edc43">cat</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730160></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="d52615d3-b7dc-4941-8ef8-2ebb9fc89fc6" type="checkbox" ><label class="sk-toggleable__label" for="d52615d3-b7dc-4941-8ef8-2ebb9fc89fc6">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(fill_value='missing', strategy='constant')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="ceda08e8-11bb-4655-869e-a951e65f3e0c" type="checkbox" ><label class="sk-toggleable__label" for="ceda08e8-11bb-4655-869e-a951e65f3e0c">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown='ignore')</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="3d6c7541-dc76-4a49-b787-093a1d524064" type="checkbox" ><label class="sk-toggleable__label" for="3d6c7541-dc76-4a49-b787-093a1d524064">LassoCV</label><div class="sk-toggleable__content"><pre>LassoCV(cv=5, max_iter=10000, random_state=0)</pre></div></div></div></div></div></div></div></div></div>
+                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10>)])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="d6e96557-7f11-44cd-89de-8edb8fbca652" type="checkbox" ><label class="sk-toggleable__label" for="d6e96557-7f11-44cd-89de-8edb8fbca652">num</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="0a8e9a51-5345-419a-98f3-41712d5e7c43" type="checkbox" ><label class="sk-toggleable__label" for="0a8e9a51-5345-419a-98f3-41712d5e7c43">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy='median')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="fe93e927-380d-401d-a74c-88bb7f4b1f1b" type="checkbox" ><label class="sk-toggleable__label" for="fe93e927-380d-401d-a74c-88bb7f4b1f1b">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="319c7593-56cf-4395-8da4-721b03c4e607" type="checkbox" ><label class="sk-toggleable__label" for="319c7593-56cf-4395-8da4-721b03c4e607">cat</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="2e678764-ef0f-40a3-b54a-ed8ff9135daf" type="checkbox" ><label class="sk-toggleable__label" for="2e678764-ef0f-40a3-b54a-ed8ff9135daf">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(fill_value='missing', strategy='constant')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="ab3ea0f9-250b-45b4-9b1e-dc1bb78fddc7" type="checkbox" ><label class="sk-toggleable__label" for="ab3ea0f9-250b-45b4-9b1e-dc1bb78fddc7">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown='ignore')</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="40fc172e-fc6a-41fd-abdb-692ec1e1086b" type="checkbox" ><label class="sk-toggleable__label" for="40fc172e-fc6a-41fd-abdb-692ec1e1086b">LassoCV</label><div class="sk-toggleable__content"><pre>LassoCV(cv=5, max_iter=10000, random_state=0)</pre></div></div></div></div></div></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4427,32 +4578,32 @@ MSE validation set 2889438999.32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 {color: black;background-color: white;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 pre{padding: 0;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-toggleable {background-color: white;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-estimator:hover {background-color: #d4ebff;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-item {z-index: 1;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-parallel::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-parallel-item {display: flex;flex-direction: column;position: relative;background-color: white;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-parallel-item:only-child::after {width: 0;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;position: relative;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-label label {font-family: monospace;font-weight: bold;background-color: white;display: inline-block;line-height: 1.2em;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-label-container {position: relative;z-index: 2;text-align: center;}#sk-5385b718-b9a2-42c7-b4a2-1160456d8699 div.sk-container {display: inline-block;position: relative;}</style><div id="sk-5385b718-b9a2-42c7-b4a2-1160456d8699" class"sk-top-container"><div class="sk-container"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="49fc422b-4420-4e19-a030-f0674f1e5122" type="checkbox" ><label class="sk-toggleable__label" for="49fc422b-4420-4e19-a030-f0674f1e5122">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessor',
+<div class="output text_html"><style>#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 {color: black;background-color: white;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 pre{padding: 0;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-toggleable {background-color: white;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-estimator:hover {background-color: #d4ebff;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-item {z-index: 1;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-parallel::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-parallel-item {display: flex;flex-direction: column;position: relative;background-color: white;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-parallel-item:only-child::after {width: 0;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;position: relative;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-label label {font-family: monospace;font-weight: bold;background-color: white;display: inline-block;line-height: 1.2em;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-label-container {position: relative;z-index: 2;text-align: center;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-container {display: inline-block;position: relative;}</style><div id="sk-7181b38a-7c84-48e1-918e-20f38ea3b664" class"sk-top-container"><div class="sk-container"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="b3d671f8-cd4f-4f88-897e-998cbe5fb21e" type="checkbox" ><label class="sk-toggleable__label" for="b3d671f8-cd4f-4f88-897e-998cbe5fb21e">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessor',
                  ColumnTransformer(transformers=[('num',
                                                   Pipeline(steps=[('imputer',
                                                                    SimpleImputer(strategy='median')),
                                                                   ('scaler',
                                                                    StandardScaler())]),
-                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730220>),
+                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0>),
                                                  ('cat',
                                                   Pipeline(steps=[('imputer',
                                                                    SimpleImputer(fill_value='missing',
                                                                                  strategy='constant')),
                                                                   ('onehot',
                                                                    OneHotEncoder(handle_unknown='ignore'))]),
-                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730160>)])),
-                ('lassobest', Lasso(alpha=78.1184746941765))])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="659998df-d0f1-4eab-8c71-1f2967dd7381" type="checkbox" ><label class="sk-toggleable__label" for="659998df-d0f1-4eab-8c71-1f2967dd7381">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('num',
+                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10>)])),
+                ('lassobest', Lasso(alpha=78.1184746941765))])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="2e6a479b-aaee-4121-98a7-727e154e6cef" type="checkbox" ><label class="sk-toggleable__label" for="2e6a479b-aaee-4121-98a7-727e154e6cef">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('num',
                                  Pipeline(steps=[('imputer',
                                                   SimpleImputer(strategy='median')),
                                                  ('scaler', StandardScaler())]),
-                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730220>),
+                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0>),
                                 ('cat',
                                  Pipeline(steps=[('imputer',
                                                   SimpleImputer(fill_value='missing',
                                                                 strategy='constant')),
                                                  ('onehot',
                                                   OneHotEncoder(handle_unknown='ignore'))]),
-                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730160>)])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="97fd5f74-a8b4-4be5-8107-f2612b07a6a2" type="checkbox" ><label class="sk-toggleable__label" for="97fd5f74-a8b4-4be5-8107-f2612b07a6a2">num</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730220></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="6945ac95-aa40-4556-8b78-9436989413df" type="checkbox" ><label class="sk-toggleable__label" for="6945ac95-aa40-4556-8b78-9436989413df">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy='median')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="a7b869b1-4154-4271-a8ec-6e6412c2a5d4" type="checkbox" ><label class="sk-toggleable__label" for="a7b869b1-4154-4271-a8ec-6e6412c2a5d4">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="658930e2-4073-4846-8923-ac5ac06300ec" type="checkbox" ><label class="sk-toggleable__label" for="658930e2-4073-4846-8923-ac5ac06300ec">cat</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CD730160></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="297b12da-bb41-4466-b97b-2e945ab5b2c4" type="checkbox" ><label class="sk-toggleable__label" for="297b12da-bb41-4466-b97b-2e945ab5b2c4">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(fill_value='missing', strategy='constant')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="a9545437-6bc6-4418-ae59-bdee7840cf6b" type="checkbox" ><label class="sk-toggleable__label" for="a9545437-6bc6-4418-ae59-bdee7840cf6b">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown='ignore')</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="a0a113c3-266c-4087-bc3f-ea80ef8dd2b8" type="checkbox" ><label class="sk-toggleable__label" for="a0a113c3-266c-4087-bc3f-ea80ef8dd2b8">Lasso</label><div class="sk-toggleable__content"><pre>Lasso(alpha=78.1184746941765)</pre></div></div></div></div></div></div></div></div></div>
+                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10>)])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="4a9c0593-ec80-4d0a-b447-47a682688697" type="checkbox" ><label class="sk-toggleable__label" for="4a9c0593-ec80-4d0a-b447-47a682688697">num</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="91434b99-2aff-4cb9-9561-5b84a46d268d" type="checkbox" ><label class="sk-toggleable__label" for="91434b99-2aff-4cb9-9561-5b84a46d268d">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy='median')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="9e8c51fb-d138-465a-bab6-f6731851a08f" type="checkbox" ><label class="sk-toggleable__label" for="9e8c51fb-d138-465a-bab6-f6731851a08f">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="d427ea4a-651f-4a48-af9a-f47b86da6e7f" type="checkbox" ><label class="sk-toggleable__label" for="d427ea4a-651f-4a48-af9a-f47b86da6e7f">cat</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="3304d3f9-2aff-40e7-be3e-b06bb67720a0" type="checkbox" ><label class="sk-toggleable__label" for="3304d3f9-2aff-40e7-be3e-b06bb67720a0">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(fill_value='missing', strategy='constant')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="12435d4a-4580-40e8-9799-c31b0440bd5a" type="checkbox" ><label class="sk-toggleable__label" for="12435d4a-4580-40e8-9799-c31b0440bd5a">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown='ignore')</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="dbf1f971-32f2-43af-9d80-c01d42c0b19b" type="checkbox" ><label class="sk-toggleable__label" for="dbf1f971-32f2-43af-9d80-c01d42c0b19b">Lasso</label><div class="sk-toggleable__content"><pre>Lasso(alpha=78.1184746941765)</pre></div></div></div></div></div></div></div></div></div>
 </div>
 <p>Zur Berechnung des RMSE werden auch mit dem Modell lassobest_pipe Predictions berechnet.</p>
 <div class="cell docutils container">
@@ -5312,8 +5463,8 @@ R squared test set 47.31
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;RMSE test set&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;R squared test set&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;R squared test set&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;RMSE test set&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -5324,18 +5475,10 @@ R squared test set 62.77
 </div>
 </div>
 </div>
+<p>Die Ergebnisse mit den Testdaten sind schlechter als die Resultate mit den bearbeiteten Trainingsdaten. Dies liegt vermutlich am Entfernen vieler Outlier durch Cook’s Distance.</p>
 </section>
 <section id="evaluation-lasso-regression-mit-scikit-learn">
 <h3>Evaluation Lasso Regression mit scikit learn<a class="headerlink" href="#evaluation-lasso-regression-mit-scikit-learn" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y2</span> <span class="o">=</span> <span class="n">test_dataset</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span>
-<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;median_income&#39;</span><span class="p">,</span> <span class="s1">&#39;people_per_household&#39;</span><span class="p">,</span> <span class="s1">&#39;ocean_proximity&#39;</span><span class="p">,</span> <span class="s1">&#39;bedrooms_per_room&#39;</span><span class="p">,</span> <span class="s1">&#39;housing_median_age&#39;</span><span class="p">]</span>
-<span class="n">X2</span> <span class="o">=</span> <span class="n">test_dataset</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred_testfinal</span> <span class="o">=</span> <span class="n">lassobest_pipe</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -5364,7 +5507,7 @@ RMSE test set 91509.58
 <h3>Evaluation Splines mit scikit learn<a class="headerlink" href="#evaluation-splines-mit-scikit-learn" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">splinesCD_pipe</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">splines_pipe</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -5447,6 +5590,12 @@ RMSE test set 91509.58
 </div>
 </div>
 </div>
+<p>Das Modell, welches mit dem Cook’s Distance optimierten Traindataset gefitted wurde, erzielt in der Evaluation mit den Testdaten leicht bessere Ergebnisse.</p>
+<p>Zum Vergleich die KPIs ohne Cook’s Distance Optimierung:</p>
+<ul class="simple">
+<li><p>RMSE: 66017.6385</p></li>
+<li><p>r2: 66.57</p></li>
+</ul>
 </section>
 </section>
 </section>
@@ -5485,7 +5634,7 @@ RMSE test set 91509.58
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Beschreibung der verwendeten Variablen</p>
+                <p class="prevnext-title">Variablen</p>
             </div>
         </a>
     </div>
@@ -5493,7 +5642,7 @@ RMSE test set 91509.58
         <a class="right-next" href="classification.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">California Housing Guide - Logistic Regression Modelle</p>
+                <p class="prevnext-title">Classification Modelle</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

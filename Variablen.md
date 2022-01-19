@@ -1,4 +1,4 @@
-# Beschreibung der verwendeten Variablen
+# Variablen
 
 Die folgenen Variablen stehen für die Modellierung zur verfügung:
 

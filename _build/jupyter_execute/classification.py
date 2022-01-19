@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # California Housing Guide - Logistic Regression Modelle
-
-# Es soll ein Classification Modell für ein Immobilienunternehmen erstellt werden, welches einschätzen kann ob der median housing prices in Destrikten über oder unter dem Wert 150.000$ liegen.
+# # Classification Modelle
 
 # # Setup
 # ---

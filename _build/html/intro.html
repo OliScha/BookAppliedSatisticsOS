@@ -102,17 +102,17 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="Variablen.html">
-     Beschreibung der verwendeten Variablen
+     Variablen
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="regression.html">
-     California Housing Guide - Regression Modelle
+     Regression Modelle
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="classification.html">
-     California Housing Guide - Logistic Regression Modelle
+     Classification Modelle
     </a>
    </li>
   </ul>
@@ -204,6 +204,24 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aufgabenstellung">
+   Aufgabenstellung
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#zielsetzung">
+   Zielsetzung
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -214,6 +232,8 @@
                 
   <section id="california-housing-guide">
 <h1>California Housing Guide<a class="headerlink" href="#california-housing-guide" title="Permalink to this headline">¶</a></h1>
+<section id="aufgabenstellung">
+<h2>Aufgabenstellung<a class="headerlink" href="#aufgabenstellung" title="Permalink to this headline">¶</a></h2>
 <p>In diesem Projekt sollen Modelle für ein imaginäres Immobilienunternehmen entwickelt werden, mit deren Hilfe folgende Vorhersagen getroffen werden können:</p>
 <ol class="simple">
 <li><p>Der durchschnittliche Preis von Immobilien in einem beliebigen Distrikt</p></li>
@@ -225,8 +245,20 @@
 <p class="admonition-title">Note</p>
 <p>Zur Modellierung werden Modelle von scikit learn und statsmodels verwendet.</p>
 </div>
+</section>
+<section id="zielsetzung">
+<h2>Zielsetzung<a class="headerlink" href="#zielsetzung" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Regression:</p></li>
+</ol>
+<p>Da es sich bei Haus-/Wohnungspreisen in diesem Fall um niedrige bis höhere 6-stellige Summen handelt (ca. 100.000 - 500.000$ in diesem Fall), wäre ein Modell mit einem 4-stelligen bis niedrig 5-stelligen RMSE wünschenswert.</p>
+<ol class="simple">
+<li><p>Klassifikation:</p></li>
+</ol>
+<p>Da für diesen Anwendungsfall sowohl die Anzahl an als “above” oder “below” identifizierten Distrikten relevant ist als auch die Korrekheit dieser Angabe, beides aber nicht über Leben und Tod entscheidet, soll der F1-Score als Kriterium genutzt werden. Ein F1-Score von über 80% wäre wünschenswert.</p>
 <div class="toctree-wrapper compound">
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
