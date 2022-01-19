@@ -43,8 +43,6 @@
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -74,8 +72,6 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
       
-      <img src="_static/logo.png" class="logo" alt="logo">
-      
       
       <h1 class="site-logo" id="site-title">California Housing Guide</h1>
       
@@ -88,7 +84,7 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   California Housing Guide
+   Einleitung
   </a>
  </li>
 </ul>
@@ -292,18 +288,16 @@
     <a class="reference internal nav-link" href="#uberblick">
      Überblick
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#analyse-kategorialer-variablen">
-       Analyse kategorialer Variablen
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#analyse-numerischer-variablen">
-       Analyse numerischer Variablen
-      </a>
-     </li>
-    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analyse-kategorialer-variablen">
+     Analyse kategorialer Variablen
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analyse-numerischer-variablen">
+     Analyse numerischer Variablen
+    </a>
    </li>
   </ul>
  </li>
@@ -1155,7 +1149,7 @@ Name: 0, dtype: object
 </div>
 <p>Diese Verunreinigung sorgt auch dafür, dass den Variablen <em>housing_median_age</em> und <em>median_house_value</em> automatisch der Datatype <em>object</em> zugewiesen wurde,
 obwohl man eher einen numerischen Wert erwarten würde (float oder int). Dies muss auch nach der Bereinigung korrigiert werden.</p>
-<p>In der Übresicht info() kann außerdem bereits erkannt werden, dass einige Observations in der Spalte <em>total_bedrooms</em> keinen Wert (NULL) vorliegen haben.</p>
+<p>In der Übersicht .info() kann außerdem bereits erkannt werden, dass einige Observations in der Spalte <em>total_bedrooms</em> keinen Wert (NULL) vorliegen haben.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_dataset</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -1233,7 +1227,7 @@ Auf ein Ausfüllen der leeren Felder mit Mittelwert o.ä. wird hier verzichtet, 
 </div>
 </div>
 </div>
-<p>Die Variable <em>price_category</em> wird direkt aus unserer vorherzusagenden Variable <em>median_house_value</em> abgeleitet und einigt sich daher nicht als Feature.</p>
+<p>Die Variable <em>price_category</em> wird direkt aus unserer vorherzusagenden Variable <em>median_house_value</em> abgeleitet und eignet sich daher nicht als Feature.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Droppen der nicht benötigten Variable</span>
@@ -1272,8 +1266,19 @@ Die Varaiblen <em>housing_median_age</em>, <em>median_house_value</em> und <em>o
 <li><p><em>housing_median_age</em> –&gt; float, da das Alter theoretisch auch in nicht gerundeten Werten angegeben werden könnte (bspw. 10,5 Jahre - was in unseren Daten allerdings nicht der Fall ist)</p></li>
 <li><p><em>median_house_value</em> –&gt; float, da Wert auch mit Nachkommastellen angegeben werden könnte</p></li>
 <li><p><em>ocean_proximity</em> –&gt; cat, dem Abstand zum Meer könnte theoretisch eine Reihenfolge zugewiesen werden</p></li>
-<li><p><em>total_bedrooms</em> –&gt; int, wie bei <em>total_rooms</em>, da es in der Regel keine halben Räume in Districts gibt.</p></li>
+<li><p><em>total_bedrooms</em> –&gt; int, wie bei <em>total_rooms</em>, da es in der Regel keine halben Räume in Districts gibt</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Anpassung der datatypes</span>
+<span class="n">train_dataset</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float64&quot;</span><span class="p">)</span>
+<span class="n">train_dataset</span><span class="p">[</span><span class="s1">&#39;housing_median_age&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="p">[</span><span class="s1">&#39;housing_median_age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float64&quot;</span><span class="p">)</span>
+<span class="n">train_dataset</span><span class="p">[</span><span class="s1">&#39;total_bedrooms&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="p">[</span><span class="s1">&#39;total_bedrooms&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;int64&quot;</span><span class="p">)</span>
+<span class="n">train_dataset</span><span class="p">[</span><span class="s1">&#39;ocean_proximity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="p">[</span><span class="s1">&#39;ocean_proximity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_dataset</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -1284,217 +1289,20 @@ Die Varaiblen <em>housing_median_age</em>, <em>median_house_value</em> und <em>o
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 Int64Index: 16352 entries, 14740 to 10078
 Data columns (total 10 columns):
- #   Column              Non-Null Count  Dtype  
----  ------              --------------  -----  
- 0   longitude           16352 non-null  float64
- 1   latitude            16352 non-null  float64
- 2   housing_median_age  16352 non-null  string 
- 3   total_rooms         16352 non-null  int64  
- 4   total_bedrooms      16352 non-null  float64
- 5   population          16352 non-null  int64  
- 6   households          16352 non-null  int64  
- 7   median_income       16352 non-null  float64
- 8   median_house_value  16352 non-null  string 
- 9   ocean_proximity     16352 non-null  object 
-dtypes: float64(4), int64(3), object(1), string(2)
-memory usage: 1.4+ MB
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_dataset</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>longitude</th>
-      <th>latitude</th>
-      <th>housing_median_age</th>
-      <th>total_rooms</th>
-      <th>total_bedrooms</th>
-      <th>population</th>
-      <th>households</th>
-      <th>median_income</th>
-      <th>median_house_value</th>
-      <th>ocean_proximity</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>14740</th>
-      <td>-117.05</td>
-      <td>32.58</td>
-      <td>22.0</td>
-      <td>2101</td>
-      <td>399.0</td>
-      <td>1551</td>
-      <td>371</td>
-      <td>4.1518</td>
-      <td>136900.0</td>
-      <td>NEAR OCEAN</td>
-    </tr>
-    <tr>
-      <th>10101</th>
-      <td>-117.97</td>
-      <td>33.92</td>
-      <td>32.0</td>
-      <td>2620</td>
-      <td>398.0</td>
-      <td>1296</td>
-      <td>429</td>
-      <td>5.7796</td>
-      <td>241300.0</td>
-      <td>&lt;1H OCEAN</td>
-    </tr>
-    <tr>
-      <th>20566</th>
-      <td>-121.84</td>
-      <td>38.65</td>
-      <td>29.0</td>
-      <td>3167</td>
-      <td>548.0</td>
-      <td>1554</td>
-      <td>534</td>
-      <td>4.3487</td>
-      <td>200700.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>2670</th>
-      <td>-115.60</td>
-      <td>33.20</td>
-      <td>37.0</td>
-      <td>709</td>
-      <td>187.0</td>
-      <td>390</td>
-      <td>142</td>
-      <td>2.4511</td>
-      <td>72500.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>15709</th>
-      <td>-122.43</td>
-      <td>37.79</td>
-      <td>25.0</td>
-      <td>1637</td>
-      <td>394.0</td>
-      <td>649</td>
-      <td>379</td>
-      <td>5.0049</td>
-      <td>460000.0</td>
-      <td>NEAR BAY</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>7616</th>
-      <td>-118.22</td>
-      <td>33.86</td>
-      <td>16.0</td>
-      <td>8732</td>
-      <td>1489.0</td>
-      <td>3944</td>
-      <td>1493</td>
-      <td>5.1948</td>
-      <td>203500.0</td>
-      <td>&lt;1H OCEAN</td>
-    </tr>
-    <tr>
-      <th>8767</th>
-      <td>-118.39</td>
-      <td>33.81</td>
-      <td>35.0</td>
-      <td>1008</td>
-      <td>165.0</td>
-      <td>391</td>
-      <td>167</td>
-      <td>3.7778</td>
-      <td>487500.0</td>
-      <td>NEAR OCEAN</td>
-    </tr>
-    <tr>
-      <th>16388</th>
-      <td>-121.30</td>
-      <td>38.05</td>
-      <td>52.0</td>
-      <td>122</td>
-      <td>26.0</td>
-      <td>62</td>
-      <td>25</td>
-      <td>1.1500</td>
-      <td>112500.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>19949</th>
-      <td>-119.37</td>
-      <td>36.21</td>
-      <td>35.0</td>
-      <td>2228</td>
-      <td>476.0</td>
-      <td>1567</td>
-      <td>449</td>
-      <td>1.4455</td>
-      <td>54100.0</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>10078</th>
-      <td>-120.27</td>
-      <td>39.35</td>
-      <td>11.0</td>
-      <td>2520</td>
-      <td>401.0</td>
-      <td>397</td>
-      <td>165</td>
-      <td>4.6650</td>
-      <td>145600.0</td>
-      <td>INLAND</td>
-    </tr>
-  </tbody>
-</table>
-<p>16352 rows × 10 columns</p>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Anpassung der datatypes</span>
-<span class="n">train_dataset</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float64&quot;</span><span class="p">)</span>
-<span class="n">train_dataset</span><span class="p">[</span><span class="s1">&#39;housing_median_age&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="p">[</span><span class="s1">&#39;housing_median_age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float64&quot;</span><span class="p">)</span>
-<span class="n">train_dataset</span><span class="p">[</span><span class="s1">&#39;total_bedrooms&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="p">[</span><span class="s1">&#39;total_bedrooms&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;int64&quot;</span><span class="p">)</span>
-<span class="n">train_dataset</span><span class="p">[</span><span class="s1">&#39;ocean_proximity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="p">[</span><span class="s1">&#39;ocean_proximity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
+ #   Column              Non-Null Count  Dtype   
+---  ------              --------------  -----   
+ 0   longitude           16352 non-null  float64 
+ 1   latitude            16352 non-null  float64 
+ 2   housing_median_age  16352 non-null  float64 
+ 3   total_rooms         16352 non-null  int64   
+ 4   total_bedrooms      16352 non-null  int64   
+ 5   population          16352 non-null  int64   
+ 6   households          16352 non-null  int64   
+ 7   median_income       16352 non-null  float64 
+ 8   median_house_value  16352 non-null  float64 
+ 9   ocean_proximity     16352 non-null  category
+dtypes: category(1), float64(5), int64(4)
+memory usage: 1.3 MB
 </pre></div>
 </div>
 </div>
@@ -1648,12 +1456,12 @@ Zuerst werden die numerischen Variablen betrachtet.</p>
 </div>
 <p>Folgende Auffälligkeiten sind hier zu sehen:</p>
 <ul class="simple">
-<li><p>Bei den Variablen <em>total_rooms</em>,<em>total_bedrooms</em>, <em>population</em> und <em>households</em> liegt der höchste Wert über dem 10 fachen des Wertes des 3 Quartils. Das deutet darauf ein, dass es einen oder wenige Distrikte gibt, welche viel größer sind als die Mehrzahl der Distrikte. Dies könnte im Feature Engineering ausgeglichen werden, indem durch Durchschnitsswerte die größe des Distrikts relativiert wird (bspw. Räume pro Person anstatt Räume im gesamten Distrikt)</p></li>
-<li><p>Bei der Variablen <em>median_income</em> fällt auf, dass der höchste Werte sehr hoch liegt im Vergleich zur Verteilung auf die Quartile (75% liegen unter 4.7, max bei 15.0)</p></li>
+<li><p>Bei den Variablen <em>total_rooms</em>,<em>total_bedrooms</em>, <em>population</em> und <em>households</em> liegt der höchste Wert über dem 10fachen des Wertes des 3 Quartils. Das deutet darauf hin, dass es einen oder wenige Distrikte gibt, welche viel größer sind als die Mehrzahl der Distrikte. Dies könnte im Feature Engineering ausgeglichen werden, indem durch Durchschnitsswerte die größe des Distrikts relativiert wird (bspw. Räume pro Person anstatt Räume im gesamten Distrikt)</p></li>
+<li><p>Auch bei der Variablen <em>median_income</em> fällt auf, dass der höchste Werte sehr hoch liegt im Vergleich zur Verteilung auf die Quartile (75% liegen unter 4.7, max bei 15.0)</p></li>
+<li><p>An Hand der <strong>Standardabweichung</strong> können wir erkennen, dass bei vielen Variablen eine hohe Streubreite vorliegt (bspw. bei <em>population</em>, <em>total_bedrooms</em>, <em>total_rooms</em>).<br />
+Bei Longitude und Latitude ist die Streuung am geringsten, was darauf hindeutet, dass die Distrikte nicht über den Globus verteilt sind sondern sich in einem bestimmten Land oder einer Region befinden.</p></li>
+<li><p>Es gibt wohl min. einen Distrikt, welcher nur einen Haushalt beinhaltet, min. einen Distrikt der noch sehr neu ist (1 Jahr <em>housing_median_age</em>), min. einen Distrikt in dem nur 3 Personen leben.</p></li>
 </ul>
-<blockquote>
-<div><p>MEHR BESCHREIBEN</p>
-</div></blockquote>
 <p>Als nächstes werden die kategorialen Variablen betrachtet.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1742,13 +1550,13 @@ Name: ocean_proximity, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/regression_50_0.png" src="_images/regression_50_0.png" />
+<img alt="_images/regression_48_0.png" src="_images/regression_48_0.png" />
 </div>
 </div>
-<p>Bei einem Blick auf die Histogramme fällt auf, dass es bei unserer vorherzusagenden Variablen <em>median_house_value</em> eine große Anzahl an Observations gibt, die einen extrem hohen Wert besitzen (ca. 500.000$).<br />
+<p>Bei einem Blick auf die Histogramme fällt auf, dass es bei der vorherzusagenden Variablen <em>median_house_value</em> eine große Anzahl an Observations gibt, die einen extrem hohen Wert besitzen (ca. 500.000$).<br />
 Auch bei <em>housing_median_age</em> gibt es eine auffällig große Menge an Observations mit dem größten Wert (52 Jahre).</p>
-<p>Evtl. wurden bei der Datenerhebung alle Werte größer den hier auffälligen Werten auf diesen Höchstwert gesetzt. Das könnte die Datenlage erklären, lässt sich in diesem Fall allerdings nicht klären.</p>
-<p>Bei den Geokoordinaten fällt auf, dass sich Observations um bestimmte Koordinaten herum häufen. Das kann auf Bevölkerungsdichte Regionen mit vielen Distrikten hinweisen, wie bspw. bei großen Städten.</p>
+<p>Evtl. wurden bei der Datenerhebung alle Werte größer den hier auffälligen Werten auf diesen Höchstwert gesetzt. Das könnte die Datenlage erklären, lässt sich in diesem Fall allerdings nicht bestätigen.</p>
+<p>Bei den Geokoordinaten fällt auf, dass sich Observations um bestimmte Koordinaten herum häufen. Das kann auf bevölkerungsdichte Regionen mit vielen Distrikten hinweisen, wie bspw. bei großen Städten.</p>
 </section>
 <section id="exploratory-data-analysis">
 <h1>Exploratory Data Analysis<a class="headerlink" href="#exploratory-data-analysis" title="Permalink to this headline">¶</a></h1>
@@ -1758,148 +1566,64 @@ Auch bei <em>housing_median_age</em> gibt es eine auffällig große Menge an Obs
 <p>Nachdem die statistischen Besonderheiten berachtet wurden, soll nun die Verteilung der Variablen sowie deren Abhängigkeiten untereinander sowie auf die vorherzusagende Variable untersucht werden.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pairplot für numerische Variablen mit Farbmarkierung für ocean_proximity</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;ocean_proximity&quot;</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_15996</span><span class="o">/</span><span class="mf">1502785857.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Pairplot für numerische Variablen mit Farbmarkierung für ocean_proximity</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;ocean_proximity&quot;</span><span class="p">);</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\seaborn\_decorators.py</span> in <span class="ni">inner_f</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">44</span>             <span class="p">)</span>
-<span class="nn">     45         kwargs.update({k: arg for k, arg</span> in <span class="ni">zip</span><span class="nt">(sig.parameters, args)})</span>
-<span class="ne">---&gt; </span><span class="mi">46</span>         <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span>     <span class="k">return</span> <span class="n">inner_f</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span> 
-
-<span class="nn">~\Anaconda\lib\site-packages\seaborn\axisgrid.py</span> in <span class="ni">pairplot</span><span class="nt">(data, hue, hue_order, palette, vars, x_vars, y_vars, kind, diag_kind, markers, height, aspect, corner, dropna, plot_kws, diag_kws, grid_kws, size)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2152</span>     <span class="c1"># Add a legend</span>
-<span class="g g-Whitespace">   </span><span class="mi">2153</span>     <span class="k">if</span> <span class="n">hue</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2154</span>         <span class="n">grid</span><span class="o">.</span><span class="n">add_legend</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">2155</span> 
-<span class="g g-Whitespace">   </span><span class="mi">2156</span>     <span class="n">grid</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\seaborn\axisgrid.py</span> in <span class="ni">add_legend</span><span class="nt">(self, legend_data, title, label_order, adjust_subtitles, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">171</span> 
-<span class="g g-Whitespace">    </span><span class="mi">172</span>             <span class="c1"># Draw the plot again to get the new transformations</span>
-<span class="ne">--&gt; </span><span class="mi">173</span>             <span class="n">_draw_figure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_figure</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">174</span> 
-<span class="g g-Whitespace">    </span><span class="mi">175</span>             <span class="c1"># Now calculate how much space we need on the right side</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\seaborn\utils.py</span> in <span class="ni">_draw_figure</span><span class="nt">(fig)</span>
-<span class="g g-Whitespace">     </span><span class="mi">93</span>     <span class="sd">&quot;&quot;&quot;Force draw of a matplotlib figure, accounting for back-compat.&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">94</span>     <span class="c1"># See https://github.com/matplotlib/matplotlib/issues/19197 for context</span>
-<span class="ne">---&gt; </span><span class="mi">95</span>     <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">96</span>     <span class="k">if</span> <span class="n">fig</span><span class="o">.</span><span class="n">stale</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">97</span>         <span class="k">try</span><span class="p">:</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\matplotlib\backends\backend_agg.py</span> in <span class="ni">draw</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">434</span>              <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span><span class="o">.</span><span class="n">_wait_cursor_for_draw_cm</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolbar</span>
-<span class="g g-Whitespace">    </span><span class="mi">435</span>               <span class="k">else</span> <span class="n">nullcontext</span><span class="p">()):</span>
-<span class="ne">--&gt; </span><span class="mi">436</span>             <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">renderer</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">437</span>             <span class="c1"># A GUI class may be need to update a window using this draw, so</span>
-<span class="g g-Whitespace">    </span><span class="mi">438</span>             <span class="c1"># don&#39;t forget to call the superclass.</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\matplotlib\artist.py</span> in <span class="ni">draw_wrapper</span><span class="nt">(artist, renderer, *args, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">71</span>     <span class="nd">@wraps</span><span class="p">(</span><span class="n">draw</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">72</span>     <span class="k">def</span> <span class="nf">draw_wrapper</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">73</span>         <span class="n">result</span> <span class="o">=</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">74</span>         <span class="k">if</span> <span class="n">renderer</span><span class="o">.</span><span class="n">_rasterizing</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">75</span>             <span class="n">renderer</span><span class="o">.</span><span class="n">stop_rasterizing</span><span class="p">()</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\matplotlib\artist.py</span> in <span class="ni">draw_wrapper</span><span class="nt">(artist, renderer)</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span>                 <span class="n">renderer</span><span class="o">.</span><span class="n">start_filter</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">49</span> 
-<span class="ne">---&gt; </span><span class="mi">50</span>             <span class="k">return</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">51</span>         <span class="k">finally</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">52</span>             <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\matplotlib\figure.py</span> in <span class="ni">draw</span><span class="nt">(self, renderer)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2801</span> 
-<span class="g g-Whitespace">   </span><span class="mi">2802</span>             <span class="bp">self</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2803</span>             <span class="n">mimage</span><span class="o">.</span><span class="n">_draw_list_compositing_images</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">2804</span>                 <span class="n">renderer</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">artists</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">suppressComposite</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2805</span> 
-
-<span class="nn">~\Anaconda\lib\site-packages\matplotlib\image.py</span> in <span class="ni">_draw_list_compositing_images</span><span class="nt">(renderer, parent, artists, suppress_composite)</span>
-<span class="g g-Whitespace">    </span><span class="mi">130</span>     <span class="k">if</span> <span class="n">not_composite</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">has_images</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">131</span>         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">artists</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">132</span>             <span class="n">a</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">133</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">134</span>         <span class="c1"># Composite any adjacent images together</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\matplotlib\artist.py</span> in <span class="ni">draw_wrapper</span><span class="nt">(artist, renderer)</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span>                 <span class="n">renderer</span><span class="o">.</span><span class="n">start_filter</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">49</span> 
-<span class="ne">---&gt; </span><span class="mi">50</span>             <span class="k">return</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">51</span>         <span class="k">finally</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">52</span>             <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\matplotlib\axes\_base.py</span> in <span class="ni">draw</span><span class="nt">(self, renderer)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3080</span>             <span class="n">renderer</span><span class="o">.</span><span class="n">stop_rasterizing</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">3081</span> 
-<span class="ne">-&gt; </span><span class="mi">3082</span>         <span class="n">mimage</span><span class="o">.</span><span class="n">_draw_list_compositing_images</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">3083</span>             <span class="n">renderer</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">artists</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">suppressComposite</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3084</span> 
-
-<span class="nn">~\Anaconda\lib\site-packages\matplotlib\image.py</span> in <span class="ni">_draw_list_compositing_images</span><span class="nt">(renderer, parent, artists, suppress_composite)</span>
-<span class="g g-Whitespace">    </span><span class="mi">130</span>     <span class="k">if</span> <span class="n">not_composite</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">has_images</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">131</span>         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">artists</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">132</span>             <span class="n">a</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">133</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">134</span>         <span class="c1"># Composite any adjacent images together</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\matplotlib\artist.py</span> in <span class="ni">draw_wrapper</span><span class="nt">(artist, renderer)</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span>                 <span class="n">renderer</span><span class="o">.</span><span class="n">start_filter</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">49</span> 
-<span class="ne">---&gt; </span><span class="mi">50</span>             <span class="k">return</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">51</span>         <span class="k">finally</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">52</span>             <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\matplotlib\collections.py</span> in <span class="ni">draw</span><span class="nt">(self, renderer)</span>
-<span class="g g-Whitespace">    </span><span class="mi">987</span>     <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">renderer</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">988</span>         <span class="bp">self</span><span class="o">.</span><span class="n">set_sizes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sizes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">dpi</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">989</span>         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">990</span> 
-<span class="g g-Whitespace">    </span><span class="mi">991</span> 
-
-<span class="nn">~\Anaconda\lib\site-packages\matplotlib\artist.py</span> in <span class="ni">draw_wrapper</span><span class="nt">(artist, renderer)</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span>                 <span class="n">renderer</span><span class="o">.</span><span class="n">start_filter</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">49</span> 
-<span class="ne">---&gt; </span><span class="mi">50</span>             <span class="k">return</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">51</span>         <span class="k">finally</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">52</span>             <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\matplotlib\collections.py</span> in <span class="ni">draw</span><span class="nt">(self, renderer)</span>
-<span class="g g-Whitespace">    </span><span class="mi">424</span>                 <span class="n">mpath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">offsets</span><span class="p">),</span> <span class="n">transOffset</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">facecolors</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-<span class="g g-Whitespace">    </span><span class="mi">425</span>         <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">426</span>             <span class="n">renderer</span><span class="o">.</span><span class="n">draw_path_collection</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">427</span>                 <span class="n">gc</span><span class="p">,</span> <span class="n">transform</span><span class="o">.</span><span class="n">frozen</span><span class="p">(),</span> <span class="n">paths</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">428</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">get_transforms</span><span class="p">(),</span> <span class="n">offsets</span><span class="p">,</span> <span class="n">transOffset</span><span class="p">,</span>
-
-<span class="nn">~\Anaconda\lib\site-packages\matplotlib\path.py</span> in <span class="ni">vertices</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">198</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">199</span> 
-<span class="ne">--&gt; </span><span class="mi">200</span>     <span class="nd">@property</span>
-<span class="g g-Whitespace">    </span><span class="mi">201</span>     <span class="k">def</span> <span class="nf">vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">202</span>         <span class="s2">&quot;&quot;&quot;</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 20640 entries, 0 to 20639
+Data columns (total 11 columns):
+ #   Column              Non-Null Count  Dtype  
+---  ------              --------------  -----  
+ 0   longitude           20640 non-null  float64
+ 1   latitude            20640 non-null  float64
+ 2   housing_median_age  20640 non-null  object 
+ 3   total_rooms         20640 non-null  int64  
+ 4   total_bedrooms      20433 non-null  float64
+ 5   population          20640 non-null  int64  
+ 6   households          20640 non-null  int64  
+ 7   median_income       20640 non-null  float64
+ 8   median_house_value  20640 non-null  object 
+ 9   ocean_proximity     20640 non-null  object 
+ 10  price_category      20640 non-null  object 
+dtypes: float64(4), int64(3), object(4)
+memory usage: 1.7+ MB
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>Erkenntnis:</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pairplot für numerische Variablen mit Farbmarkierung für ocean_proximity</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;total_rooms&quot;</span><span class="p">,</span><span class="s2">&quot;total_bedrooms&quot;</span><span class="p">,</span><span class="s2">&quot;population&quot;</span><span class="p">,</span><span class="s2">&quot;households&quot;</span><span class="p">,</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">],</span>\
+     <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;ocean_proximity&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/regression_54_0.png" src="_images/regression_54_0.png" />
+</div>
+</div>
+<blockquote>
+<div><p><strong>Erkenntnis:</strong></p>
 <ul class="simple">
-<li><p>Einfluss auf Y Variable: Ein Zusammenhang zwischen <em>median_income</em> und <em>median_house_value</em> ist zu erkennen, ansonsten gibt es erstmal keine weiteren offensichtlichen Zusammenhänge.</p></li>
+<li><p>Einfluss auf Y Variable: Ein Zusammenhang zwischen <em>median_income</em> und <em>median_house_value</em> ist zu erkennen. Durch die Einfärbung nach <em>ocean_proximity</em> kann man erkennen, dass sich INLAND Distrikte tendenziell eher am unteren Wertebereich der Y-Variable befinden. Ansonsten gibt es erstmal keine weiteren offensichtlichen Zusammenhänge.</p></li>
 <li><p>Variablen untereinander: Es gibt starke lineare Zusammenhänge zwischen <em>total_rooms</em>, <em>total_bedrooms</em>, <em>households</em> und <em>population</em>. Das ist soweit logisch und muss bei der Modellierung später beachtet werden (Collinearity).</p></li>
 </ul>
-<p>Auch an Hand der Korrelationswerte lässt sich erkennen, dass lediglich <em>median_income</em> einen starken Einfluss auf <em>median_house_value</em> hat.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pairplot für numerische Variablen mit Farbmarkierung für ocean_proximity</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;housing_median_age&quot;</span><span class="p">,</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span><span class="s2">&quot;median_income&quot;</span><span class="p">,</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;ocean_proximity&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/regression_56_0.png" src="_images/regression_56_0.png" />
+</div>
+</div>
+<p>Auch an Hand der Korrelationswerte der numerischen Variablen lässt sich erkennen, dass lediglich <em>median_income</em> einen starken Einfluss auf <em>median_house_value</em> hat.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
@@ -2101,10 +1825,11 @@ Name: median_house_value, dtype: float64
 <img alt="_images/regression_60_0.png" src="_images/regression_60_0.png" />
 </div>
 </div>
-<p>Die oben bereits erkannten Zusammenhänge lassen sich hier nochmal einen Blick bestätigen.</p>
+<p>Die oben bereits erkannten Zusammenhänge lassen sich hier nochmal auf einen Blick bestätigen.</p>
+</section>
 <hr class="docutils" />
 <section id="analyse-kategorialer-variablen">
-<h3>Analyse kategorialer Variablen<a class="headerlink" href="#analyse-kategorialer-variablen" title="Permalink to this headline">¶</a></h3>
+<h2>Analyse kategorialer Variablen<a class="headerlink" href="#analyse-kategorialer-variablen" title="Permalink to this headline">¶</a></h2>
 <p>Als nächstes wird die kategoriale Variable <em>ocean_proximity</em> näher untersucht.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2150,7 +1875,8 @@ Auf dem Plot lässt sich erkennen, dass sich die Ausprägungen <em>ISLAND</em> u
 <p>Durch eine kleine Änderung in den Parametern des Plots lassen sich besonders gut die Gebiete erkennen, aus welchen viele Observations vorliegen. Wie bereits vermutet handelt es sich vor allem um Ballungszentren bei San Francisco und Los Angeles.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_dataset</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;scatter&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span><span class="n">c</span><span class="o">=</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;jet&quot;</span><span class="p">),</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_dataset</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;scatter&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span>
+<span class="n">c</span><span class="o">=</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;jet&quot;</span><span class="p">),</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -2159,7 +1885,7 @@ Auf dem Plot lässt sich erkennen, dass sich die Ausprägungen <em>ISLAND</em> u
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1f7da63f1f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x163ce325460&gt;
 </pre></div>
 </div>
 <img alt="_images/regression_70_2.png" src="_images/regression_70_2.png" />
@@ -2189,7 +1915,7 @@ Auf dem Plot lässt sich erkennen, dass sich die Ausprägungen <em>ISLAND</em> u
 <img alt="_images/regression_74_0.png" src="_images/regression_74_0.png" />
 </div>
 </div>
-<p>Durch eine andere Form der Darstellung lässt sich nochmal gut die Menge und Dicht der Observations erkennen - und dass für <em>ISLAND</em> nur sehr wenige Observations vorliegen.</p>
+<p>Durch eine andere Form der Darstellung lässt sich nochmal gut die Menge und Dichte der Observations erkennen - und dass für <em>ISLAND</em> nur sehr wenige Observations vorliegen.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyse von &quot;ocean_proximity&quot; mit displot</span>
@@ -2198,7 +1924,7 @@ Auf dem Plot lässt sich erkennen, dass sich die Ausprägungen <em>ISLAND</em> u
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1f7d8d36760&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x163ce44cdc0&gt;
 </pre></div>
 </div>
 <img alt="_images/regression_76_1.png" src="_images/regression_76_1.png" />
@@ -2210,7 +1936,7 @@ Auffällig ist, das es für die Ausprägung <em>ISLAND</em> nur sehr wenige Obse
 </div></blockquote>
 </section>
 <section id="analyse-numerischer-variablen">
-<h3>Analyse numerischer Variablen<a class="headerlink" href="#analyse-numerischer-variablen" title="Permalink to this headline">¶</a></h3>
+<h2>Analyse numerischer Variablen<a class="headerlink" href="#analyse-numerischer-variablen" title="Permalink to this headline">¶</a></h2>
 <p>Vor allem die numerische Variable <em>median_income</em> sieht auf Basis des zu Beginn erstellen pairplots vielversprechend aus und wird daher nun näher untersucht. Aber auch andere numerische Varaiblen sollen noch genauer betrachtet werden.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2226,7 +1952,8 @@ Auffällig ist, das es für die Ausprägung <em>ISLAND</em> nur sehr wenige Obse
 <p>Wie bereits im Parplot lässt sich hier nochmal gut erkennen, dass tendenziell mit steigendem <em>median_income</em> auch der <em>median_house_value</em> steigt.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;median_income&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;darkred&#39;</span><span class="p">},</span> <span class="n">ci</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;median_income&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span> 
+<span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;darkred&#39;</span><span class="p">},</span> <span class="n">ci</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -2251,7 +1978,8 @@ Auffällig ist, das es für die Ausprägung <em>ISLAND</em> nur sehr wenige Obse
 <p>Auch bei <em>total_rooms</em> lääst sich ein leichter Trend erkennen. Da es sich allerdings hier um die Gesamtzahl der Räume in einem Distrikt handelt, welche natürlich direkt abhängig von dessen Größe ist, ist diese Variable möglicherweise nicht besonders gut geeignet. Viel besser wäre eine Variable, die die Anzahl der Räume in Relation setzt zur Anzahl an Haushalten oder Menschen. So eine Variable kann später im Feature Engineering erstellt werden.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;total_rooms&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;darkred&#39;</span><span class="p">},</span> <span class="n">ci</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;total_rooms&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span> 
+<span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;darkred&#39;</span><span class="p">},</span> <span class="n">ci</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -2276,7 +2004,8 @@ Auffällig ist, das es für die Ausprägung <em>ISLAND</em> nur sehr wenige Obse
 <p>Bei der Variable <em>housing_median_age</em> könnte man eine Auswirkung auf median_house_value erwarten, da neuere Häuser teurer sein könnten als alte Häuser. Anhand der Analyse lässt sich jedoch erkennen, dass diese Auswirkung nur sehr gering ist. Das könnte man bspw. durch teure Altbauwohungen oder durchgeführte Instandhaltungsmaßnahmen erklären.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;housing_median_age&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;darkred&#39;</span><span class="p">},</span> <span class="n">ci</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;housing_median_age&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span> 
+<span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;darkred&#39;</span><span class="p">},</span> <span class="n">ci</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -2285,9 +2014,8 @@ Auffällig ist, das es für die Ausprägung <em>ISLAND</em> nur sehr wenige Obse
 </div>
 </div>
 <blockquote>
-<div><p><strong>Fazit:</strong> Wie bereits erwartet bietet die Variable <em>median_income</em> das höchste Potential zur Vorhersage von <em>median_house_value</em>. Auch <em>ocean_proximity</em> zeigt eindeutig Auswirkungen auf unsere Y Variable, kann aber ggfs. noch zusammengefasst werden um später die Modelle zu optimieren. Auch bei weiteren Variablen kann Einfluss auf Y gefunden werden, allerdings ist dieser sehr schwach und sollte im Feauture Engineering optimiert werden.</p>
+<div><p><strong>Fazit:</strong> Wie bereits erwartet bietet die Variable <em>median_income</em> das höchste Potential zur Vorhersage von <em>median_house_value</em>. Auch <em>ocean_proximity</em> zeigt eindeutig Auswirkungen auf die Y Variable, kann aber ggfs. noch zusammengefasst werden um später die Modelle zu optimieren. Auch bei weiteren Variablen kann Einfluss auf Y gefunden werden, allerdings ist dieser sehr schwach und sollte im Feauture Engineering optimiert werden.</p>
 </div></blockquote>
-</section>
 </section>
 </section>
 <section id="initial-feature-engineering">
@@ -2339,7 +2067,8 @@ Name: median_house_value, dtype: float64
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Analyse neu erstellter Variablen</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">y_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">],</span> <span class="n">x_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;people_per_household&quot;</span><span class="p">,</span> <span class="s2">&quot;bedrooms_per_household&quot;</span><span class="p">,</span> <span class="s2">&quot;rooms_per_household&quot;</span><span class="p">,</span> <span class="s2">&quot;bedrooms_per_room&quot;</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;ocean_proximity&quot;</span><span class="p">);</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">y_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">],</span> 
+<span class="n">x_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;people_per_household&quot;</span><span class="p">,</span> <span class="s2">&quot;bedrooms_per_household&quot;</span><span class="p">,</span> <span class="s2">&quot;rooms_per_household&quot;</span><span class="p">,</span> <span class="s2">&quot;bedrooms_per_room&quot;</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;ocean_proximity&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -3077,7 +2806,7 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 </div>
-<p>Nach dem Entfernen der Outlier lässt sich eine stärke Auswirkung der Features auf die Y Variable erkennen</p>
+<p>Nach dem Entfernen der Outlier lässt sich eine stärkere Auswirkung der Features auf die Y-Variable erkennen.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;bedrooms_per_room&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">);</span>
@@ -3337,32 +3066,32 @@ Um die Daten in das für scikit learn benötigte Format zu bringen, führen wir 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>#sk-f216df2b-8441-4009-bfac-45fc149c022b {color: black;background-color: white;}#sk-f216df2b-8441-4009-bfac-45fc149c022b pre{padding: 0;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-toggleable {background-color: white;}#sk-f216df2b-8441-4009-bfac-45fc149c022b label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-f216df2b-8441-4009-bfac-45fc149c022b input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-f216df2b-8441-4009-bfac-45fc149c022b input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-estimator:hover {background-color: #d4ebff;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-item {z-index: 1;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-parallel::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-parallel-item {display: flex;flex-direction: column;position: relative;background-color: white;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-parallel-item:only-child::after {width: 0;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;position: relative;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-label label {font-family: monospace;font-weight: bold;background-color: white;display: inline-block;line-height: 1.2em;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-label-container {position: relative;z-index: 2;text-align: center;}#sk-f216df2b-8441-4009-bfac-45fc149c022b div.sk-container {display: inline-block;position: relative;}</style><div id="sk-f216df2b-8441-4009-bfac-45fc149c022b" class"sk-top-container"><div class="sk-container"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="69b1f1e4-a749-4325-a73e-8d446420ef06" type="checkbox" ><label class="sk-toggleable__label" for="69b1f1e4-a749-4325-a73e-8d446420ef06">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessor',
+<div class="output text_html"><style>#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 {color: black;background-color: white;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 pre{padding: 0;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-toggleable {background-color: white;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-estimator:hover {background-color: #d4ebff;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-item {z-index: 1;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-parallel::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-parallel-item {display: flex;flex-direction: column;position: relative;background-color: white;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-parallel-item:only-child::after {width: 0;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;position: relative;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-label label {font-family: monospace;font-weight: bold;background-color: white;display: inline-block;line-height: 1.2em;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-label-container {position: relative;z-index: 2;text-align: center;}#sk-611102c9-5038-4ff0-9fb3-d657fa85f322 div.sk-container {display: inline-block;position: relative;}</style><div id="sk-611102c9-5038-4ff0-9fb3-d657fa85f322" class"sk-top-container"><div class="sk-container"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="012e3cb4-b058-47bc-b486-a8e1a43a6661" type="checkbox" ><label class="sk-toggleable__label" for="012e3cb4-b058-47bc-b486-a8e1a43a6661">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessor',
                  ColumnTransformer(transformers=[('num',
                                                   Pipeline(steps=[('imputer',
                                                                    SimpleImputer(strategy='median')),
                                                                   ('scaler',
                                                                    StandardScaler())]),
-                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0>),
+                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x00000163CC73EE50>),
                                                  ('cat',
                                                   Pipeline(steps=[('imputer',
                                                                    SimpleImputer(fill_value='missing',
                                                                                  strategy='constant')),
                                                                   ('onehot',
                                                                    OneHotEncoder(handle_unknown='ignore'))]),
-                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10>)])),
-                ('lin', LinearRegression())])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="ec76a1b9-d803-4c07-9d07-6de838bfec81" type="checkbox" ><label class="sk-toggleable__label" for="ec76a1b9-d803-4c07-9d07-6de838bfec81">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('num',
+                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x00000163CC73EE20>)])),
+                ('lin', LinearRegression())])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="3875075d-cf33-49bd-8d94-3ae135841744" type="checkbox" ><label class="sk-toggleable__label" for="3875075d-cf33-49bd-8d94-3ae135841744">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('num',
                                  Pipeline(steps=[('imputer',
                                                   SimpleImputer(strategy='median')),
                                                  ('scaler', StandardScaler())]),
-                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0>),
+                                 <sklearn.compose._column_transformer.make_column_selector object at 0x00000163CC73EE50>),
                                 ('cat',
                                  Pipeline(steps=[('imputer',
                                                   SimpleImputer(fill_value='missing',
                                                                 strategy='constant')),
                                                  ('onehot',
                                                   OneHotEncoder(handle_unknown='ignore'))]),
-                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10>)])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="e47d7881-f013-491a-8d2d-6744a4f0aaa5" type="checkbox" ><label class="sk-toggleable__label" for="e47d7881-f013-491a-8d2d-6744a4f0aaa5">num</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="ba54500e-ec2c-4318-854a-4028f2a0167b" type="checkbox" ><label class="sk-toggleable__label" for="ba54500e-ec2c-4318-854a-4028f2a0167b">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy='median')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="5054ec28-03a8-4cbc-90b8-607946014fa2" type="checkbox" ><label class="sk-toggleable__label" for="5054ec28-03a8-4cbc-90b8-607946014fa2">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="5187cd71-9dcf-4ad2-b583-61a29749ec5c" type="checkbox" ><label class="sk-toggleable__label" for="5187cd71-9dcf-4ad2-b583-61a29749ec5c">cat</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="6103333c-160a-487b-a8fd-28e5c2ef7887" type="checkbox" ><label class="sk-toggleable__label" for="6103333c-160a-487b-a8fd-28e5c2ef7887">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(fill_value='missing', strategy='constant')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="0937c15c-7ad7-4467-adce-3d032930b657" type="checkbox" ><label class="sk-toggleable__label" for="0937c15c-7ad7-4467-adce-3d032930b657">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown='ignore')</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="6dd46deb-685c-4ab2-8d00-6310b15913fd" type="checkbox" ><label class="sk-toggleable__label" for="6dd46deb-685c-4ab2-8d00-6310b15913fd">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div></div></div></div></div>
+                                 <sklearn.compose._column_transformer.make_column_selector object at 0x00000163CC73EE20>)])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="d6dddd6c-0604-4d95-852d-6c02aad1c662" type="checkbox" ><label class="sk-toggleable__label" for="d6dddd6c-0604-4d95-852d-6c02aad1c662">num</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x00000163CC73EE50></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="12aaed75-0372-4aed-9e18-9a111869c878" type="checkbox" ><label class="sk-toggleable__label" for="12aaed75-0372-4aed-9e18-9a111869c878">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy='median')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="8319e554-ed47-4072-8435-7f4fbd2a3a1b" type="checkbox" ><label class="sk-toggleable__label" for="8319e554-ed47-4072-8435-7f4fbd2a3a1b">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="c41f39d0-fdaa-4c44-a1e9-689c50d453ee" type="checkbox" ><label class="sk-toggleable__label" for="c41f39d0-fdaa-4c44-a1e9-689c50d453ee">cat</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x00000163CC73EE20></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="9b5826fd-f6b1-4cdb-be3f-c70c28036f6f" type="checkbox" ><label class="sk-toggleable__label" for="9b5826fd-f6b1-4cdb-be3f-c70c28036f6f">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(fill_value='missing', strategy='constant')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="c7c73aa2-9e46-4bb8-9196-a9b032f7a960" type="checkbox" ><label class="sk-toggleable__label" for="c7c73aa2-9e46-4bb8-9196-a9b032f7a960">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown='ignore')</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="08dfd2ad-9809-478d-991b-516e329eae62" type="checkbox" ><label class="sk-toggleable__label" for="08dfd2ad-9809-478d-991b-516e329eae62">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3454,7 +3183,7 @@ RMSE: 70936.34551161608
 </div>
 </div>
 </div>
-<p>Ein Ergebnis von r2 = 62,62% und einem RMSE von 70712 ist kein besonders gutes Ergebnis. Das Modell weicht im Schnitt 70712<span class="math notranslate nohighlight">\( vom eigentlichen *median_house_value* ab, welcher sich meistens zwischen 100.000 und 500.000\)</span> bewegt. Als Versuch wurde das schwächste Feature <em>housing_median_age</em> entfernt, das Ergebnis fiel dabei leicht schlechter aus:</p>
+<p>Ein Ergebnis von r2 = 62,62% und einem RMSE von 70712 ist kein besonders gutes Ergebnis. Das Modell weicht im Schnitt um 70.712 vom eigentlichen <em>median_house_value</em> ab, welcher sich meistens zwischen 100.000 und 500.000 Dollar bewegt. Als Versuch wurde das schwächste Feature <em>housing_median_age</em> entfernt, das Ergebnis fiel dabei leicht schlechter aus:</p>
 <p>Modell ohne <em>housing_median_age</em>:</p>
 <ul class="simple">
 <li><p>r2 in %: 61.742949278293366</p></li>
@@ -3489,7 +3218,7 @@ RMSE: 72431.00251043547
 </div>
 </div>
 <p>Das Ergebnis der Validierung fällt noch schlechter aus.
-Das Modell ist also nicht gut genug gefittet, also underfitted. Nun kann entweder das Modell angepasst werden (bspw. andere Varaiblen gewählt werden) oder ein anderes Modell getestet werden um auf ein besseres Ergebnis zu kommen. Da nach verschiedenen Tests kein bessere Kombination an Features gefunden werden konnte, werden zunächst andere Modelle getestet.</p>
+Das Modell ist also nicht gut genug gefittet, also underfitted. Nun kann entweder das Modell angepasst werden (bspw. andere Variablen gewählt werden) oder ein anderes Modell getestet werden um auf ein besseres Ergebnis zu kommen. Da nach verschiedenen Tests kein bessere Kombination an Features gefunden werden konnte, werden zunächst andere Modelle getestet.</p>
 </section>
 </section>
 <section id="model-1-2-linear-ols-regression-with-statsmodels">
@@ -3499,7 +3228,8 @@ Das Modell ist also nicht gut genug gefittet, also underfitted. Nun kann entwede
 <p>Für das Linear Regression Modell von statsmodels ist kein erneuter datasplit notwendig, das Modell kann mit dem train_dataset arbeiten, welches X und Y Variablen enthält. Auf die seperate Erstellung eines Validation Datasets wird hier verzichtet, das Modell wird lediglich mit den Traingsdaten und schließlich mit den Testdaten evaluiert.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm1</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;median_house_value ~ median_income + ocean_proximity + bedrooms_per_room + people_per_household + housing_median_age&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm1</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;median_house_value ~ median_income + ocean_proximity + bedrooms_per_room + </span><span class="se">\</span>
+<span class="s1">people_per_household + housing_median_age&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -3559,7 +3289,7 @@ Das Modell ist also nicht gut genug gefittet, also underfitted. Nun kann entwede
   <th>Date:</th>              <td>Wed, 19 Jan 2022</td>  <th>  Prob (F-statistic):</th>   <td>  0.00</td>   
 </tr>
 <tr>
-  <th>Time:</th>                  <td>12:59:26</td>      <th>  Log-Likelihood:    </th> <td>-2.0583e+05</td>
+  <th>Time:</th>                  <td>19:50:47</td>      <th>  Log-Likelihood:    </th> <td>-2.0583e+05</td>
 </tr>
 <tr>
   <th>No. Observations:</th>       <td> 16346</td>       <th>  AIC:               </th>  <td>4.117e+05</td> 
@@ -3636,7 +3366,136 @@ Das Modell ist also nicht gut genug gefittet, also underfitted. Nun kann entwede
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/regression_159_0.png" src="_images/regression_159_0.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_28108</span><span class="o">/</span><span class="mf">1938551063.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Visualisierung der Outlier nach Cook&#39;s Distance</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">influence_plot</span><span class="p">(</span><span class="n">lm1</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s2">&quot;cooks&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="nn">~\Anaconda\lib\site-packages\statsmodels\graphics\regressionplots.py</span> in <span class="ni">influence_plot</span><span class="nt">(results, external, alpha, criterion, size, plot_alpha, ax, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">916</span> 
+<span class="g g-Whitespace">    </span><span class="mi">917</span>     <span class="n">infl</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get_influence</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">918</span>     <span class="n">res</span> <span class="o">=</span> <span class="n">_influence_plot</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">infl</span><span class="p">,</span> <span class="n">external</span><span class="o">=</span><span class="n">external</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">919</span>                           <span class="n">criterion</span><span class="o">=</span><span class="n">criterion</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">920</span>                           <span class="n">plot_alpha</span><span class="o">=</span><span class="n">plot_alpha</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">~\Anaconda\lib\site-packages\statsmodels\graphics\regressionplots.py</span> in <span class="ni">_influence_plot</span><span class="nt">(results, influence, external, alpha, criterion, size, plot_alpha, ax, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">879</span>     <span class="n">leverage</span> <span class="o">=</span> <span class="n">infl</span><span class="o">.</span><span class="n">hat_matrix_diag</span>
+<span class="g g-Whitespace">    </span><span class="mi">880</span>     <span class="k">if</span> <span class="n">external</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">881</span>         <span class="n">resids</span> <span class="o">=</span> <span class="n">infl</span><span class="o">.</span><span class="n">resid_studentized_external</span>
+<span class="g g-Whitespace">    </span><span class="mi">882</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">883</span>         <span class="n">resids</span> <span class="o">=</span> <span class="n">infl</span><span class="o">.</span><span class="n">resid_studentized</span>
+
+<span class="nn">~\Anaconda\lib\site-packages\pandas\_libs\properties.pyx</span> in <span class="ni">pandas._libs.properties.CachedProperty.__get__</span><span class="nt">()</span>
+
+<span class="nn">~\Anaconda\lib\site-packages\statsmodels\stats\outliers_influence.py</span> in <span class="ni">resid_studentized_external</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">658</span>         <span class="n">requires</span> <span class="n">leave</span> <span class="n">one</span> <span class="n">out</span> <span class="n">loop</span> <span class="k">for</span> <span class="n">observations</span>
+<span class="g g-Whitespace">    </span><span class="mi">659</span>         <span class="sd">&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">660</span><span class="sd">         sigma_looo = np.sqrt(self.sigma2_not_obsi)</span>
+<span class="g g-Whitespace">    </span><span class="mi">661</span><span class="sd">         return self.get_resid_studentized_external(sigma=sigma_looo)</span>
+<span class="g g-Whitespace">    </span><span class="mi">662</span><span class="sd"> </span>
+
+<span class="nn">~\Anaconda\lib\site-packages\pandas\_libs\properties.pyx</span> in <span class="ni">pandas._libs.properties.CachedProperty.__get__</span><span class="nt">()</span>
+
+<span class="nn">~\Anaconda\lib\site-packages\statsmodels\stats\outliers_influence.py</span> in <span class="ni">sigma2_not_obsi</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">792</span><span class="sd">         uses results from leave-one-observation-out loop</span>
+<span class="g g-Whitespace">    </span><span class="mi">793</span><span class="sd">         &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">794</span>         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_res_looo</span><span class="p">[</span><span class="s1">&#39;mse_resid&#39;</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">795</span> 
+<span class="g g-Whitespace">    </span><span class="mi">796</span>     <span class="nd">@property</span>
+
+<span class="nn">~\Anaconda\lib\site-packages\pandas\_libs\properties.pyx</span> in <span class="ni">pandas._libs.properties.CachedProperty.__get__</span><span class="nt">()</span>
+
+<span class="nn">~\Anaconda\lib\site-packages\statsmodels\stats\outliers_influence.py</span> in <span class="ni">_res_looo</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">952</span>         <span class="n">cv_iter</span> <span class="o">=</span> <span class="n">LeaveOneOut</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nobs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">953</span>         <span class="k">for</span> <span class="n">inidx</span><span class="p">,</span> <span class="n">outidx</span> <span class="ow">in</span> <span class="n">cv_iter</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">954</span>             <span class="n">res_i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_class</span><span class="p">(</span><span class="n">endog</span><span class="p">[</span><span class="n">inidx</span><span class="p">],</span> <span class="n">exog</span><span class="p">[</span><span class="n">inidx</span><span class="p">])</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">955</span>             <span class="n">params</span><span class="p">[</span><span class="n">outidx</span><span class="p">]</span> <span class="o">=</span> <span class="n">res_i</span><span class="o">.</span><span class="n">params</span>
+<span class="g g-Whitespace">    </span><span class="mi">956</span>             <span class="n">mse_resid</span><span class="p">[</span><span class="n">outidx</span><span class="p">]</span> <span class="o">=</span> <span class="n">res_i</span><span class="o">.</span><span class="n">mse_resid</span>
+
+<span class="nn">~\Anaconda\lib\site-packages\statsmodels\regression\linear_model.py</span> in <span class="ni">__init__</span><span class="nt">(self, endog, exog, missing, hasconst, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">870</span>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endog</span><span class="p">,</span> <span class="n">exog</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">missing</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">hasconst</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">871</span>                  <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">872</span>         <span class="nb">super</span><span class="p">(</span><span class="n">OLS</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">endog</span><span class="p">,</span> <span class="n">exog</span><span class="p">,</span> <span class="n">missing</span><span class="o">=</span><span class="n">missing</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">873</span>                                   <span class="n">hasconst</span><span class="o">=</span><span class="n">hasconst</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">874</span>         <span class="k">if</span> <span class="s2">&quot;weights&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_keys</span><span class="p">:</span>
+
+<span class="nn">~\Anaconda\lib\site-packages\statsmodels\regression\linear_model.py</span> in <span class="ni">__init__</span><span class="nt">(self, endog, exog, weights, missing, hasconst, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">701</span>         <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">702</span>             <span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">703</span>         <span class="nb">super</span><span class="p">(</span><span class="n">WLS</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">endog</span><span class="p">,</span> <span class="n">exog</span><span class="p">,</span> <span class="n">missing</span><span class="o">=</span><span class="n">missing</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">704</span>                                   <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span> <span class="n">hasconst</span><span class="o">=</span><span class="n">hasconst</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">705</span>         <span class="n">nobs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exog</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nn">~\Anaconda\lib\site-packages\statsmodels\regression\linear_model.py</span> in <span class="ni">__init__</span><span class="nt">(self, endog, exog, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">188</span>     <span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">189</span><span class="sd">     def __init__(self, endog, exog, **kwargs):</span>
+<span class="ne">--&gt; </span><span class="mi">190</span><span class="sd">         super(RegressionModel, self).__init__(endog, exog, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">191</span><span class="sd">         self._data_attr.extend([&#39;pinv_wexog&#39;, &#39;weights&#39;])</span>
+<span class="g g-Whitespace">    </span><span class="mi">192</span><span class="sd"> </span>
+
+<span class="nn">~\Anaconda\lib\site-packages\statsmodels\base\model.py</span> in <span class="ni">__init__</span><span class="nt">(self, endog, exog, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">235</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">236</span><span class="sd">     def __init__(self, endog, exog=None, **kwargs):</span>
+<span class="ne">--&gt; </span><span class="mi">237</span><span class="sd">         super(LikelihoodModel, self).__init__(endog, exog, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">238</span><span class="sd">         self.initialize()</span>
+<span class="g g-Whitespace">    </span><span class="mi">239</span><span class="sd"> </span>
+
+<span class="nn">~\Anaconda\lib\site-packages\statsmodels\base\model.py</span> in <span class="ni">__init__</span><span class="nt">(self, endog, exog, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span><span class="sd">         missing = kwargs.pop(&#39;missing&#39;, &#39;none&#39;)</span>
+<span class="g g-Whitespace">     </span><span class="mi">76</span><span class="sd">         hasconst = kwargs.pop(&#39;hasconst&#39;, None)</span>
+<span class="ne">---&gt; </span><span class="mi">77</span><span class="sd">         self.data = self._handle_data(endog, exog, missing, hasconst,</span>
+<span class="g g-Whitespace">     </span><span class="mi">78</span><span class="sd">                                       **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">79</span><span class="sd">         self.k_constant = self.data.k_constant</span>
+
+<span class="nn">~\Anaconda\lib\site-packages\statsmodels\base\model.py</span> in <span class="ni">_handle_data</span><span class="nt">(self, endog, exog, missing, hasconst, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">100</span><span class="sd">     def _handle_data(self, endog, exog, missing, hasconst, **kwargs):</span>
+<span class="ne">--&gt; </span><span class="mi">101</span><span class="sd">         data = handle_data(endog, exog, missing, hasconst, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span><span class="sd">         # kwargs arrays could have changed, easier to just attach here</span>
+<span class="g g-Whitespace">    </span><span class="mi">103</span><span class="sd">         for key in kwargs:</span>
+
+<span class="nn">~\Anaconda\lib\site-packages\statsmodels\base\data.py</span> in <span class="ni">handle_data</span><span class="nt">(endog, exog, missing, hasconst, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">670</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">671</span><span class="sd">     klass = handle_data_class_factory(endog, exog)</span>
+<span class="ne">--&gt; </span><span class="mi">672</span><span class="sd">     return klass(endog, exog=exog, missing=missing, hasconst=hasconst,</span>
+<span class="g g-Whitespace">    </span><span class="mi">673</span><span class="sd">                  **kwargs)</span>
+
+<span class="nn">~\Anaconda\lib\site-packages\statsmodels\base\data.py</span> in <span class="ni">__init__</span><span class="nt">(self, endog, exog, missing, hasconst, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">85</span><span class="sd">         self.const_idx = None</span>
+<span class="g g-Whitespace">     </span><span class="mi">86</span><span class="sd">         self.k_constant = 0</span>
+<span class="ne">---&gt; </span><span class="mi">87</span><span class="sd">         self._handle_constant(hasconst)</span>
+<span class="g g-Whitespace">     </span><span class="mi">88</span><span class="sd">         self._check_integrity()</span>
+<span class="g g-Whitespace">     </span><span class="mi">89</span><span class="sd">         self._cache = {}</span>
+
+<span class="nn">~\Anaconda\lib\site-packages\statsmodels\base\data.py</span> in <span class="ni">_handle_constant</span><span class="nt">(self, hasconst)</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span><span class="sd">             if not np.isfinite(exog_max).all():</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span><span class="sd">                 raise MissingDataError(&#39;exog contains inf or nans&#39;)</span>
+<span class="ne">--&gt; </span><span class="mi">134</span><span class="sd">             exog_min = np.min(self.exog, axis=0)</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span><span class="sd">             const_idx = np.where(exog_max == exog_min)[0].squeeze()</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span><span class="sd">             self.k_constant = const_idx.size</span>
+
+<span class="nn">&lt;__array_function__ internals&gt;</span> in <span class="ni">amin</span><span class="nt">(*args, **kwargs)</span>
+
+<span class="nn">~\Anaconda\lib\site-packages\numpy\core\fromnumeric.py</span> in <span class="ni">amin</span><span class="nt">(a, axis, out, keepdims, initial, where)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2856</span><span class="sd">     6</span>
+<span class="g g-Whitespace">   </span><span class="mi">2857</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">2858</span>     <span class="k">return</span> <span class="n">_wrapreduction</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2859</span>                           <span class="n">keepdims</span><span class="o">=</span><span class="n">keepdims</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="n">initial</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">where</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2860</span> 
+
+<span class="nn">~\Anaconda\lib\site-packages\numpy\core\fromnumeric.py</span> in <span class="ni">_wrapreduction</span><span class="nt">(obj, ufunc, method, axis, dtype, out, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">85</span>                 <span class="k">return</span> <span class="n">reduction</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">,</span> <span class="o">**</span><span class="n">passkwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">86</span> 
+<span class="ne">---&gt; </span><span class="mi">87</span>     <span class="k">return</span> <span class="n">ufunc</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="o">**</span><span class="n">passkwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">88</span> 
+<span class="g g-Whitespace">     </span><span class="mi">89</span> 
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+<img alt="_images/regression_159_1.png" src="_images/regression_159_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -3890,7 +3749,8 @@ Int64Index([10574, 17237,  4643,  4592,  5288, 15700, 17108,  8857,  5464,
 <p>Nun wird der Algorithmus erneut durchgeführt, auf Basis des bereinigten datasets.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm2</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;median_house_value ~ median_income + ocean_proximity + bedrooms_per_room + people_per_household + housing_median_age&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train_dataset2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm2</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;median_house_value ~ median_income + ocean_proximity + bedrooms_per_room + </span><span class="se">\</span>
+<span class="s1">people_per_household + housing_median_age&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train_dataset2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -3917,7 +3777,7 @@ Int64Index([10574, 17237,  4643,  4592,  5288, 15700, 17108,  8857,  5464,
   <th>Date:</th>              <td>Wed, 19 Jan 2022</td>  <th>  Prob (F-statistic):</th>   <td>  0.00</td>   
 </tr>
 <tr>
-  <th>Time:</th>                  <td>13:00:22</td>      <th>  Log-Likelihood:    </th> <td>-1.9102e+05</td>
+  <th>Time:</th>                  <td>19:47:15</td>      <th>  Log-Likelihood:    </th> <td>-1.9102e+05</td>
 </tr>
 <tr>
   <th>No. Observations:</th>       <td> 15527</td>       <th>  AIC:               </th>  <td>3.821e+05</td> 
@@ -4010,7 +3870,8 @@ Int64Index([10574, 17237,  4643,  4592,  5288, 15700, 17108,  8857,  5464,
 <p>Auf dem Partial Regression Plot können wir jeweils einen mehr oder weniger linearen Zusammenhang der Features auf die Y Variable erkennen.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;median_income&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train_dataset2</span><span class="p">,</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;darkred&#39;</span><span class="p">},</span> <span class="n">ci</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;median_income&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train_dataset2</span><span class="p">,</span> 
+<span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;darkred&#39;</span><span class="p">},</span> <span class="n">ci</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -4020,7 +3881,8 @@ Int64Index([10574, 17237,  4643,  4592,  5288, 15700, 17108,  8857,  5464,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;bedrooms_per_room&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train_dataset2</span><span class="p">,</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;darkred&#39;</span><span class="p">},</span> <span class="n">ci</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;bedrooms_per_room&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train_dataset2</span><span class="p">,</span> 
+<span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;darkred&#39;</span><span class="p">},</span> <span class="n">ci</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -4029,240 +3891,6 @@ Int64Index([10574, 17237,  4643,  4592,  5288, 15700, 17108,  8857,  5464,
 </div>
 </div>
 <p>Da bereits im Feature Engineering sowie durch Cook’s Distance starke Outlier entfernt wurden, sind hier keine Outlier mehr mit bspw. besonders starkem Hebel zu erkennen.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_dataset2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>longitude</th>
-      <th>latitude</th>
-      <th>housing_median_age</th>
-      <th>total_rooms</th>
-      <th>total_bedrooms</th>
-      <th>population</th>
-      <th>households</th>
-      <th>median_income</th>
-      <th>median_house_value</th>
-      <th>ocean_proximity</th>
-      <th>people_per_household</th>
-      <th>bedrooms_per_household</th>
-      <th>rooms_per_household</th>
-      <th>bedrooms_per_room</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>14740</th>
-      <td>-117.05</td>
-      <td>32.58</td>
-      <td>22.0</td>
-      <td>2101</td>
-      <td>399</td>
-      <td>1551</td>
-      <td>371</td>
-      <td>4.1518</td>
-      <td>136900.0</td>
-      <td>NEAR WATER</td>
-      <td>4.180593</td>
-      <td>1.075472</td>
-      <td>5.663073</td>
-      <td>0.189910</td>
-    </tr>
-    <tr>
-      <th>10101</th>
-      <td>-117.97</td>
-      <td>33.92</td>
-      <td>32.0</td>
-      <td>2620</td>
-      <td>398</td>
-      <td>1296</td>
-      <td>429</td>
-      <td>5.7796</td>
-      <td>241300.0</td>
-      <td>NEAR WATER</td>
-      <td>3.020979</td>
-      <td>0.927739</td>
-      <td>6.107226</td>
-      <td>0.151908</td>
-    </tr>
-    <tr>
-      <th>20566</th>
-      <td>-121.84</td>
-      <td>38.65</td>
-      <td>29.0</td>
-      <td>3167</td>
-      <td>548</td>
-      <td>1554</td>
-      <td>534</td>
-      <td>4.3487</td>
-      <td>200700.0</td>
-      <td>INLAND</td>
-      <td>2.910112</td>
-      <td>1.026217</td>
-      <td>5.930712</td>
-      <td>0.173034</td>
-    </tr>
-    <tr>
-      <th>2670</th>
-      <td>-115.60</td>
-      <td>33.20</td>
-      <td>37.0</td>
-      <td>709</td>
-      <td>187</td>
-      <td>390</td>
-      <td>142</td>
-      <td>2.4511</td>
-      <td>72500.0</td>
-      <td>INLAND</td>
-      <td>2.746479</td>
-      <td>1.316901</td>
-      <td>4.992958</td>
-      <td>0.263752</td>
-    </tr>
-    <tr>
-      <th>15709</th>
-      <td>-122.43</td>
-      <td>37.79</td>
-      <td>25.0</td>
-      <td>1637</td>
-      <td>394</td>
-      <td>649</td>
-      <td>379</td>
-      <td>5.0049</td>
-      <td>460000.0</td>
-      <td>NEAR WATER</td>
-      <td>1.712401</td>
-      <td>1.039578</td>
-      <td>4.319261</td>
-      <td>0.240684</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>4083</th>
-      <td>-118.38</td>
-      <td>34.15</td>
-      <td>36.0</td>
-      <td>2933</td>
-      <td>619</td>
-      <td>1115</td>
-      <td>579</td>
-      <td>4.3036</td>
-      <td>365900.0</td>
-      <td>NEAR WATER</td>
-      <td>1.925734</td>
-      <td>1.069085</td>
-      <td>5.065630</td>
-      <td>0.211047</td>
-    </tr>
-    <tr>
-      <th>7616</th>
-      <td>-118.22</td>
-      <td>33.86</td>
-      <td>16.0</td>
-      <td>8732</td>
-      <td>1489</td>
-      <td>3944</td>
-      <td>1493</td>
-      <td>5.1948</td>
-      <td>203500.0</td>
-      <td>NEAR WATER</td>
-      <td>2.641661</td>
-      <td>0.997321</td>
-      <td>5.848627</td>
-      <td>0.170522</td>
-    </tr>
-    <tr>
-      <th>16388</th>
-      <td>-121.30</td>
-      <td>38.05</td>
-      <td>52.0</td>
-      <td>122</td>
-      <td>26</td>
-      <td>62</td>
-      <td>25</td>
-      <td>1.1500</td>
-      <td>112500.0</td>
-      <td>INLAND</td>
-      <td>2.480000</td>
-      <td>1.040000</td>
-      <td>4.880000</td>
-      <td>0.213115</td>
-    </tr>
-    <tr>
-      <th>19949</th>
-      <td>-119.37</td>
-      <td>36.21</td>
-      <td>35.0</td>
-      <td>2228</td>
-      <td>476</td>
-      <td>1567</td>
-      <td>449</td>
-      <td>1.4455</td>
-      <td>54100.0</td>
-      <td>INLAND</td>
-      <td>3.489978</td>
-      <td>1.060134</td>
-      <td>4.962138</td>
-      <td>0.213645</td>
-    </tr>
-    <tr>
-      <th>10078</th>
-      <td>-120.27</td>
-      <td>39.35</td>
-      <td>11.0</td>
-      <td>2520</td>
-      <td>401</td>
-      <td>397</td>
-      <td>165</td>
-      <td>4.6650</td>
-      <td>145600.0</td>
-      <td>INLAND</td>
-      <td>2.406061</td>
-      <td>2.430303</td>
-      <td>15.272727</td>
-      <td>0.159127</td>
-    </tr>
-  </tbody>
-</table>
-<p>15527 rows × 14 columns</p>
-</div></div></div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred2</span> <span class="o">=</span> <span class="n">lm2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">train_dataset2</span><span class="p">)</span>
@@ -4277,7 +3905,7 @@ Int64Index([10574, 17237,  4643,  4592,  5288, 15700, 17108,  8857,  5464,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/regression_177_0.png" src="_images/regression_177_0.png" />
+<img alt="_images/regression_176_0.png" src="_images/regression_176_0.png" />
 </div>
 </div>
 <p>Im residplot sollten im Optimalfall die residuals einigermaßen gleichmäßig zufällig um die horizontale Nulllinie verteilt sein.
@@ -4315,7 +3943,7 @@ Da dies nicht ganz der Fall ist, könnte es auf heteroscedasticity hindeuten. Da
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/regression_182_0.png" src="_images/regression_182_0.png" />
+<img alt="_images/regression_181_0.png" src="_images/regression_181_0.png" />
 </div>
 </div>
 </section>
@@ -4367,32 +3995,32 @@ Da dies nicht ganz der Fall ist, könnte es auf heteroscedasticity hindeuten. Da
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>#sk-2f13929c-eecc-4084-8e51-09929a837be3 {color: black;background-color: white;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 pre{padding: 0;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-toggleable {background-color: white;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-estimator:hover {background-color: #d4ebff;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-item {z-index: 1;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-parallel::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-parallel-item {display: flex;flex-direction: column;position: relative;background-color: white;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-parallel-item:only-child::after {width: 0;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;position: relative;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-label label {font-family: monospace;font-weight: bold;background-color: white;display: inline-block;line-height: 1.2em;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-label-container {position: relative;z-index: 2;text-align: center;}#sk-2f13929c-eecc-4084-8e51-09929a837be3 div.sk-container {display: inline-block;position: relative;}</style><div id="sk-2f13929c-eecc-4084-8e51-09929a837be3" class"sk-top-container"><div class="sk-container"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="ba9d4eaa-6f49-48ea-8b27-15629defb299" type="checkbox" ><label class="sk-toggleable__label" for="ba9d4eaa-6f49-48ea-8b27-15629defb299">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessor',
+<div class="output text_html"><style>#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e {color: black;background-color: white;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e pre{padding: 0;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-toggleable {background-color: white;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-estimator:hover {background-color: #d4ebff;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-item {z-index: 1;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-parallel::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-parallel-item {display: flex;flex-direction: column;position: relative;background-color: white;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-parallel-item:only-child::after {width: 0;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;position: relative;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-label label {font-family: monospace;font-weight: bold;background-color: white;display: inline-block;line-height: 1.2em;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-label-container {position: relative;z-index: 2;text-align: center;}#sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e div.sk-container {display: inline-block;position: relative;}</style><div id="sk-770615ed-bfc8-4df7-b5cd-c7cb6b0d225e" class"sk-top-container"><div class="sk-container"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="93a0b02b-ca24-40b1-9017-931d59b5ea9b" type="checkbox" ><label class="sk-toggleable__label" for="93a0b02b-ca24-40b1-9017-931d59b5ea9b">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessor',
                  ColumnTransformer(transformers=[('num',
                                                   Pipeline(steps=[('imputer',
                                                                    SimpleImputer(strategy='median')),
                                                                   ('scaler',
                                                                    StandardScaler())]),
-                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0>),
+                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x0000020777E615E0>),
                                                  ('cat',
                                                   Pipeline(steps=[('imputer',
                                                                    SimpleImputer(fill_value='missing',
                                                                                  strategy='constant')),
                                                                   ('onehot',
                                                                    OneHotEncoder(handle_unknown='ignore'))]),
-                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10>)])),
-                ('lasso', Lasso(alpha=1))])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="a997f487-c0ae-41e4-8814-b8802cfbaca8" type="checkbox" ><label class="sk-toggleable__label" for="a997f487-c0ae-41e4-8814-b8802cfbaca8">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('num',
+                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x0000020777E61610>)])),
+                ('lasso', Lasso(alpha=1))])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="1d37cf21-375a-4f77-9fb7-54356adb14eb" type="checkbox" ><label class="sk-toggleable__label" for="1d37cf21-375a-4f77-9fb7-54356adb14eb">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('num',
                                  Pipeline(steps=[('imputer',
                                                   SimpleImputer(strategy='median')),
                                                  ('scaler', StandardScaler())]),
-                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0>),
+                                 <sklearn.compose._column_transformer.make_column_selector object at 0x0000020777E615E0>),
                                 ('cat',
                                  Pipeline(steps=[('imputer',
                                                   SimpleImputer(fill_value='missing',
                                                                 strategy='constant')),
                                                  ('onehot',
                                                   OneHotEncoder(handle_unknown='ignore'))]),
-                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10>)])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="ff7be644-5542-453a-aba8-e55ce7bdd078" type="checkbox" ><label class="sk-toggleable__label" for="ff7be644-5542-453a-aba8-e55ce7bdd078">num</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="fdf0e51d-1000-4db6-8b70-8197101343ae" type="checkbox" ><label class="sk-toggleable__label" for="fdf0e51d-1000-4db6-8b70-8197101343ae">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy='median')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="ef241b6e-d8b8-4694-bc5b-3b992d928ff9" type="checkbox" ><label class="sk-toggleable__label" for="ef241b6e-d8b8-4694-bc5b-3b992d928ff9">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="8d00ddd0-73ac-4d22-a02d-e9b0f1ed162f" type="checkbox" ><label class="sk-toggleable__label" for="8d00ddd0-73ac-4d22-a02d-e9b0f1ed162f">cat</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="8cc60b3e-0643-4144-9706-3a738d5dcbc8" type="checkbox" ><label class="sk-toggleable__label" for="8cc60b3e-0643-4144-9706-3a738d5dcbc8">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(fill_value='missing', strategy='constant')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="14467aa3-0be3-48bd-a742-46c99ad360e6" type="checkbox" ><label class="sk-toggleable__label" for="14467aa3-0be3-48bd-a742-46c99ad360e6">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown='ignore')</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="25588e76-6f06-4670-8edf-0ed472a4ee45" type="checkbox" ><label class="sk-toggleable__label" for="25588e76-6f06-4670-8edf-0ed472a4ee45">Lasso</label><div class="sk-toggleable__content"><pre>Lasso(alpha=1)</pre></div></div></div></div></div></div></div></div></div>
+                                 <sklearn.compose._column_transformer.make_column_selector object at 0x0000020777E61610>)])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="e3562929-e94b-48b0-bfcf-344a4ba6c7fb" type="checkbox" ><label class="sk-toggleable__label" for="e3562929-e94b-48b0-bfcf-344a4ba6c7fb">num</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x0000020777E615E0></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="1913f370-faca-458a-a31d-e611438ed8f6" type="checkbox" ><label class="sk-toggleable__label" for="1913f370-faca-458a-a31d-e611438ed8f6">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy='median')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="4acf5330-4709-4c78-87cb-ae7f6e576d32" type="checkbox" ><label class="sk-toggleable__label" for="4acf5330-4709-4c78-87cb-ae7f6e576d32">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="7c92ad73-52b9-4acf-ab41-2a30cafa2a72" type="checkbox" ><label class="sk-toggleable__label" for="7c92ad73-52b9-4acf-ab41-2a30cafa2a72">cat</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x0000020777E61610></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="ff98b851-3d67-44a5-affb-933b9b48299b" type="checkbox" ><label class="sk-toggleable__label" for="ff98b851-3d67-44a5-affb-933b9b48299b">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(fill_value='missing', strategy='constant')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="5af1e307-d0e0-4778-940b-b59b99e192c5" type="checkbox" ><label class="sk-toggleable__label" for="5af1e307-d0e0-4778-940b-b59b99e192c5">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown='ignore')</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="6c5130b4-8ec8-4ecf-9201-f033583dcfdc" type="checkbox" ><label class="sk-toggleable__label" for="6c5130b4-8ec8-4ecf-9201-f033583dcfdc">Lasso</label><div class="sk-toggleable__content"><pre>Lasso(alpha=1)</pre></div></div></div></div></div></div></div></div></div>
 </div>
 <p>Um die Importance der einzelnen Features im Lasso Algorithmus zu visualisieren, wird an dieser Stelle eine Liste mit allen Feature Namen erstellt.</p>
 <div class="cell docutils container">
@@ -4414,7 +4042,8 @@ Da dies nicht ganz der Fall ist, könnte es auf heteroscedasticity hindeuten. Da
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Erstellen einer Liste aller Feature Namen</span>
-<span class="n">feature_names</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">list_numerical</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">lasso_pipe</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;preprocessor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transformers_</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;onehot&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()))</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">list_numerical</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> \
+<span class="n">lasso_pipe</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;preprocessor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transformers_</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;onehot&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()))</span>
 <span class="n">feature_names</span>
 </pre></div>
 </div>
@@ -4437,7 +4066,7 @@ Da dies nicht ganz der Fall ist, könnte es auf heteroscedasticity hindeuten. Da
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/regression_195_0.png" src="_images/regression_195_0.png" />
+<img alt="_images/regression_194_0.png" src="_images/regression_194_0.png" />
 </div>
 </div>
 </section>
@@ -4514,32 +4143,32 @@ MSE validation set 2889438999.32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 {color: black;background-color: white;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 pre{padding: 0;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-toggleable {background-color: white;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-estimator:hover {background-color: #d4ebff;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-item {z-index: 1;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-parallel::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-parallel-item {display: flex;flex-direction: column;position: relative;background-color: white;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-parallel-item:only-child::after {width: 0;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;position: relative;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-label label {font-family: monospace;font-weight: bold;background-color: white;display: inline-block;line-height: 1.2em;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-label-container {position: relative;z-index: 2;text-align: center;}#sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004 div.sk-container {display: inline-block;position: relative;}</style><div id="sk-e90a3b2b-5d6b-426c-88ca-188a6cf6b004" class"sk-top-container"><div class="sk-container"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="3a44113d-0417-47db-9b85-59c6c1362945" type="checkbox" ><label class="sk-toggleable__label" for="3a44113d-0417-47db-9b85-59c6c1362945">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessor',
+<div class="output text_html"><style>#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 {color: black;background-color: white;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 pre{padding: 0;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-toggleable {background-color: white;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-estimator:hover {background-color: #d4ebff;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-item {z-index: 1;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-parallel::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-parallel-item {display: flex;flex-direction: column;position: relative;background-color: white;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-parallel-item:only-child::after {width: 0;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;position: relative;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-label label {font-family: monospace;font-weight: bold;background-color: white;display: inline-block;line-height: 1.2em;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-label-container {position: relative;z-index: 2;text-align: center;}#sk-80f27f6e-5d7e-471c-8ba5-425627758fc4 div.sk-container {display: inline-block;position: relative;}</style><div id="sk-80f27f6e-5d7e-471c-8ba5-425627758fc4" class"sk-top-container"><div class="sk-container"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="72d980be-e72f-4346-a6c1-0c5e03195c88" type="checkbox" ><label class="sk-toggleable__label" for="72d980be-e72f-4346-a6c1-0c5e03195c88">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessor',
                  ColumnTransformer(transformers=[('num',
                                                   Pipeline(steps=[('imputer',
                                                                    SimpleImputer(strategy='median')),
                                                                   ('scaler',
                                                                    StandardScaler())]),
-                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0>),
+                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x0000020777E615E0>),
                                                  ('cat',
                                                   Pipeline(steps=[('imputer',
                                                                    SimpleImputer(fill_value='missing',
                                                                                  strategy='constant')),
                                                                   ('onehot',
                                                                    OneHotEncoder(handle_unknown='ignore'))]),
-                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10>)])),
-                ('lassoCV', LassoCV(cv=5, max_iter=10000, random_state=0))])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="92250a54-48a7-4441-b62d-ed1ca1cabb7a" type="checkbox" ><label class="sk-toggleable__label" for="92250a54-48a7-4441-b62d-ed1ca1cabb7a">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('num',
+                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x0000020777E61610>)])),
+                ('lassoCV', LassoCV(cv=5, max_iter=10000, random_state=0))])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="2cc6959b-3d5f-42e6-ba7e-1a37b51bee44" type="checkbox" ><label class="sk-toggleable__label" for="2cc6959b-3d5f-42e6-ba7e-1a37b51bee44">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('num',
                                  Pipeline(steps=[('imputer',
                                                   SimpleImputer(strategy='median')),
                                                  ('scaler', StandardScaler())]),
-                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0>),
+                                 <sklearn.compose._column_transformer.make_column_selector object at 0x0000020777E615E0>),
                                 ('cat',
                                  Pipeline(steps=[('imputer',
                                                   SimpleImputer(fill_value='missing',
                                                                 strategy='constant')),
                                                  ('onehot',
                                                   OneHotEncoder(handle_unknown='ignore'))]),
-                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10>)])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="d6e96557-7f11-44cd-89de-8edb8fbca652" type="checkbox" ><label class="sk-toggleable__label" for="d6e96557-7f11-44cd-89de-8edb8fbca652">num</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="0a8e9a51-5345-419a-98f3-41712d5e7c43" type="checkbox" ><label class="sk-toggleable__label" for="0a8e9a51-5345-419a-98f3-41712d5e7c43">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy='median')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="fe93e927-380d-401d-a74c-88bb7f4b1f1b" type="checkbox" ><label class="sk-toggleable__label" for="fe93e927-380d-401d-a74c-88bb7f4b1f1b">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="319c7593-56cf-4395-8da4-721b03c4e607" type="checkbox" ><label class="sk-toggleable__label" for="319c7593-56cf-4395-8da4-721b03c4e607">cat</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="2e678764-ef0f-40a3-b54a-ed8ff9135daf" type="checkbox" ><label class="sk-toggleable__label" for="2e678764-ef0f-40a3-b54a-ed8ff9135daf">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(fill_value='missing', strategy='constant')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="ab3ea0f9-250b-45b4-9b1e-dc1bb78fddc7" type="checkbox" ><label class="sk-toggleable__label" for="ab3ea0f9-250b-45b4-9b1e-dc1bb78fddc7">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown='ignore')</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="40fc172e-fc6a-41fd-abdb-692ec1e1086b" type="checkbox" ><label class="sk-toggleable__label" for="40fc172e-fc6a-41fd-abdb-692ec1e1086b">LassoCV</label><div class="sk-toggleable__content"><pre>LassoCV(cv=5, max_iter=10000, random_state=0)</pre></div></div></div></div></div></div></div></div></div>
+                                 <sklearn.compose._column_transformer.make_column_selector object at 0x0000020777E61610>)])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="5a932f19-767e-40c6-a339-a58bb27e5429" type="checkbox" ><label class="sk-toggleable__label" for="5a932f19-767e-40c6-a339-a58bb27e5429">num</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x0000020777E615E0></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="0aff5d03-87ab-4a1a-a357-8e426b696eb8" type="checkbox" ><label class="sk-toggleable__label" for="0aff5d03-87ab-4a1a-a357-8e426b696eb8">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy='median')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="ac009460-00b7-4c89-b6a2-aed5e74ef429" type="checkbox" ><label class="sk-toggleable__label" for="ac009460-00b7-4c89-b6a2-aed5e74ef429">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="9a315b98-8e25-429c-9f13-f789ad674f0d" type="checkbox" ><label class="sk-toggleable__label" for="9a315b98-8e25-429c-9f13-f789ad674f0d">cat</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x0000020777E61610></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="30022051-9883-4447-9c1a-662ba6f1feb6" type="checkbox" ><label class="sk-toggleable__label" for="30022051-9883-4447-9c1a-662ba6f1feb6">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(fill_value='missing', strategy='constant')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="1936047b-3c3b-4b98-831d-81b25eccea4a" type="checkbox" ><label class="sk-toggleable__label" for="1936047b-3c3b-4b98-831d-81b25eccea4a">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown='ignore')</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="307d97c0-fc9a-4249-9bec-1019b62c9dfb" type="checkbox" ><label class="sk-toggleable__label" for="307d97c0-fc9a-4249-9bec-1019b62c9dfb">LassoCV</label><div class="sk-toggleable__content"><pre>LassoCV(cv=5, max_iter=10000, random_state=0)</pre></div></div></div></div></div></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4553,7 +4182,6 @@ MSE validation set 2889438999.32
 </div>
 </div>
 </div>
-<p>Der ermittelte optimale Wert alpha liegt bei 80.62796500840743</p>
 </section>
 <section id="lasso-lasso-best">
 <h3>Lasso - Lasso Best<a class="headerlink" href="#lasso-lasso-best" title="Permalink to this headline">¶</a></h3>
@@ -4578,32 +4206,32 @@ MSE validation set 2889438999.32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 {color: black;background-color: white;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 pre{padding: 0;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-toggleable {background-color: white;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-estimator:hover {background-color: #d4ebff;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-item {z-index: 1;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-parallel::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-parallel-item {display: flex;flex-direction: column;position: relative;background-color: white;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-parallel-item:only-child::after {width: 0;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;position: relative;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-label label {font-family: monospace;font-weight: bold;background-color: white;display: inline-block;line-height: 1.2em;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-label-container {position: relative;z-index: 2;text-align: center;}#sk-7181b38a-7c84-48e1-918e-20f38ea3b664 div.sk-container {display: inline-block;position: relative;}</style><div id="sk-7181b38a-7c84-48e1-918e-20f38ea3b664" class"sk-top-container"><div class="sk-container"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="b3d671f8-cd4f-4f88-897e-998cbe5fb21e" type="checkbox" ><label class="sk-toggleable__label" for="b3d671f8-cd4f-4f88-897e-998cbe5fb21e">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessor',
+<div class="output text_html"><style>#sk-a03e009a-815d-473e-86a3-1cfac00113e8 {color: black;background-color: white;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 pre{padding: 0;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-toggleable {background-color: white;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-estimator:hover {background-color: #d4ebff;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-item {z-index: 1;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-parallel::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 2em;bottom: 0;left: 50%;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-parallel-item {display: flex;flex-direction: column;position: relative;background-color: white;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-parallel-item:only-child::after {width: 0;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;position: relative;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-label label {font-family: monospace;font-weight: bold;background-color: white;display: inline-block;line-height: 1.2em;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-label-container {position: relative;z-index: 2;text-align: center;}#sk-a03e009a-815d-473e-86a3-1cfac00113e8 div.sk-container {display: inline-block;position: relative;}</style><div id="sk-a03e009a-815d-473e-86a3-1cfac00113e8" class"sk-top-container"><div class="sk-container"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="12f31ce9-77f1-4ccb-aaf3-62150f96a3da" type="checkbox" ><label class="sk-toggleable__label" for="12f31ce9-77f1-4ccb-aaf3-62150f96a3da">Pipeline</label><div class="sk-toggleable__content"><pre>Pipeline(steps=[('preprocessor',
                  ColumnTransformer(transformers=[('num',
                                                   Pipeline(steps=[('imputer',
                                                                    SimpleImputer(strategy='median')),
                                                                   ('scaler',
                                                                    StandardScaler())]),
-                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0>),
+                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x0000020777E615E0>),
                                                  ('cat',
                                                   Pipeline(steps=[('imputer',
                                                                    SimpleImputer(fill_value='missing',
                                                                                  strategy='constant')),
                                                                   ('onehot',
                                                                    OneHotEncoder(handle_unknown='ignore'))]),
-                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10>)])),
-                ('lassobest', Lasso(alpha=78.1184746941765))])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="2e6a479b-aaee-4121-98a7-727e154e6cef" type="checkbox" ><label class="sk-toggleable__label" for="2e6a479b-aaee-4121-98a7-727e154e6cef">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('num',
+                                                  <sklearn.compose._column_transformer.make_column_selector object at 0x0000020777E61610>)])),
+                ('lassobest', Lasso(alpha=78.1184746941765))])</pre></div></div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="255c3972-758f-43f6-840c-1fc4ba8c6615" type="checkbox" ><label class="sk-toggleable__label" for="255c3972-758f-43f6-840c-1fc4ba8c6615">preprocessor: ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[('num',
                                  Pipeline(steps=[('imputer',
                                                   SimpleImputer(strategy='median')),
                                                  ('scaler', StandardScaler())]),
-                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0>),
+                                 <sklearn.compose._column_transformer.make_column_selector object at 0x0000020777E615E0>),
                                 ('cat',
                                  Pipeline(steps=[('imputer',
                                                   SimpleImputer(fill_value='missing',
                                                                 strategy='constant')),
                                                  ('onehot',
                                                   OneHotEncoder(handle_unknown='ignore'))]),
-                                 <sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10>)])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="4a9c0593-ec80-4d0a-b447-47a682688697" type="checkbox" ><label class="sk-toggleable__label" for="4a9c0593-ec80-4d0a-b447-47a682688697">num</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7C1ABE6D0></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="91434b99-2aff-4cb9-9561-5b84a46d268d" type="checkbox" ><label class="sk-toggleable__label" for="91434b99-2aff-4cb9-9561-5b84a46d268d">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy='median')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="9e8c51fb-d138-465a-bab6-f6731851a08f" type="checkbox" ><label class="sk-toggleable__label" for="9e8c51fb-d138-465a-bab6-f6731851a08f">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="d427ea4a-651f-4a48-af9a-f47b86da6e7f" type="checkbox" ><label class="sk-toggleable__label" for="d427ea4a-651f-4a48-af9a-f47b86da6e7f">cat</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x000001F7CEB0DC10></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="3304d3f9-2aff-40e7-be3e-b06bb67720a0" type="checkbox" ><label class="sk-toggleable__label" for="3304d3f9-2aff-40e7-be3e-b06bb67720a0">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(fill_value='missing', strategy='constant')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="12435d4a-4580-40e8-9799-c31b0440bd5a" type="checkbox" ><label class="sk-toggleable__label" for="12435d4a-4580-40e8-9799-c31b0440bd5a">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown='ignore')</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="dbf1f971-32f2-43af-9d80-c01d42c0b19b" type="checkbox" ><label class="sk-toggleable__label" for="dbf1f971-32f2-43af-9d80-c01d42c0b19b">Lasso</label><div class="sk-toggleable__content"><pre>Lasso(alpha=78.1184746941765)</pre></div></div></div></div></div></div></div></div></div>
+                                 <sklearn.compose._column_transformer.make_column_selector object at 0x0000020777E61610>)])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="b15b0ffd-ecac-477a-a0f5-debfa1fcb379" type="checkbox" ><label class="sk-toggleable__label" for="b15b0ffd-ecac-477a-a0f5-debfa1fcb379">num</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x0000020777E615E0></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="fc3bf290-d519-4079-a15f-36e54c9a741c" type="checkbox" ><label class="sk-toggleable__label" for="fc3bf290-d519-4079-a15f-36e54c9a741c">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(strategy='median')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="c02096e9-ab6f-408d-a86b-c806345ee699" type="checkbox" ><label class="sk-toggleable__label" for="c02096e9-ab6f-408d-a86b-c806345ee699">StandardScaler</label><div class="sk-toggleable__content"><pre>StandardScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="a7304cc5-d33e-4ae5-a719-c78baac7eb7e" type="checkbox" ><label class="sk-toggleable__label" for="a7304cc5-d33e-4ae5-a719-c78baac7eb7e">cat</label><div class="sk-toggleable__content"><pre><sklearn.compose._column_transformer.make_column_selector object at 0x0000020777E61610></pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="af30129e-78cd-4772-a3ee-771f13fe7ac5" type="checkbox" ><label class="sk-toggleable__label" for="af30129e-78cd-4772-a3ee-771f13fe7ac5">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(fill_value='missing', strategy='constant')</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="4353dfb1-19d0-462a-8aa0-04a6948ec3be" type="checkbox" ><label class="sk-toggleable__label" for="4353dfb1-19d0-462a-8aa0-04a6948ec3be">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(handle_unknown='ignore')</pre></div></div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="71321747-ad12-432c-b618-30ca367b53d2" type="checkbox" ><label class="sk-toggleable__label" for="71321747-ad12-432c-b618-30ca367b53d2">Lasso</label><div class="sk-toggleable__content"><pre>Lasso(alpha=78.1184746941765)</pre></div></div></div></div></div></div></div></div></div>
 </div>
 <p>Zur Berechnung des RMSE werden auch mit dem Modell lassobest_pipe Predictions berechnet.</p>
 <div class="cell docutils container">
@@ -4656,7 +4284,9 @@ RMSE validation set 53753.5
 </div>
 </div>
 </div>
-<p><strong>Fazit</strong>: Durch die best alpha Optimierung hat sich das Ergebnis unseres Modells nicht verbessert, lediglich der RMSE ist kaum merklich besser geworden. Ein r2 von ca. 73% und ein RMSE von ca 53.000 ist ähnlich gut wie das Linear Regression Modell mit statsmodels.</p>
+<blockquote>
+<div><p><strong>Fazit</strong>: Durch die best alpha Optimierung hat sich das Ergebnis unseres Modells nicht verbessert, lediglich der RMSE ist kaum merklich besser geworden. Ein r2 von ca. 73% und ein RMSE von ca 53.000 ist ähnlich gut wie das Linear Regression Modell mit statsmodels.</p>
+</div></blockquote>
 </section>
 </section>
 <section id="splines">
@@ -4681,7 +4311,7 @@ RMSE validation set 53753.5
 </div>
 </div>
 </div>
-<p>Für das Modell definieren wir die Anzahl der zu platzierenden Knots auf 4. Die Komponente SplineTransformer wird diese Knots dann autoamtisch platzieren.</p>
+<p>Für das Modell definieren wir die Anzahl der zu platzierenden Knots auf 4. Die Komponente SplineTransformer wird diese Knots dann automatisch platzieren.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Erstellen des Models mit Pipeline. Der Spline Transformer soll 4 Knots platzieren.</span>
@@ -4784,7 +4414,7 @@ R squared validation set 66.89
 </div>
 </div>
 </div>
-<p>Sowohl der r2 Wert als auch der RMSE des Modells liegen hinter dem der vorherigen Modelle mit statsmodels.</p>
+<p>Sowohl der r2 Wert als auch der RMSE des Modells liegen hinter dem der vorherigen zwei Modelle.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create observations</span>
@@ -4795,7 +4425,7 @@ R squared validation set 66.89
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\olive\AppData\Local\Temp/ipykernel_27644/1056164967.py:2: FutureWarning: Dropping of nuisance columns in DataFrame reductions (with &#39;numeric_only=None&#39;) is deprecated; in a future version this will raise TypeError.  Select only valid columns before calling the reduction.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\olive\AppData\Local\Temp/ipykernel_25244/1056164967.py:2: FutureWarning: Dropping of nuisance columns in DataFrame reductions (with &#39;numeric_only=None&#39;) is deprecated; in a future version this will raise TypeError.  Select only valid columns before calling the reduction.
   x_new = np.linspace(X_val3.min(),X_val3.max(), 100)
 </pre></div>
 </div>
@@ -4813,7 +4443,7 @@ R squared validation set 66.89
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/regression_230_0.png" src="_images/regression_230_0.png" />
+<img alt="_images/regression_228_0.png" src="_images/regression_228_0.png" />
 </div>
 </div>
 <section id="test-mit-cook-s-distance-bereinigten-dataset">
@@ -5063,7 +4693,7 @@ R squared validation set 47.93
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/regression_249_0.png" src="_images/regression_249_0.png" />
+<img alt="_images/regression_247_0.png" src="_images/regression_247_0.png" />
 </div>
 </div>
 </section>
@@ -5149,6 +4779,7 @@ R squared test set 47.31
 </div>
 </div>
 </div>
+<p>Auch dieses Modell liefert keine guten Werte.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make predictions</span>
@@ -5162,7 +4793,7 @@ R squared test set 47.31
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/regression_254_0.png" src="_images/regression_254_0.png" />
+<img alt="_images/regression_253_0.png" src="_images/regression_253_0.png" />
 </div>
 </div>
 </section>
@@ -5172,7 +4803,7 @@ R squared test set 47.31
 <h1>Abschließende Evaluation mit Testdaten<a class="headerlink" href="#abschlieszende-evaluation-mit-testdaten" title="Permalink to this headline">¶</a></h1>
 <section id="transformation-testdaten">
 <h2>Transformation Testdaten<a class="headerlink" href="#transformation-testdaten" title="Permalink to this headline">¶</a></h2>
-<p>Um die Testdaten verwenden zu können, müssen die gleichen Schritte zur Transformation durchgeführt werden wie mit den Traindaten (ANpassung Datentypen, droppen NULL values, Erzeugen von selbst erstellten Features)</p>
+<p>Um die Testdaten verwenden zu können, müssen die gleichen Schritte zur Transformation durchgeführt werden wie mit den Traindaten (Anpassung Datentypen, droppen NULL values, Erzeugen von selbst erstellten Features).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_dataset</span>
@@ -5434,9 +5065,7 @@ R squared test set 47.31
 <p>Um die Testdaten in der Evaluation für bestimmte Modelle verwenden zu können, müssen diese nach Features und vorherzusagender Varaible aufgeteilt werden.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#X = test_dataset.drop([&quot;median_house_value&quot;], axis=1)</span>
-<span class="c1">#y= test_dataset[&quot;median_house_value&quot;]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">test_dataset</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">test_dataset</span><span class="p">[</span><span class="s1">&#39;median_house_value&#39;</span><span class="p">]</span>
 <span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;median_income&#39;</span><span class="p">,</span> <span class="s1">&#39;people_per_household&#39;</span><span class="p">,</span> <span class="s1">&#39;ocean_proximity&#39;</span><span class="p">,</span> <span class="s1">&#39;bedrooms_per_room&#39;</span><span class="p">,</span> <span class="s1">&#39;housing_median_age&#39;</span><span class="p">]</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">test_dataset</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
 </pre></div>
@@ -5469,8 +5098,8 @@ R squared test set 47.31
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE test set 69665.64
-R squared test set 62.77
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R squared test set 62.77
+RMSE test set 69665.64
 </pre></div>
 </div>
 </div>
@@ -5502,6 +5131,7 @@ RMSE test set 91509.58
 </div>
 </div>
 </div>
+<p>Das Ergebnis ist sehr schlecht, das liegt vermutlich an dem datenset mit entfernten Outliern nach Cook’s Distance. Das mit dem “originalen” train_dataset gefittete Modell hätte vermutlich besser Abgeschnitten.</p>
 </section>
 <section id="evaluation-splines-mit-scikit-learn">
 <h3>Evaluation Splines mit scikit learn<a class="headerlink" href="#evaluation-splines-mit-scikit-learn" title="Permalink to this headline">¶</a></h3>
@@ -5596,6 +5226,9 @@ RMSE test set 91509.58
 <li><p>RMSE: 66017.6385</p></li>
 <li><p>r2: 66.57</p></li>
 </ul>
+<blockquote>
+<div><p><strong>Fazit</strong>: In der Evaluation der Testdaten schneidet das Splines Modell von scikit learn am besten ab.</p>
+</div></blockquote>
 </section>
 </section>
 </section>

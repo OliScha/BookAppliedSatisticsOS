@@ -32,7 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-# Pairplot für numerische Variablen mit Farbmarkierung für ocean_proximity
-sns.pairplot(data=train_dataset, hue="ocean_proximity");
+# Visualisierung der Outlier nach Cook's Distance
+fig = sm.graphics.influence_plot(lm1, criterion="cooks")
+fig.tight_layout(pad=1.0)
 -------------------
 

@@ -2,7 +2,7 @@
 
 ## Regression
 
-Bei den Regressionsmodellen schneidet das Splines Modell von Patsy am besten ab. Die Ergebnisse nach Evaluierung durch die Testdaten sind um einiges schlechter als die Ergebnisse, welche durch die Trainings- oder Validationdatasets entstehen. Das liegt vermutlich daran, dass die Trainingsdaten zu sehr optimiert wurden, also zu viele Outlier entfernt worden sind.
+Bei den Regressionsmodellen schneidet das Splines Modell von scikit learn am besten ab. Die Ergebnisse nach Evaluierung durch die Testdaten sind um einiges schlechter als die Ergebnisse, welche durch die Trainings- oder Validationdatasets entstehen. Das liegt vermutlich daran, dass die Trainingsdaten zu sehr optimiert wurden, also zu viele Outlier entfernt worden sind.
 
 Keines der Modelle erreicht den zu Beginn definierten Zielwert von einem niedrigen 5-stilligen RMSE.
 

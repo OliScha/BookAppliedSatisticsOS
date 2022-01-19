@@ -6,7 +6,9 @@
 # # Setup
 # ---
 
-# ## Import Libraries & Daten
+# ### Import Module & Libraries
+
+# Zu Beginn werden die benötigten Komponenten aus den entsprechenden Libraries importiert.
 
 # In[1]:
 
@@ -41,25 +43,11 @@ sns.set_theme()
 get_ipython().run_line_magic('matplotlib', 'inline')
 
 
+# ### Erstellen einer Pipeline
+
+# Um die numerische und kategoriale Variablen automatisch in ein korrektes Format für die scikit learn Modelle zu transformieren, wird an dieser Stelle eine Pipeline definiert. Diese besteht aus verschiedenen Elementen, welche bspw. fehlende Werte ausfüllt (SimpleImputer) oder kategoriale Variablen in ein binäres Format umwandelt (OneHotEncoder).
+
 # In[2]:
-
-
-ROOT = "https://raw.githubusercontent.com/jan-kirenz/project-OliScha/main/"
-DATA = "project_data.csv?token=GHSAT0AAAAAABPCEITIYHBIEPRTFMZJXUGKYPKREJQ"
-
-df = pd.read_csv(ROOT + DATA)
-
-
-# In[3]:
-
-
-# prüfen ob Import funktioniert hat
-df
-
-
-# ## Erstellen der Pipeline für scikit learn Modelle
-
-# In[4]:
 
 
 # für numeric features
@@ -69,7 +57,7 @@ numeric_transformer = Pipeline(steps=[
     ])
 
 
-# In[5]:
+# In[3]:
 
 
 # für categorical features  
@@ -79,7 +67,7 @@ categorical_transformer = Pipeline(steps=[
     ])
 
 
-# In[6]:
+# In[4]:
 
 
 # Erstellen der Pipeline, zusammenführen von cat und numeric transformer
@@ -89,10 +77,37 @@ preprocessor = ColumnTransformer(transformers=[
         ])
 
 
-# Siehe Kapitel *Regression*
+# # Import Data
+# ---
+
+# Als nächstes wird der Datensatz aus dem GitHub Repository importiert.
+
+# In[5]:
+
+
+ROOT = "https://raw.githubusercontent.com/jan-kirenz/project-OliScha/main/"
+DATA = "project_data.csv?token=GHSAT0AAAAAABPCEITIYHBIEPRTFMZJXUGKYPKREJQ"
+
+df = pd.read_csv(ROOT + DATA)
+
+
+# Wir werfen einen ersten Blick auf die Daten um zu prüfen, ob der Import funktioniert hat. Hier fällt direkt auf, dass die erste Observation durch Text und ein Währungszeichen verunreigt ist.
+
+# In[6]:
+
+
+# prüfen ob Import funktioniert hat
+df
+
 
 # # Data Split
 # ---
+
+# Direkt nach dem Import und einem ersten Blick auf die Daten werden die Daten in Traings- und Testdaten aufgeteilt. Alle folgenden Schritt finden auf Basis der Trainingsdaten statt, um möglichst realistische Ergebnisse bei der späteren Evaluation mit Testdaten zu erzielen.
+# 
+# Dadurch soll ein möglichst realistischer generalization error (or out-of-sample error) erzielt werden.
+# 
+# Bestimmte Schritte der Datenaufbereitung (datatypes, selbst erstellte Variablen etc.) müssen dann späte rallerdings auch für die Testdaten durchgeführt werden, um diese zur Evaluation nutzen zu können.
 
 # In[7]:
 
@@ -103,6 +118,15 @@ test_dataset = df.drop(train_dataset.index)
 
 train_dataset
 
+
+# # Data Inspection & EDA
+# ---
+
+# Die ausführliche Untersuchung und Interpretation der Variablen wird im Kapitel "Regression" behandelt und ist auch für diese Kapitel gültig, da es sich um die selben Daten handelt.  
+#   
+#   
+#     
+#       
 
 # # Data Transformation
 # ---
@@ -214,7 +238,7 @@ train_dataset['ocean_proximity'] = train_dataset['ocean_proximity'].astype("cate
 # In[19]:
 
 
-model1 = smf.glm(formula = 'updated_price_cat ~ median_income + ocean_proximity + bedrooms_per_room + people_per_household + housing_median_age', data=train_dataset, family=sm.families.Binomial()).fit()
+model1 = smf.glm(formula = 'updated_price_cat ~ median_income + ocean_proximity + bedrooms_per_room + people_per_household + housing_median_age',     data=train_dataset, family=sm.families.Binomial()).fit()
 
 
 # In[20]:
@@ -313,7 +337,7 @@ train_dataset
 
 # ### Data Split
 
-# Für das scikit learn Modell werden die Daten in das von scikit learn verlangte Format gebracht. Dabei erzeugen wir auch Evaluationsdaten, mit welchenwir unser Modell vor der finalen Evaluation mit den Testdaten noch einmal bewerten können.
+# Für das scikit learn Modell werden die Daten in das von scikit learn verlangte Format gebracht. Dabei erzeugen wir auch Evaluationsdaten, mit welchen wir unser Modell vor der finalen Evaluation mit den Testdaten noch einmal bewerten können.
 
 # In[27]:
 
@@ -359,6 +383,7 @@ class_pipe.score(X_val, y_val)
 # In[32]:
 
 
+# Threshold 0,5
 cm = confusion_matrix(y_val, y_pred)
 
 disp = ConfusionMatrixDisplay(confusion_matrix=cm,
@@ -571,3 +596,5 @@ print(classification_report(y2, y_pred_test2, target_names=['above', 'below']))
 # Classification Report mit Trainingsdaten Threshold 0,5
 print(classification_report(y_val, y_pred, target_names=['above', 'below']))
 
+
+# >**Fazit**: Das Classification Modell von statsmodels schneidet in der Evaluation leicht besser ab als das von scikit learn. Ein F1-Score von 0.85 erfüllt unser zu Beginn gesetztes Ziel.

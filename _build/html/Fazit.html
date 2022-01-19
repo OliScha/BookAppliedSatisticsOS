@@ -52,7 +52,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="California Housing Guide - Logistic Regression Modelle" href="classification.html" />
+    <link rel="prev" title="Classification Modelle" href="classification.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -71,8 +71,6 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
       
-      <img src="_static/logo.png" class="logo" alt="logo">
-      
       
       <h1 class="site-logo" id="site-title">California Housing Guide</h1>
       
@@ -85,7 +83,7 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   California Housing Guide
+   Einleitung
   </a>
  </li>
 </ul>
@@ -102,17 +100,17 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="Variablen.html">
-     Beschreibung der verwendeten Variablen
+     Variablen
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="regression.html">
-     California Housing Guide - Regression Modelle
+     Regression Modelle
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="classification.html">
-     California Housing Guide - Logistic Regression Modelle
+     Classification Modelle
     </a>
    </li>
   </ul>
@@ -210,12 +208,12 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#klassifikation">
-   Klassifikation
+  <a class="reference internal nav-link" href="#regression">
+   Regression
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
+  <a class="reference internal nav-link" href="#klassifikation">
    Klassifikation
   </a>
  </li>
@@ -232,12 +230,13 @@
                 
   <section id="fazit">
 <h1>Fazit<a class="headerlink" href="#fazit" title="Permalink to this headline">¶</a></h1>
+<section id="regression">
+<h2>Regression<a class="headerlink" href="#regression" title="Permalink to this headline">¶</a></h2>
+<p>Bei den Regressionsmodellen schneidet das Splines Modell von scikit learn am besten ab. Die Ergebnisse nach Evaluierung durch die Testdaten sind um einiges schlechter als die Ergebnisse, welche durch die Trainings- oder Validationdatasets entstehen. Das liegt vermutlich daran, dass die Trainingsdaten zu sehr optimiert wurden, also zu viele Outlier entfernt worden sind.</p>
+<p>Keines der Modelle erreicht den zu Beginn definierten Zielwert von einem niedrigen 5-stilligen RMSE.</p>
+</section>
 <section id="klassifikation">
 <h2>Klassifikation<a class="headerlink" href="#klassifikation" title="Permalink to this headline">¶</a></h2>
-<p>asdasf</p>
-</section>
-<section id="id1">
-<h2>Klassifikation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Das Classification Modell von statsmodels erzielt in diesem Fall leicht bessere Ergebnisse als das von scikit learn und würde daher für das Deployment in eine produktive Umgebung ausgewählt werden.</p>
 <p>Es fällt auf, dass die Abweichungen der Modellergebnisse zwischen Trainings- und Testdaten nicht so groß sind wie bei den Regressionsmodellen. Das liegt möglicherweise daran, dass hier nicht so viele Outlier entfernt wurden wie bspw. durch Cook’s Distance oder Regression Diagnostics.</p>
 <p>Auch das Ergebnis generell ist um einiges zufriedenstellender als das der Regressionsmodelle, was wohl aber an der Art der Vorhersage liegt (Es ist natürlich einfacher einen binären Wert wie Ja/Nein oder in diesem Fall über/unter vorherzusagen als einen exakten Preis).</p>
@@ -278,7 +277,7 @@
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">California Housing Guide - Logistic Regression Modelle</p>
+                <p class="prevnext-title">Classification Modelle</p>
             </div>
         </a>
     </div>
