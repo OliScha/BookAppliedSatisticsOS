@@ -988,7 +988,7 @@ test = sm.stats.het_breuschpagan(lm2.resid, lm2.model.exog)
 lzip(name, test)
 
 
-# Da alle P-Values über 0,05 liegen können wir die Null-Hypothese akzeptieren, was auf homoscedasticity hindeutet.
+# Zwei der drei P-Values liegen unter 0,05, was auf heteroscedasticity hindeutet.
 
 # Im Detail lassen sich auch noch einzelne Variablen untersuchen, was hier lediglich an der einflussreichsten Variablen *median_income* durchgeführt werden soll. Die folgende Funktion liefert mehrere Plots für eine Variable:
 # - Y and Fitted vs. X: Die auf Basis von *median_income* gefitteten Werte bewegen sich in einem ähnlichen Bereich wie unsere Y Variable
